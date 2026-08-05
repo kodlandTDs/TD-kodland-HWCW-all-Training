@@ -6121,6 +6121,16 @@ let LANG='en';
 let MODULES,CHECKLIST,SELF_QUESTIONS,QUIZ,SORT_GAME,DST_URL;
 function loadLangData(code){
   const d=I18N[code]; if(!d) return false;
+  // Gameplay keys are internal identifiers and must never be localized.
+  // Re-sync them from the English master so every region grades identically.
+  if(d.sortgame && I18N.en.sortgame){
+    Object.keys(d.sortgame).forEach(id=>{
+      d.sortgame[id].forEach((item,index)=>{
+        const master=I18N.en.sortgame[id] && I18N.en.sortgame[id][index];
+        if(master) item.cat=master.cat;
+      });
+    });
+  }
   MODULES=d.modules; CHECKLIST=d.checklist; SELF_QUESTIONS=d.selfq; QUIZ=d.quiz; SORT_GAME=d.sortgame; DST_URL=d.dst;
   LANG=code;
   return true;
@@ -6486,13 +6496,13 @@ document.addEventListener('click', function(){
   document.getElementById('langMenu').classList.remove('show');
 });
 
-// ─── DEV MODE (Shift+D ×4, within 2s) ──────────────────────────────────────
+// ─── DEV MODE (Shift+D ×4, within 4s) ──────────────────────────────────────
 let devKeyBuffer=[];
 document.addEventListener('keydown', function(e){
   if(e.shiftKey && e.key.toLowerCase()==='d'){
     const now=Date.now();
     devKeyBuffer.push(now);
-    devKeyBuffer=devKeyBuffer.filter(t=>now-t<2000);
+    devKeyBuffer=devKeyBuffer.filter(t=>now-t<4000);
     if(devKeyBuffer.length>=4){ toggleDevMode(); devKeyBuffer=[]; }
   }
 });
@@ -6500,8 +6510,8 @@ function toggleDevMode(){
   const isDev=localStorage.getItem('kl-hwcw-devmode')==='1';
   if(!isDev){
     localStorage.setItem('kl-hwcw-devmode-backup', localStorage.getItem(PROG_KEY)||'{}');
-    const p={}; MODULES.forEach(m=>{p[m.id]={passed:true,score:100};}); p['final']={passed:true,score:100};
-    saveProgress(p);
+    const p={}; MODULES.forEach(m=>{p[m.id]={passed:true,pct:100};}); p['final']={passed:true,pct:100};
+    saveProg(p);
     localStorage.setItem('kl-hwcw-devmode','1');
     showDevBadge(true);
   }else{
