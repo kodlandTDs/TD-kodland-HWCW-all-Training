@@ -1,0 +1,3838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boost Homework & Classwork Submission — Kodland Tutor Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#7C3AED;--blue-d:#5B21B6;--blue-l:#C4B5FD;
+  --coral:#FF6B54;--coral-d:#E8503C;
+  --green:#7BC142;--green-d:#5A9C2C;--green-l:#A9DE7C;
+  --ink:#2A1B4D;--ink2:#4A3B6B;--muted:#8577A3;
+  --bg:#F4EEFF;--surface:#FFFFFF;--surface2:#F8F3FF;--border:#E3D6FA;
+  --text:var(--ink);--text2:var(--ink2);--text-muted:var(--muted);
+  --nav-bg:rgba(255,255,255,0.94);--nav-b:#E3D6FA;
+  --shadow:0 2px 14px rgba(42,27,77,.08);--shadow-h:0 10px 30px rgba(91,33,182,.18);
+  --hi-bg:#F4EEFF;--hi-b:#C9AEF6;--hi-t:#5B21B6;
+  --opt-h:#F4EEFF;
+  --ok-bg:#EAFBF1;--ok-b:#8FE3B4;--ok-t:#0F7A45;
+  --no-bg:#FFF1EF;--no-b:#FFC3B8;--no-t:#B23A26;
+  --r:16px;--rsm:10px;--rpill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+.screen{display:none;min-height:100vh;flex-direction:column}
+.screen.active{display:flex}
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:66px;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:2px solid var(--nav-b);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.logo-mark{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.5px;color:var(--blue);line-height:1;white-space:nowrap}
+.logo-sub{font-family:'Inter',sans-serif;font-weight:700;font-size:12.5px;color:var(--coral);white-space:nowrap;line-height:1.3;max-width:150px}
+.logo-div{width:1px;height:26px;background:var(--border);margin:0 5px}
+.nav-r{display:flex;align-items:center;gap:8px;position:relative}
+.pbtn{display:flex;align-items:center;gap:5px;padding:9px 16px;border-radius:var(--rpill);background:var(--surface);border:2px solid var(--border);color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;text-decoration:none}
+.pbtn:hover{background:var(--blue);border-color:var(--blue-d);color:#fff}
+/* LANG DROPDOWN */
+.lang-wrap{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:var(--rpill);background:var(--surface);border:2px solid var(--border);color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
+.lang-btn:hover{border-color:var(--blue-l)}
+.lang-menu{display:none;position:absolute;top:48px;right:0;background:var(--surface);border:2px solid var(--border);border-radius:14px;box-shadow:var(--shadow-h);min-width:190px;overflow:hidden;z-index:50}
+.lang-menu.show{display:block}
+.lang-item{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;font-size:13.5px;font-weight:600;color:var(--text);cursor:pointer}
+.lang-item:hover{background:var(--surface2)}
+.lang-item.active{color:var(--blue);font-weight:800}
+.lang-item.disabled{color:var(--text-muted);cursor:not-allowed}
+.lang-item.disabled:hover{background:none}
+.lang-soon{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);padding:2px 7px;border-radius:var(--rpill)}
+/* HERO */
+.hero{padding:56px 40px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;bottom:28%;background:radial-gradient(ellipse 70% 55% at 50% 0%,var(--blue-l) 0%,transparent 70%);opacity:.30;pointer-events:none}
+.hero-inner{position:relative;max-width:640px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:2px solid var(--border);border-radius:var(--rpill);padding:6px 16px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:800;color:var(--blue);margin-bottom:22px;text-transform:uppercase;letter-spacing:.5px}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(32px,5.2vw,52px);font-weight:800;line-height:1.08;letter-spacing:-1px;color:var(--text);margin-bottom:16px}
+.h-pill{display:inline-block;background:var(--coral);color:#fff;border-radius:var(--rpill);padding:2px 20px;margin:0 2px;font-size:.92em}
+.hero p{color:var(--text2);font-size:16px;line-height:1.65;margin-bottom:22px;max-width:520px;margin-left:auto;margin-right:auto}
+.hero-reasons{max-width:540px;margin:0 auto 24px;text-align:left;display:flex;flex-direction:column;gap:10px}
+.hr-item{display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:13px 17px;font-size:14.5px;color:var(--text2);line-height:1.55;box-shadow:var(--shadow)}
+.hr-item>span:first-child{flex-shrink:0;font-size:18px;line-height:1.4}
+.hr-item>span:last-child{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.start-btn{display:inline-block;padding:16px 38px;background:var(--blue);color:#fff;border:none;border-radius:var(--rpill);font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 6px 20px rgba(29,79,216,.3);margin-top:4px}
+.start-btn:hover{background:var(--coral);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,84,.35)}
+.prog-strip{display:inline-flex;align-items:center;gap:14px;background:var(--surface);border:2px solid var(--border);border-radius:var(--rpill);padding:12px 22px;box-shadow:var(--shadow);max-width:380px;width:100%}
+.pnum{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:24px;color:var(--blue);line-height:1;flex-shrink:0}
+.ptrack{flex:1;height:9px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--rpill);overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--coral));border-radius:var(--rpill);transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.plbl{font-size:12.5px;color:var(--text-muted);font-weight:700;flex-shrink:0}
+/* ROUTE / ROADMAP */
+.msec{padding:8px 32px 70px;max-width:1080px;margin:0 auto;width:100%}
+.slbl{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:16px;margin-top:4px}
+.route{max-width:1100px;margin:0 auto;padding:6px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;align-items:stretch}
+.rcard{min-width:0}
+@media(max-width:600px){.route{grid-template-columns:1fr}}
+.mc{background:var(--surface);border:2px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;box-shadow:var(--shadow)}
+.mc:hover:not(.locked){transform:translateY(-4px);box-shadow:var(--shadow-h)}
+.mc.locked{opacity:.5;cursor:not-allowed}
+.mc.done{border-color:var(--green)}
+.mc-stripe{height:7px}
+.mc-body{padding:22px}
+.mc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.mc-num{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted)}
+.mc-em{font-size:32px}
+.mc-title{font-family:'Baloo 2',sans-serif;font-size:23px;font-weight:700;letter-spacing:-.2px;color:var(--text);margin-bottom:7px;line-height:1.15}
+.mc-desc{font-size:14.5px;color:var(--text2);line-height:1.6}
+.mc-foot{margin-top:16px;display:flex;align-items:center;justify-content:space-between}
+.badge{font-family:'Inter',sans-serif;font-size:11px;font-weight:800;letter-spacing:.3px;padding:5px 13px;border-radius:var(--rpill);text-transform:uppercase}
+.bd{background:#E4F5D3;color:var(--green-d);border:1.5px solid var(--green)}
+.bs{background:var(--coral);color:#fff;border:1.5px solid var(--coral-d)}
+.bl{background:var(--surface2);color:var(--text-muted);border:1.5px solid var(--border)}
+.br{background:#DCEBFF;color:var(--blue-d);border:1.5px solid var(--blue-l)}
+.stag{font-size:12.5px;color:var(--text-muted);font-weight:600}
+.stag b{color:var(--text)}
+/* CONTENT */
+.cbody{padding:38px 40px 60px;max-width:820px;margin:0 auto;width:100%;flex:1}
+.meyebrow{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:9px}
+.mh1{font-family:'Baloo 2',sans-serif;font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.6px;line-height:1.12;color:var(--text);margin-bottom:16px}
+.mobj{background:var(--surface);border:2px solid var(--border);border-left:5px solid var(--blue);border-radius:0 var(--rsm) var(--rsm) 0;padding:14px 18px;font-size:14.5px;color:var(--text2);line-height:1.6;margin-bottom:34px}
+.mobj strong{color:var(--text)}
+.sch{font-family:'Baloo 2',sans-serif;font-size:25px;font-weight:800;margin:44px 0 18px;color:var(--text);display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
+.sch::after{content:'';flex:1;height:3px;background:var(--border);border-radius:2px}
+.card{background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:19px 21px;margin-bottom:11px;box-shadow:var(--shadow)}
+.card h4{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.card p,.card li{font-size:14.5px;color:var(--text2);line-height:1.7}
+.card ul,.card ol{padding-left:18px}
+.card li{margin-bottom:5px}
+.card p strong,.card li strong{color:var(--text)}
+.imgcard{overflow:hidden}
+.imgcard img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;border-radius:10px}
+.media-frame{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#171326}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.localized-subtitle{margin-top:10px;padding:10px 12px;border-radius:9px;background:#211d36;color:#fff;font-size:13px;line-height:1.55}
+.localized-subtitle strong{display:inline-block;margin-right:7px;color:#ffe66d;font-size:11px;letter-spacing:.04em}
+.tbl-wrap{overflow-x:auto;margin-top:4px}
+.card table{width:100%;border-collapse:collapse;font-size:13.8px;line-height:1.55}
+.card th{text-align:left;padding:9px 11px;border-bottom:2px solid var(--border);font-family:'Baloo 2',sans-serif;font-size:13px;color:var(--text)}
+.card td{padding:9px 11px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.card tr:last-child td{border-bottom:none}
+.card.hi{background:var(--hi-bg);border-color:var(--hi-b)}
+.card.hi h4{color:var(--hi-t);font-size:16.5px}
+.card.hi p,.card.hi li{color:var(--hi-t);opacity:.9}
+.card.ok{background:var(--ok-bg);border-color:var(--ok-b)}
+.card.ok h4{color:var(--ok-t)}
+.card.ok p,.card.ok li{color:var(--ok-t);opacity:.92}
+.card.danger{background:var(--no-bg);border-color:var(--no-b)}
+.card.danger h4{color:var(--no-t)}
+.card.danger p,.card.danger li{color:var(--no-t);opacity:.92}
+.card.danger th{color:var(--no-t);border-color:var(--no-b)}
+.card.danger td{color:var(--no-t);opacity:.9;border-color:var(--no-b)}
+.card.method{background:var(--ok-bg);border-color:var(--ok-b);border-style:dashed}
+.card.method h4{color:var(--ok-t)}
+.card.method p,.card.method li{color:var(--ok-t);opacity:.92}
+/* FEEDBACK FLOW DIAGRAM */
+.flow{display:flex;align-items:stretch;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.flow-step{flex:1;min-width:190px;border-radius:var(--r);padding:18px 19px;box-shadow:var(--shadow);border:2px solid}
+.flow-step .fs-ic{font-size:28px;margin-bottom:8px}
+.flow-step h4{font-size:15.5px;margin-bottom:6px}
+.flow-step p{font-size:13.5px;line-height:1.55;margin:0}
+.flow-step.f-blue{background:#EAF1FF;border-color:var(--blue-l);color:var(--blue-d)}
+.flow-step.f-blue h4{color:var(--blue-d)}
+.flow-step.f-coral{background:#FFF0ED;border-color:#FFC3B8;color:var(--coral-d)}
+.flow-step.f-coral h4{color:var(--coral-d)}
+.flow-step.f-green{background:var(--ok-bg);border-color:var(--ok-b);color:var(--ok-t)}
+.flow-step.f-green h4{color:var(--ok-t)}
+.flow-arrow{display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--text-muted);flex:0 0 auto;padding:0 2px}
+@media(max-width:700px){.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg);margin:-4px auto}}
+.callout{display:flex;gap:11px;border-radius:var(--rsm);padding:13px 16px;margin-bottom:11px;font-size:14px;line-height:1.65;border:1.5px solid}
+.ci{font-size:16px;flex-shrink:0;margin-top:1px}
+.cw{background:#FFF6EE;border-color:#FBD9B0;color:#9A5B12}
+.ct{background:#EFFAFF;border-color:#B9E6FA;color:#0B5E85}
+.cg{background:var(--ok-bg);border-color:var(--ok-b);color:var(--ok-t)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:560px){.two-col{grid-template-columns:1fr}}
+.divider{border:none;border-top:2px solid var(--border);margin:30px 0}
+.ctabtn{display:block;width:100%;padding:17px;background:var(--blue);color:#fff;border:none;border-radius:var(--rpill);font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:700;cursor:pointer;transition:all .15s;margin-bottom:40px;margin-top:4px;box-shadow:0 4px 16px rgba(29,79,216,.28)}
+.ctabtn:hover{background:var(--coral);transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,107,84,.35)}
+@media(max-width:640px){.cbody,.msec,.hero{padding-left:18px;padding-right:18px}}
+/* QUIZ */
+.qbody{padding:38px 40px;max-width:700px;margin:0 auto;width:100%;flex:1}
+.qpt{height:8px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--rpill);margin-bottom:38px;overflow:hidden}
+.qpf{height:100%;background:linear-gradient(90deg,var(--blue),var(--coral));border-radius:var(--rpill);transition:width .4s ease}
+.qctr{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:11px}
+.qtxt{font-family:'Baloo 2',sans-serif;font-size:23px;font-weight:700;letter-spacing:-.3px;line-height:1.35;margin-bottom:28px;color:var(--text)}
+.qopts{display:flex;flex-direction:column;gap:11px}
+.qopt{background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:15px 19px;cursor:pointer;font-size:14.5px;color:var(--text);font-family:'Inter',sans-serif;font-weight:500;transition:all .15s;text-align:left;line-height:1.5;box-shadow:var(--shadow)}
+.qopt:hover:not(.answered){background:var(--opt-h);border-color:var(--blue-l)}
+.qopt.correct{background:var(--ok-bg);border-color:var(--ok-b);color:var(--ok-t)}
+.qopt.wrong{background:var(--no-bg);border-color:var(--no-b);color:var(--no-t)}
+.qopt.answered{cursor:default}
+.qfb{display:none;margin-top:15px;border-radius:var(--rsm);padding:14px 17px;font-size:14.5px;line-height:1.6;border:2px solid}
+.qfb.show{display:block}
+.qfb.ok{background:var(--ok-bg);border-color:var(--ok-b);color:var(--ok-t)}
+.qfb.bad{background:var(--no-bg);border-color:var(--no-b);color:var(--no-t)}
+.qnxt{display:none;margin-top:19px;width:100%;padding:15px;background:var(--blue);color:#fff;border:none;border-radius:var(--rpill);font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:all .15s}
+.qnxt.show{display:block}
+.qnxt:hover{background:var(--coral)}
+/* SORT GAME */
+.sortbody{padding:38px 40px;max-width:700px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;align-items:center}
+.sort-instr{font-size:13.5px;color:var(--text-muted);margin-bottom:22px;text-align:center;max-width:420px;line-height:1.5}
+.sort-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:28px 26px;font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:700;line-height:1.4;color:var(--text);box-shadow:var(--shadow-h);width:100%;max-width:480px;text-align:center;cursor:grab;touch-action:none;user-select:none;transition:transform .05s linear;position:relative;z-index:5}
+.sort-card:active{cursor:grabbing}
+.sort-card.correct{background:var(--ok-bg);border-color:var(--ok-b);color:var(--ok-t)}
+.sort-card.wrong{background:var(--no-bg);border-color:var(--no-b);color:var(--no-t)}
+.sort-zones{display:flex;gap:16px;width:100%;max-width:480px;margin-top:30px}
+.sort-zone{flex:1;border-radius:var(--r);border:2.5px dashed var(--border);padding:20px 10px;text-align:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;color:var(--text-muted);cursor:pointer;transition:all .15s;min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.sort-zone .sz-ic{font-size:26px}
+.sort-zone .sz-sub{font-size:10.5px;font-weight:600;color:var(--text-muted)}
+.sort-zone.hover{border-style:solid;transform:scale(1.03)}
+.sort-zone.trash.hover{background:var(--no-bg);border-color:var(--no-b);color:var(--no-t)}
+.sort-zone.treasure.hover{background:var(--ok-bg);border-color:var(--ok-b);color:var(--ok-t)}
+/* RESULTS */
+.rbody{padding:64px 40px;max-width:540px;margin:0 auto;text-align:center;flex:1}
+.remi{font-size:66px;margin-bottom:15px}
+.rtitle{font-family:'Baloo 2',sans-serif;font-size:31px;font-weight:800;letter-spacing:-.4px;color:var(--text)}
+.rpct{font-family:'Baloo 2',sans-serif;font-size:64px;font-weight:800;line-height:1;margin:15px 0 7px}
+.rpct.pass{color:var(--blue)}
+.rpct.fail{color:var(--coral)}
+.rsub{color:var(--text2);font-size:15.5px;line-height:1.65;margin-bottom:32px}
+.bdark{display:block;width:100%;padding:15px 24px;margin-bottom:10px;background:var(--blue);color:#fff;border:none;border-radius:var(--rpill);font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:all .15s}
+.bdark:hover{background:var(--coral)}
+.bline{display:block;width:100%;padding:14px 24px;margin-bottom:10px;background:transparent;color:var(--text2);border:2px solid var(--border);border-radius:var(--rpill);font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;transition:all .15s}
+.bline:hover{background:var(--surface2);color:var(--text);border-color:var(--blue-l)}
+/* CERT */
+.compbody{padding:64px 40px;max-width:620px;margin:0 auto;text-align:center;flex:1}
+.cert{background:var(--surface);border:3px solid var(--blue);border-radius:22px;padding:36px 30px;margin:30px 0;box-shadow:0 0 44px rgba(29,79,216,.14);position:relative;overflow:hidden}
+.cert::before{content:'';position:absolute;top:-60px;right:-60px;width:170px;height:170px;border-radius:50%;background:var(--blue);opacity:.08;pointer-events:none}
+.clbl2{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--coral);margin-bottom:13px}
+.cert h2{font-family:'Baloo 2',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.3px;color:var(--text)}
+.cert p{color:var(--text2);margin-top:7px;font-size:14.5px}
+.cmods{display:flex;justify-content:center;gap:9px;margin-top:22px;flex-wrap:wrap}
+.cmod{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;background:#EAF2FF}
+.comp-p{color:var(--text2);margin-top:14px;font-size:15.5px;line-height:1.7;text-align:start}
+.comp-note{display:flex;gap:12px;align-items:flex-start;text-align:start;background:#FFF4E8;border:2px solid #F5C08A;border-radius:var(--r);padding:18px 20px;margin:22px 0;font-size:15px;line-height:1.7;color:var(--text)}
+.comp-note-ic{flex-shrink:0;font-size:19px;line-height:1.4}
+.comp-good{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;color:var(--text);margin:22px 0 26px}
+/* CHECKLIST */
+.chk-body{padding:44px 40px 64px;max-width:720px;margin:0 auto;flex:1}
+.chk-badge{display:inline-flex;align-items:center;gap:6px;background:#DCEBFF;color:var(--blue-d);border:2px solid var(--blue-l);border-radius:var(--rpill);padding:6px 15px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+.chk-h1{font-family:'Baloo 2',sans-serif;font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-height:1.15;color:var(--text);margin-bottom:12px}
+.chk-sub{font-size:15.5px;color:var(--text2);line-height:1.7;margin-bottom:30px}
+.chk-list{display:flex;flex-direction:column;gap:12px}
+.chk-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}
+.chk-ic{width:34px;height:34px;border-radius:50%;background:#DCEBFF;color:var(--blue-d);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-family:'Baloo 2',sans-serif}
+.chk-txt{font-size:14.5px;color:var(--text2);line-height:1.65;padding-top:5px}
+.chk-txt strong{color:var(--text)}
+.chk-selfeval{margin-top:36px;background:var(--surface2);border:2px dashed var(--blue-l);border-radius:var(--r);padding:24px 26px}
+.chk-selfeval-h{font-family:'Baloo 2',sans-serif;font-size:20px;font-weight:800;color:var(--text);margin-bottom:6px}
+.chk-selfeval-sub{font-size:13.5px;color:var(--text-muted);margin-bottom:16px;line-height:1.55}
+.chk-self-item{display:flex;gap:10px;margin-bottom:11px;font-size:14.5px;color:var(--text2);line-height:1.6}
+.chk-self-item:last-child{margin-bottom:0}
+.chk-self-ic{flex-shrink:0;font-size:15px}
+.chk-actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.chk-actions button{flex:1;min-width:220px;margin-bottom:0}
+@media(max-width:640px){.chk-body{padding-left:18px;padding-right:18px}}
+@media print{
+  .nav,.no-print{display:none!important}
+  body{background:#fff}
+  .chk-body{padding:10px 6px;max-width:100%}
+  .chk-item,.chk-selfeval{box-shadow:none;break-inside:avoid}
+}
+
+/* RTL support (Arabic) */
+html[dir="rtl"] body{direction:rtl;text-align:right}
+html[dir="rtl"] .nav{flex-direction:row-reverse}
+html[dir="rtl"] .logo{flex-direction:row-reverse}
+html[dir="rtl"] .lang-menu{left:0;right:auto}
+html[dir="rtl"] .mc-stripe{transform:scaleX(-1)}
+html[dir="rtl"] .chk-item,html[dir="rtl"] .chk-self-item{flex-direction:row-reverse;text-align:right}
+html[dir="rtl"] .hr-item{flex-direction:row-reverse;text-align:right}
+html[dir="rtl"] table th,html[dir="rtl"] table td{text-align:right}
+html[dir="rtl"] .sort-zones{flex-direction:row-reverse}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="screen-home" class="screen active">
+  <nav class="nav">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r">
+      <div class="lang-wrap">
+        <button class="lang-btn" id="langBtn" onclick="toggleLang(event)">🌐 EN <span style="font-size:10px">▾</span></button>
+        <div class="lang-menu" id="langMenu"><div class="lang-item" data-lang="en" onclick="location.href='en.html'"><span>🇬🇧 English</span></div><div class="lang-item active" data-lang="ru" onclick="location.href='ru.html'"><span>🇷🇺 Русский</span></div><div class="lang-item disabled" data-lang="tr" onclick=""><span>🇹🇷 Türkçe</span><span class="lang-soon">soon</span></div><div class="lang-item" data-lang="id" onclick="location.href='id.html'"><span>🇮🇩 Bahasa Indonesia</span></div><div class="lang-item" data-lang="br" onclick="location.href='br.html'"><span>🇧🇷 Português (BR)</span></div><div class="lang-item disabled" data-lang="it" onclick=""><span>🇮🇹 Italiano</span><span class="lang-soon">soon</span></div><div class="lang-item disabled" data-lang="pl" onclick=""><span>🇵🇱 Polski</span><span class="lang-soon">soon</span></div><div class="lang-item disabled" data-lang="es" onclick=""><span>🇪🇸 Español</span><span class="lang-soon">soon</span></div><div class="lang-item disabled" data-lang="ar" onclick=""><span>🇸🇦 العربية</span><span class="lang-soon">soon</span></div></div>
+    </div>
+      </div>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow" data-ui="heroEyebrow">📊 Tutor Training Program</div>
+      <h1 data-ui="heroH1">Boost Your Students'<br><span class="h-pill">HW & Classwork Submission</span></h1>
+      <p data-ui="heroWelcome">Welcome to this training! You're probably here for one of two reasons:</p>
+      <div class="hero-reasons">
+        <div class="hr-item"><span>😩</span><span data-ui="heroReason1">You explain the homework clearly, and half the class still doesn't submit it — you want to understand why.</span></div>
+        <div class="hr-item"><span>🐌</span><span data-ui="heroReason2">Project grading piles up, students move on before you grade it, and it's dragging your HW/CW numbers down.</span></div>
+      </div>
+      <p data-ui="heroWork">Complete all 6 modules, score at least 80% on each available quiz, and pass the final exam to unlock the essentials checklist.</p>
+      <button class="start-btn" onclick="goDashboard()" data-ui="startBtn">🚀 Start Training</button>
+    </div>
+  </div>
+</div>
+
+<!-- LEARNING PATH / DASHBOARD -->
+<div id="screen-path" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r">
+      <span id="ntag" style="font-size:13px;color:var(--text-muted);font-weight:700;display:none"></span>
+    </div>
+  </nav>
+  <div class="msec">
+    <div class="slbl" data-ui="pathLabel">Your learning path</div>
+    <div class="route" id="mgrid"></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div id="screen-content" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r"><button class="pbtn" onclick="goDashboard()" data-ui="navModules">← Modules</button></div>
+  </nav>
+  <div class="cbody" id="cbody"></div>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r"><button class="pbtn" onclick="exitQuiz()" data-ui="navExitCheck">← Exit Check</button></div>
+  </nav>
+  <div class="qbody">
+    <div class="qpt"><div class="qpf" id="qfill"></div></div>
+    <div class="qctr" id="qcount"></div>
+    <div class="qtxt" id="qtext"></div>
+    <div class="qopts" id="qopts"></div>
+    <div class="qfb" id="qfb"></div>
+    <button class="qnxt" id="qnxt" onclick="nextQ()">Next →</button>
+  </div>
+</div>
+
+<!-- SORT GAME -->
+<div id="screen-sort" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r"><button class="pbtn" onclick="exitQuiz()" data-ui="navExitCheck">← Exit Check</button></div>
+  </nav>
+  <div class="sortbody">
+    <div class="qpt" style="max-width:480px;width:100%"><div class="qpf" id="sfill"></div></div>
+    <div class="qctr" id="scount"></div>
+    <div class="sort-instr" data-ui="sortInstr">Drag the card into the zone it belongs — or just tap a zone if that's easier.</div>
+    <div class="sort-card" id="scard"></div>
+    <div class="sort-zones">
+      <div class="sort-zone trash" id="zone-trash" onclick="dropCard('trash')"><div class="sz-ic">🗑️</div><span data-ui="trashLabel">Trash</span><div class="sz-sub" data-ui="trashSub">Hurts submissions</div></div>
+      <div class="sort-zone treasure" id="zone-treasure" onclick="dropCard('treasure')"><div class="sz-ic">💎</div><span data-ui="treasureLabel">Treasure</span><div class="sz-sub" data-ui="treasureSub">Helps submissions</div></div>
+    </div>
+    <div class="qfb" id="sfb" style="max-width:480px;width:100%"></div>
+    <button class="qnxt" id="snxt" style="max-width:480px" onclick="nextCard()">Next →</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="screen-results" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r"><button class="pbtn" onclick="goDashboard()" data-ui="navModules">← Modules</button></div>
+  </nav>
+  <div class="rbody" id="rbody"></div>
+</div>
+
+<!-- CERTIFICATE -->
+<div id="screen-complete" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r"><button class="pbtn" onclick="goDashboard()">← Dashboard</button></div>
+  </nav>
+  <div class="compbody" id="compbody"></div>
+</div>
+
+<!-- CHECKLIST -->
+<div id="screen-checklist" class="screen">
+  <nav class="nav">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-mark">kodland</span>
+      <span class="logo-div"></span>
+      <span class="logo-sub" data-ui="deptName">Tutor Development Department</span>
+    </a>
+    <div class="nav-r"><button class="pbtn" onclick="goDashboard()">← Dashboard</button></div>
+  </nav>
+  <div class="chk-body">
+    <div class="chk-badge" data-ui="chkCertified">✅ Certified</div>
+    <div class="chk-h1" data-ui="chkTitle">Your HW/CW Essentials Checklist</div>
+    <p class="chk-sub" data-ui="chkSub">Keep this nearby. These are the habits from the training that move the needle most — in the order they show up in a real class.</p>
+    <div class="chk-list" id="chkList"></div>
+    <div class="chk-selfeval">
+      <div class="chk-selfeval-h" data-ui="chkSelfH">🪞 Self-Check: Ask Yourself</div>
+      <div class="chk-selfeval-sub" data-ui="chkSelfSub">Not graded — just a quick, honest check-in with yourself before or after class.</div>
+      <div id="chkSelf"></div>
+    </div>
+    <div class="chk-actions no-print">
+      <button class="bdark" onclick="window.print()" data-ui="downloadPdf">⬇️ Download as PDF</button>
+      <button class="bline" onclick="goDashboard()" data-ui="backDash">← Back to Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+const TOTAL=6;
+let currentModule=null, quizData=[], qi=0, score=0;
+const PROG_KEY='kl-hwcw-progress';
+
+const IMG={'3d69510a':'assets/img/3d69510a.png','553f225d':'assets/img/553f225d.png','27f5e1ce':'assets/img/27f5e1ce.png','3c6dd220':'assets/img/3c6dd220.png','70844c19':'assets/img/70844c19.png','e8e73f38':'assets/img/e8e73f38.png','c9ceb704':'assets/img/c9ceb704.png','fd3f1f39':'assets/img/fd3f1f39.png','2aaf1c75':'assets/img/2aaf1c75.png','c75b6cdc':'assets/img/c75b6cdc.png','d44b8c5b':'assets/img/d44b8c5b.png','e6f1705d':'assets/img/e6f1705d.png','285fac3e':'assets/img/285fac3e.png','fb30310b':'assets/img/fb30310b.png'};
+
+const I18N={
+ "en": {
+  "modules": [
+   {
+    "id": 1,
+    "emoji": "📊",
+    "title": "Understanding the Metric: HW/CW Submission",
+    "desc": "How submission is measured, what HSR/CSR mean for you, and why this is more than a formality.",
+    "obj": "Understand how HW/CW submission is measured and why it's directly tied to student retention.",
+    "color": "#7C3AED",
+    "noQuiz": true,
+    "sections": [
+     {
+      "t": "📐 How Is It Measured?",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Every assignment falls into one of two types, and they behave very differently once a student hits submit."
+       },
+       {
+        "type": "table",
+        "h": "Assignment types",
+        "head": [
+         "Type",
+         "How it counts"
+        ],
+        "rows": [
+         [
+          "📘 Theory",
+          "Marked complete automatically as soon as a student opens it — no click, no waiting on you"
+         ],
+         [
+          "⭐ Project",
+          "Waits on <strong>your</strong> grade before it counts — and before the student can move on"
+         ]
+        ]
+       },
+       {
+        "type": "img",
+        "src": IMG['3d69510a'],
+        "caption": "This is the exact legend you see in “Check” — the colors map straight onto Theory (auto-clears) versus Project (waits on you)."
+       },
+       {
+        "type": "text",
+        "h": "From the tutor's perspective",
+        "b": "Two indicators sum up your performance on this metric:<br><br><strong>HSR (Homework Submission Rate):</strong> % of assigned homework your students actually submit.<br><strong>CSR (Classwork Submission Rate):</strong> % of in-class assignments submitted during the session itself."
+       }
+      ]
+     },
+     {
+      "t": "🔍 Why Students Skip It",
+      "cards": [
+       {
+        "type": "twocol",
+        "left": {
+         "h": "🌦️ External (outside your control)",
+         "items": [
+          "The family didn't have time that week",
+          "A technical problem at home",
+          "They genuinely forgot the deadline"
+         ]
+        },
+        "right": {
+         "h": "🎯 Internal (you can influence these)",
+         "items": [
+          "They didn't understand the task",
+          "They forgot exactly what to do",
+          "It doesn't feel like it really matters",
+          "They submitted once and it was never reviewed — so why bother again?"
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "t": "⛓️ The Domino Effect",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Skipping homework rarely stays a one-off",
+        "b": "No submission → no feedback → falls behind in the next lesson → feels “I’m not good at this” → disengages → eventually stops attending altogether."
+       },
+       {
+        "type": "text",
+        "b": "This is exactly why HW/CW submission isn't a formality — it's one of the earliest warning signs of a student quietly heading toward dropping the course. The good news: the internal causes — the ones we can change — are the focus of the rest of this training."
+       },
+       {
+        "type": "tip",
+        "txt": "Before every class: open the homework tab and know exactly who's behind — before you say hello, not after."
+       },
+       {
+        "type": "age",
+        "young": "“Finishing your homework helps you become a coding master faster!”",
+        "older": "“Staying consistent with assignments is honestly what separates people who get good at this from people who don’t.”"
+       },
+       {
+        "type": "method",
+        "b": "Every official Kodland lesson script names a responsible methodologist and an open feedback channel for mistakes or unclear instructions — the same channel you'd use if anything about a HW/CW step ever feels unclear."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "emoji": "🪞",
+    "title": "Foundation Lesson Structure",
+    "desc": "A quick reminder of the full lesson shape, then straight into the two touchpoints that matter for submission.",
+    "obj": "Recall the full lesson shape and know exactly where the HW/CW touchpoints live inside it.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🪞 Quick Recap: The Lesson Shape",
+      "cards": [
+       {
+        "type": "text",
+        "b": "You've seen the full lesson shape before — quick reminder. Every lesson is a mirror: four stages at the Beginning, a Theory & Practice block in the middle, and the same four stages reversed at the End. Circular: the lesson ends exactly as it begins, giving students a sense of closure and rhythm."
+       },
+       {
+        "type": "twocol",
+        "left": {
+         "h": "▶️ Beginning",
+         "items": [
+          "1. Warm-Up",
+          "2. Previous Lesson Revision",
+          "3. Homework Check",
+          "4. Lesson Goal"
+         ]
+        },
+        "right": {
+         "h": "⏹️ End (mirrored)",
+         "items": [
+          "1. Lesson Summary",
+          "2. Homework Assignment",
+          "3. Next Lesson Preview",
+          "4. Wrap-Up"
+         ]
+        }
+       },
+       {
+        "type": "hi",
+        "h": "🧪 The middle: Theory & Practice",
+        "b": "Between Beginning and End sits the actual teaching — new content explained, then hands-on practice. That's 9 stages total in a real lesson, not 8: 4 + Theory & Practice + 4."
+       },
+       {
+        "type": "method",
+        "b": "Real Kodland lesson scripts (like M2L1) are timed stage-by-stage — Briefing, Theory, Practice, Reflection — each with a planned duration and start time. This mirror structure isn't a suggestion, it's literally how lessons are scheduled."
+       },
+       {
+        "type": "age",
+        "young": "“I’m so glad you’re here! Today we’re building something amazing.”",
+        "older": "“Hey, good to see you — ready to dig into today’s project?”"
+       },
+       {
+        "type": "tip",
+        "txt": "Quick habit: before class, write a short bullet list of your lesson stages with rough timings. Keep it next to you — it helps you catch a skipped stage before it happens."
+       }
+      ]
+     },
+     {
+      "t": "🎯 Where HW/CW Actually Lives",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Out of all 9 stages, two are the real touchpoints for this training — everything else in this module is context. These two get their own dedicated modules right after this one."
+       }
+      ]
+     },
+     {
+      "t": "✏️ Touchpoint 1: Homework Check",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Goal: review last lesson's homework with students, out loud — not just check a box. This is where Module 3 lives, in full depth."
+       },
+       {
+        "type": "video",
+        "src": "videos/en/homework-check.mp4",
+        "label": "Homework Check — example",
+        "caption": "Watch how the tutor opens the homework and reviews it together with the student, instead of just asking “did you do it?”"
+       }
+      ]
+     },
+     {
+      "t": "📜 Touchpoint 2: Homework Assignment",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Goal: give clear homework with instructions before the lesson ends. This is where Module 5 lives, in full depth."
+       },
+       {
+        "type": "video",
+        "src": "videos/en/homework-assignment.mp4",
+        "label": "Homework Assignment — example",
+        "caption": "Watch how the tutor presents the next homework clearly — what it is, and why it matters — instead of rushing it in the last 10 seconds."
+       }
+      ]
+     },
+     {
+      "t": "🎬 See Every Stage in Action",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Real recordings for the other 7 stages, if you want a refresher on any of them."
+       },
+       {
+        "type": "video",
+        "src": "videos/en/warm-up.mp4",
+        "label": "1. Warm-Up"
+       },
+       {
+        "type": "video",
+        "src": "videos/en/previous-lesson-revision.mp4",
+        "label": "2. Previous Lesson Revision"
+       },
+       {
+        "type": "video",
+        "src": "videos/en/lesson-goal.mp4",
+        "label": "4. Lesson Goal"
+       },
+       {
+        "type": "video",
+        "src": "videos/en/lesson-summary.mp4",
+        "label": "5. Lesson Summary"
+       },
+       {
+        "type": "video",
+        "src": "videos/en/next-lesson-preview.mp4",
+        "label": "8. Next Lesson Preview"
+       },
+       {
+        "type": "video",
+        "src": "videos/en/wrap-up.mp4",
+        "label": "9. Wrap-Up"
+       }
+      ]
+     },
+     {
+      "t": "🙋 How to Involve Kids in Every Phase",
+      "cards": [
+       {
+        "type": "text",
+        "b": "This part is new — four techniques that work in any of the 9 stages above."
+       },
+       {
+        "type": "table",
+        "h": "Four techniques that work in any stage",
+        "head": [
+         "Technique",
+         "How to use it"
+        ],
+        "rows": [
+         [
+          "❓ Open Questions",
+          "Ask “what do you think will happen if…?” — avoid yes/no questions, invite real thinking"
+         ],
+         [
+          "🔗 Screen Sharing",
+          "Ask the student to share their screen and walk you through their work — great during Homework Check and Warm-Up"
+         ],
+         [
+          "▶️ Slide Reading",
+          "Invite students to read slide text aloud, then explain it in their own words"
+         ],
+         [
+          "⭐ Praise & Encouragement",
+          "Specific praise like “great job explaining that step!” — acknowledge effort, not just correct answers"
+         ]
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "emoji": "👋",
+    "title": "Start Strong: Review Homework Together",
+    "desc": "The single highest-leverage habit for boosting submission — plus the M1L1 task you can never skip.",
+    "obj": "Make homework review a visible, out-loud part of every class opening.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 The One Rule for This Window",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Review at least one homework item together, out loud, every single class.",
+        "b": "This is the clearest pattern across our own classes — and it lines up with decades of feedback research (Hattie & Timperley, 2007): specific, visible feedback is one of the strongest levers on whether learning — and submission — continues."
+       },
+       {
+        "type": "text",
+        "b": "The mechanism is simple: a student who sees last week's homework actually reviewed trusts that this week's will be too. Skip the review, and submission quietly becomes optional in their mind."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ What to Do",
+         "items": [
+          "Walk through at least one item together, out loud",
+          "Ask what was hard, not just whether it got done",
+          "Be specific — point to the exact step, not “good job”"
+         ]
+        },
+        "right": {
+         "h": "❌ What to Avoid",
+         "items": [
+          "Marking it “done” without actually looking at it together",
+          "Generic praise with no specifics",
+          "Fixing mistakes yourself instead of walking them through it"
+         ]
+        }
+       },
+       {
+        "type": "method",
+        "b": "Real lesson scripts explicitly instruct tutors to question the most inactive students, praise those active in the chat, and praise kids who answer correctly — Homework Check is one of the built-in moments for exactly this."
+       },
+       {
+        "type": "tip",
+        "txt": "Try connecting homework to what the student already likes. “You mentioned you like Minecraft — want to build your project in that style?” It makes homework feel less like a chore."
+       }
+      ]
+     },
+     {
+      "t": "⚠️ Every M1L1: Non-Negotiable",
+      "cards": [
+       {
+        "type": "warnbox",
+        "h": "Every M1L1 ships with a “How to submit homework?” task",
+        "b": "This is a Theory task that teaches the actual submission flow. Walk through it live, on screen, every single time — this is not optional."
+       },
+       {
+        "type": "img",
+        "src": IMG['553f225d'],
+        "caption": "What students open: the M1L1 “How to submit homework?” task — walk through this exact screen live, on camera."
+       },
+       {
+        "type": "img",
+        "src": IMG['27f5e1ce'],
+        "caption": "Once it’s done, it shows Checked in their homework panel — the very first submission moment they experience."
+       }
+      ]
+     },
+     {
+      "t": "🌟 Bonus Hook: My Achievements",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Students have their own “My Achievements” tab — missions, badges, and coins that unlock as they complete homework. Most students never check it unless a tutor points it out."
+       },
+       {
+        "type": "age",
+        "young": "My Achievements works great as-is — coins and badges are genuinely exciting at this age.",
+        "older": "Teens often find coins a bit childish. Try reframing it as a streak (“that’s 4 in a row”), a peer leaderboard, or simply “you’re one step from unlocking the next challenge” — same system, different framing."
+       },
+       {
+        "type": "img",
+        "src": IMG['3c6dd220'],
+        "caption": "A mission unlocked in My Achievements — students track progress here like a real game."
+       },
+       {
+        "type": "img",
+        "src": IMG['70844c19'],
+        "caption": "Coins earned straight from completing assignments — a nice hook to mention early in a lesson."
+       }
+      ]
+     },
+     {
+      "t": "🎓 Bonus: The Last Lesson of Any Course Module",
+      "cards": [
+       {
+        "type": "text",
+        "b": "This is the same habit as above, just zoomed out from a single lesson to a whole module. When you reach the last lesson of a course module — any module, not just this training — use part of that lesson for a mini review with the student."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "🔁",
+          "h": "Review",
+          "b": "Recap out loud what was covered across the whole module — not just today’s lesson.",
+          "color": "blue"
+         },
+         {
+          "ic": "📂",
+          "h": "Check the work",
+          "b": "Look back at the homework/classwork submitted through the module. Point out what was hard, and fix it together now — before it carries into the next module.",
+          "color": "coral"
+         },
+         {
+          "ic": "🎯",
+          "h": "Set a target",
+          "b": "Agree on one concrete, specific target for the next module — not “study harder”, something you can both check back on.",
+          "color": "green"
+         }
+        ]
+       },
+       {
+        "type": "tip",
+        "txt": "Same What/Where/When instinct from Module 5 — just applied at the module level instead of the single-lesson level."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Real Example",
+      "cards": [
+       {
+        "type": "yt",
+        "id": "wL4uFMsQTq4",
+        "start": 465,
+        "end": 566,
+        "caption": "This is exactly the ‘review together’ move — the tutor checks what was learned last time before moving on, instead of just summarizing it themselves."
+       },
+       {
+        "type": "yt",
+        "id": "eZClmTdgCMA",
+        "start": 3465,
+        "end": 3519,
+        "caption": "Constructive feedback in action: the tutor explains *why* the work is good, not just “good job” — the specific praise this module asks for."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "emoji": "🎯",
+    "title": "During Class: Demo the Submission Steps Live",
+    "desc": "Live, on-screen demos of exactly how to submit homework or classwork — not verbal instructions alone.",
+    "obj": "Replace verbal instructions with a live, on-screen demo of the actual HW/CW submission flow.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 The One Rule for This Window",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Never just describe where to click — share your screen and show it live.",
+        "b": "Richard Mayer's research on multimedia learning shows people learn better from words and pictures together than from words alone. A student who isn't sure exactly where to click doesn't usually ask — they quietly give up instead."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ What to Do",
+         "items": [
+          "Share your screen and demo the actual submission flow",
+          "Point directly at the button you're describing",
+          "Record a 60-second demo once, reuse it every class <em>(optional)</em>"
+         ]
+        },
+        "right": {
+         "h": "❌ What to Avoid",
+         "items": [
+          "Describing where to click without showing it",
+          "Explaining the platform from memory, camera off",
+          "Assuming last week's demo is still remembered"
+         ]
+        }
+       },
+       {
+        "type": "age",
+        "young": "“Watch closely — I’m going to show you something cool!”",
+        "older": "“Let me walk you through this quickly so you’re not stuck on it later.”"
+       },
+       {
+        "type": "method",
+        "b": "Official lesson scripts don't just say “explain the tool” — they hand tutors numbered, screenshot-by-screenshot steps to demo live, exactly like the do/avoid list above."
+       },
+       {
+        "type": "tip",
+        "txt": "Quick add-on: call quiet students by name while you demo — it keeps the whole room actually watching, not just half of it."
+       }
+      ]
+     },
+     {
+      "t": "📢 A Simple 3-Step Demo Formula",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Turning 'show it, don't just tell' into a repeatable habit is easier with a fixed 3-step pattern you can run every single time."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "📣",
+          "h": "Announce",
+          "b": "Say what you're about to show before you show it: 'Watch my screen — I'm going to demo exactly how to submit this.'",
+          "color": "blue"
+         },
+         {
+          "ic": "🖥️",
+          "h": "Show & Narrate",
+          "b": "Click through it live while talking out loud: 'I'm clicking Submit here — and here's where your score shows up.'",
+          "color": "coral"
+         },
+         {
+          "ic": "✅",
+          "h": "Confirm",
+          "b": "Ask one student to repeat the steps back, or try it themselves while you watch.",
+          "color": "green"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "t": "👀 Keep the Whole Room Watching",
+      "cards": [
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ What to Do",
+         "items": [
+          "Call quiet students by name while demoing",
+          "Pause mid-demo and ask “what do you click next?”",
+          "Note who never unmuted or typed, and follow up after"
+         ]
+        },
+        "right": {
+         "h": "❌ What to Avoid",
+         "items": [
+          "Demoing to the strongest student only",
+          "Assuming silence means everyone's following along",
+          "Rushing through the demo to save time"
+         ]
+        }
+       },
+       {
+        "type": "table",
+        "h": "Quick fixes for common tech hiccups",
+        "head": [
+         "Hiccup",
+         "Quick fix"
+        ],
+        "rows": [
+         [
+          "Screen share frozen",
+          "Stop and restart sharing, narrate what you would be showing"
+         ],
+         [
+          "Student can't see the button",
+          "Zoom in, or use a cursor highlight / laser pointer"
+         ],
+         [
+          "Platform lagging",
+          "Switch to a pre-recorded 60-second demo clip"
+         ],
+         [
+          "One or two students stuck on a tech problem",
+          "Move them to a breakout room with your TL, and keep teaching the rest of the class"
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "t": "🗂️ Know the Assignment Shapes",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Not every course submits homework the same way. Before you demo it live, check which shape your course uses."
+       },
+       {
+        "type": "table",
+        "h": "Three shapes you'll see",
+        "head": [
+         "Shape",
+         "Example course",
+         "How students submit"
+        ],
+        "rows": [
+         [
+          "💬 Chat-based",
+          "Roblox, Digital Creativity",
+          "Send a link and a file, through the chat room"
+         ],
+         [
+          "💻 In-platform editor",
+          "Python, Scratch",
+          "Code right on the platform, then click Submit"
+         ],
+         [
+          "✅ Theory + checklist",
+          "Many courses",
+          "Read the material, tick each box, then submit"
+         ]
+        ]
+       },
+       {
+        "type": "tip",
+        "txt": "If your course isn't Roblox, Python, or Digital Creativity, match it to whichever shape above looks closest — the demo habit stays the same."
+       }
+      ]
+     },
+     {
+      "t": "🎮 Real Example: Roblox",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Students build their game in Roblox Studio, outside the Kodland platform. So they always submit through chat: a link, plus the game as a file."
+       },
+       {
+        "type": "img",
+        "src": IMG['e8e73f38'],
+        "caption": "The robot reminds students to attach the file and double-check the criteria. Read this part out loud during your demo — students often skip it."
+       }
+      ]
+     },
+     {
+      "t": "🐍 Real Example: Python",
+      "cards": [
+       {
+        "type": "img",
+        "src": IMG['c9ceb704'],
+        "caption": "Students code right inside the platform. There's no file to attach — just Run, check the result, then Submit."
+       },
+       {
+        "type": "tip",
+        "txt": "See a “Resubmit” button instead of “Submit”? That means the student already sent this once, and it's waiting on your feedback."
+       }
+      ]
+     },
+     {
+      "t": "🎨 Real Example: Digital Creativity",
+      "cards": [
+       {
+        "type": "img",
+        "src": IMG['fd3f1f39'],
+        "caption": "Digital Creativity is the simplest shape — students just click through slides. No coding, no file to upload."
+       },
+       {
+        "type": "tip",
+        "txt": "Because it's this easy, students sometimes think reading is enough. Remind them: reading isn't submitting — they still need to click Submit."
+       }
+      ]
+     },
+     {
+      "t": "⚠️ The “Didn't Submit” Warning",
+      "cards": [
+       {
+        "type": "text",
+        "b": "If a student clicks Next without clicking Submit first, this popup appears."
+       },
+       {
+        "type": "img",
+        "src": IMG['2aaf1c75'],
+        "caption": "This means the work never reached you — even if it looks finished on the student's screen."
+       },
+       {
+        "type": "img",
+        "src": IMG['c75b6cdc'],
+        "caption": "This is what you see on your side. Red/orange = not submitted, green = reviewed, yellow = waiting on you."
+       },
+       {
+        "type": "warnbox",
+        "h": "Don't assume — ask first",
+        "b": "If you see red on your dashboard, it doesn't always mean the student skipped it. They may have just hit Next by mistake. Ask before you conclude anything."
+       }
+      ]
+     },
+     {
+      "t": "⭐ Close the Loop With Student Feedback",
+      "cards": [
+       {
+        "type": "img",
+        "src": IMG['d44b8c5b'],
+        "caption": "Every lesson ends with a star rating."
+       },
+       {
+        "type": "img",
+        "src": IMG['e6f1705d'],
+        "caption": "Every task has a quick thumbs up/down too."
+       },
+       {
+        "type": "text",
+        "b": "These aren't just formalities — your team actually reads them. Every so often, remind students to rate honestly. It helps everyone, including you."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Real Example",
+      "cards": [
+       {
+        "type": "yt",
+        "id": "6Jccmc9oieY",
+        "start": 980,
+        "end": 1423,
+        "caption": "This is the core move for this module — the tutor models the activity live before asking students to try it alone, and waits for everyone to confirm they’re ready."
+       },
+       {
+        "type": "yt",
+        "id": "KtXz1EXYsIU",
+        "start": 1675,
+        "end": 2075,
+        "caption": "A direct example of the 3-step demo formula above — instructions broken into small, manageable steps instead of one long explanation."
+       },
+       {
+        "type": "yt",
+        "id": "6Jccmc9oieY",
+        "start": 1243,
+        "end": 1295,
+        "caption": "This is what ‘Keep the Whole Room Watching’ looks like in practice — the tutor actively invites participation instead of just checking for silence."
+       },
+       {
+        "type": "yt",
+        "id": "gamD-X9ZuCo",
+        "start": 1641,
+        "end": 1935,
+        "caption": "Bonus, not the core tip: the tutor stays flexible on how a student personalizes a task, as long as the lesson objective still gets practiced."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "emoji": "🏁",
+    "title": "End Class: Close With a Clear Recap",
+    "desc": "A vague reminder gets forgotten. A specific plan walks out the door with them.",
+    "obj": "End every class with an explicit, out-loud recap of what's due, where, and by when.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 The One Rule for This Window",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Spend the last 2 minutes stating exactly what's due, where, and by when — out loud, on screen.",
+        "b": "Research on implementation intentions (Gollwitzer) shows people follow through far more often when they've mentally rehearsed exactly what, where, and when — not just decided to “do it later.” This is the single strongest driver we've seen for classwork submission specifically."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ What to Do",
+         "items": [
+          "End with an explicit recap: what's due, where, by when",
+          "Protect the last 2 minutes for this on purpose",
+          "Confirm the student knows exactly where to submit"
+         ]
+        },
+        "right": {
+         "h": "❌ What to Avoid",
+         "items": [
+          "Letting the recap get cut when you're running late",
+          "Vague reminders: “don't forget your homework”",
+          "Ending on a technical note instead of the real next step"
+         ]
+        }
+       },
+       {
+        "type": "age",
+        "young": "“Remember: draw your potion and send it to me before our next class!”",
+        "older": "“Just to confirm — submit it in the Homework tab by Wednesday night.”"
+       },
+       {
+        "type": "method",
+        "b": "The official Reflection stage is literally: praise the students for their work, ask what they thought of the lesson, then announce what's next — the same What/Where/When close this module teaches, straight from a real lesson script."
+       },
+       {
+        "type": "tip",
+        "txt": "Before giving homework, add one quick reason why it matters: “This helps you practice today’s skill before next class.” A quick reason works better than just “do this.”"
+       },
+       {
+        "type": "tip",
+        "txt": "Quick add-on: pair the recap with one specific, personal piece of praise — generic encouragement doesn't move anyone, specific praise does."
+       }
+      ]
+     },
+     {
+      "t": "🧩 The What / Where / When Formula",
+      "cards": [
+       {
+        "type": "text",
+        "b": "A clear recap breaks down into three parts — leave any one out and it stops working."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "📝",
+          "h": "What",
+          "b": "Name the exact task: “Finish the color-fill exercise from today.”",
+          "color": "blue"
+         },
+         {
+          "ic": "📍",
+          "h": "Where",
+          "b": "Name the exact tab: “Submit it in the Homework tab, not Project.”",
+          "color": "coral"
+         },
+         {
+          "ic": "⏰",
+          "h": "When",
+          "b": "Give an exact deadline: “By Wednesday at midnight.”",
+          "color": "green"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "t": "🌟 Pair It With Real Motivation",
+      "cards": [
+       {
+        "type": "text",
+        "b": "A clear recap lands even better paired with genuine, specific motivation — not generic praise."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ What to Do",
+         "items": [
+          "Give one specific, personal piece of praise before saying goodbye",
+          "Offer a small choice in the homework — ownership builds motivation",
+          "Frame homework as practice, not a chore"
+         ]
+        },
+        "right": {
+         "h": "❌ What to Avoid",
+         "items": [
+          "Generic praise: “good job everyone”",
+          "Ending on a purely technical or rushed note",
+          "Making homework feel like punishment"
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "t": "🎬 Real Example",
+      "cards": [
+       {
+        "type": "yt",
+        "id": "6Jccmc9oieY",
+        "start": 3586,
+        "end": 3862,
+        "caption": "This is the closest match to the whole module — the tutor builds excitement for next lesson and clearly explains the homework before signing off."
+       },
+       {
+        "type": "yt",
+        "id": "XhgRysTDqXU",
+        "start": 5106,
+        "end": 5177,
+        "caption": "A focused example of explaining homework clearly — reinforcing the ‘what’ part of the What/Where/When formula."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "emoji": "📩",
+    "title": "After Class: Follow Up on Silence",
+    "desc": "This is the exact moment a quiet dip can turn into a dropped course.",
+    "obj": "Catch a silent or non-submitting student early — and keep parents in the loop before it becomes a surprise.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 The One Rule for This Window",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Message any student who stayed silent or skipped submitting — same day, personally.",
+        "b": "This connects straight back to the domino effect from Module 1: a quiet, unnoticed dip is exactly what turns into a student who eventually stops coming altogether."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ What to Do",
+         "items": [
+          "Message a student personally if they stayed silent all lesson",
+          "Flag it to CS if a student misses 2 lessons in a row — or if they don't respond after a single absence",
+          "Fill in the Backoffice — Comment for Student every time"
+         ]
+        },
+        "right": {
+         "h": "❌ What to Avoid",
+         "items": [
+          "Waiting until 2+ missed lessons to say anything",
+          "Treating a quiet student as a fine student",
+          "Letting parents find out about missed homework as a surprise"
+         ]
+        }
+       },
+       {
+        "type": "age",
+        "young": "“Hi! I noticed you were a bit quiet today — everything okay? 😊”",
+        "older": "“Hey, noticed you were quiet in class today — let me know if anything was unclear.”"
+       },
+       {
+        "type": "method",
+        "b": "The official Methodological Recommendations are explicit: message a student personally if they didn't answer any questions all lesson, and flag it to CS if they miss 2 lessons in a row — or stay unresponsive after a single absence."
+       }
+      ]
+     },
+     {
+      "t": "👪 Loop In Parents Early",
+      "cards": [
+       {
+        "type": "warnbox",
+        "h": "Keep parent groups aware of submission status early — not at report time",
+        "b": "A small, early heads-up avoids a much harder conversation later. Before offering an extra class to catch up, contact your TL first to review the case."
+       },
+       {
+        "type": "img",
+        "src": IMG['285fac3e'],
+        "caption": "This is the reminder banner students already see — parents getting the same signal early avoids surprises later."
+       }
+      ]
+     },
+     {
+      "t": "📋 Close the Loop: The “Check” Tab & Student Statuses",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Closing the loop means reading student statuses accurately in the <strong>Check</strong> tab, so you know exactly who needs feedback, who is falling behind, and what to write down."
+       },
+       {
+        "type": "table",
+        "h": "Status colours — where to act",
+        "head": [
+         "Indicator",
+         "What it means",
+         "What you do"
+        ],
+        "rows": [
+         [
+          "🟢 Green",
+          "Assignment reviewed",
+          "Graded and closed. Nothing to do."
+         ],
+         [
+          "🟡 Yellow",
+          "Waiting for review",
+          "<strong>Action needed:</strong> the student submitted — review and grade within 24–48 hours."
+         ],
+         [
+          "🟠 Orange",
+          "Submitted after the deadline",
+          "Review it live during Homework Check to reinforce consistency."
+         ],
+         [
+          "🔴 Red",
+          "Not submitted",
+          "<strong>Friction detected:</strong> address it during Stage 3 (Homework Check) or M1L1 onboarding."
+         ],
+         [
+          "🔘 Grey",
+          "No assignment / not graded",
+          "Default state for unassigned or non-graded theory items."
+         ]
+        ]
+       },
+       {
+        "type": "table",
+        "h": "🏷️ Assignment type icons",
+        "head": [
+         "Indicator",
+         "What it means"
+        ],
+        "rows": [
+         [
+          "🏠 Homework",
+          "Meant to be completed outside class."
+         ],
+         [
+          "📘 Theory",
+          "Concept slides — auto-clears once opened."
+         ],
+         [
+          "⭐ Project",
+          "Hands-on task — stays pending until you grade it."
+         ],
+         [
+          "📍 Additional task",
+          "Bonus work for students who want more."
+         ]
+        ]
+       },
+       {
+        "type": "text",
+        "h": "Where to record what",
+        "b": "<strong>Daily grading and statuses → the Check tab.</strong> Filter by lesson (for example M1.L2), click the yellow pills to grade what is pending, and use the “Only awaiting review” toggle to isolate submissions waiting on you.<br><br><strong>Notes about a student → Backoffice, Comment for Student.</strong> If someone is red because of illness, a broken mic or a holiday, open their profile and leave a comment (“Yug: mic issues during L2, could not finish T3 live”). That is what keeps your Team Leader — and any substitute tutor — from being caught by surprise."
+       },
+       {
+        "type": "img",
+        "src": IMG['fb30310b'],
+        "caption": "This is what your follow-through actually looks like on the back end — every lesson, every comment, tracked and visible."
+       },
+       {
+        "type": "hi",
+        "h": "You're not alone in this",
+        "b": "If something feels unclear, or a conversation with a student or parent feels tricky, loop in your TL or the TD team early. Asking for help before something becomes a problem reflects well on you — it isn't a sign you're struggling, it's what keeps the whole team able to support the student properly."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Real Example",
+      "cards": [
+       {
+        "type": "text",
+        "b": "A real parent phone call is hard to record on camera, so here's the closest real example on hand: a tutor doing Previous Lesson Revision with a student, naturally folding in the fact they weren't there last time."
+       },
+       {
+        "type": "video",
+        "src": "videos/en/previous-lesson-revision.mp4",
+        "label": "Referencing a previous absence with a returning student",
+        "caption": "Watch how the tutor brings up the missed lesson as a normal part of the recap, instead of making it an awkward callout."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "checklist": [
+   "Run all four Beginning stages and all four End stages — Warm-Up through Wrap-Up, every lesson.",
+   "Review at least one homework item together, out loud, every class.",
+   "Never skip the M1L1 “How to submit homework?” task — walk through it live.",
+   "Remind students about My Achievements — coins and badges are a real reason to submit.",
+   "Show it, don't just say it — screen-share every submission flow you teach.",
+   "Close every class with a specific recap: what's due, where, and by when.",
+   "Message any student who stayed silent or skipped submitting — same day.",
+   "Keep parent groups aware of submission status early, not at report time.",
+   "If a student misses 2 lessons in a row — or doesn't respond after one absence — flag it to CS. Don't wait."
+  ],
+  "selfq": [
+   "Did I run every Beginning and End stage today, or did I skip one under time pressure?",
+   "Did I review at least one piece of homework with a student today, out loud?",
+   "Is there a student whose submission I only marked “done” without really looking?",
+   "Did I show today's submission step live, or just describe it?",
+   "Did I close class with a specific, out-loud recap of what's due?",
+   "Is there a student who's gone quiet that I haven't personally checked on yet?",
+   "Have I kept parents in the loop on submission status this week, not just at report time?"
+  ],
+  "quiz": {
+   "2": [
+    {
+     "q": "A tutor is running short on time and considers cutting the Wrap-Up short to end exactly on schedule. What's the risk?",
+     "opts": [
+      "Ending exactly on schedule matters more, so trimming Wrap-Up is a reasonable trade to make",
+      "The circular structure breaks, and students lose the sense of closure the mirror is built to give them",
+      "It's fine as long as Next Lesson Preview still happens somewhere in the lesson"
+     ],
+     "c": 1,
+     "fb": "The mirror only works if both ends are actually there — skipping the close breaks the rhythm the whole structure is built on."
+    },
+    {
+     "q": "A tutor says “Great work today, see you next week!” at the very end of class. Which stage did they skip?",
+     "opts": [
+      "Wrap-Up — they didn't say goodbye warmly enough",
+      "Homework Assignment — no next task was mentioned at all",
+      "Lesson Summary — they didn't recap what was covered"
+     ],
+     "c": 1,
+     "fb": "A warm goodbye isn't the same as assigning the next homework — that stage was skipped entirely."
+    },
+    {
+     "q": "In the mirror format, which pairing is correct?",
+     "opts": [
+      "Homework Check mirrors Homework Assignment",
+      "Warm-Up mirrors Lesson Goal",
+      "Previous Lesson Revision mirrors Homework Assignment"
+     ],
+     "c": 0,
+     "fb": "Check old homework at the start, assign new homework near the end — that's the actual mirror pairing."
+    },
+    {
+     "q": "Where does the actual new-content teaching happen in the lesson shape?",
+     "opts": [
+      "During the four Beginning stages",
+      "In the Theory & Practice block, between Beginning and End",
+      "During Wrap-Up, at the very end"
+     ],
+     "c": 1,
+     "fb": "Theory & Practice is the middle block — 4 Beginning stages, then Theory & Practice, then 4 End stages, mirrored."
+    },
+    {
+     "q": "Which of the following is NOT one of the four techniques for involving kids in every phase?",
+     "opts": [
+      "Open Questions",
+      "Grading silently without comment",
+      "Screen Sharing"
+     ],
+     "c": 1,
+     "fb": "Grading silently is the opposite of involvement — the four techniques are Open Questions, Screen Sharing, Slide Reading, and Praise & Encouragement."
+    },
+    {
+     "q": "A student answers a question correctly during class. What's the most effective response, per this module?",
+     "opts": [
+      "“Good job!” and move on quickly so the pace doesn't slow",
+      "Specific praise like “great job explaining that step!”, tied to what they actually did",
+      "Say nothing and let the correct answer speak for itself, since over-praising can feel patronizing"
+     ],
+     "c": 1,
+     "fb": "Specific praise tied to what they actually did lands far better than generic praise or no response at all."
+    }
+   ],
+   "3": [
+    {
+     "q": "A student clearly didn't do the homework, and looks embarrassed when you ask about it in front of everyone. What's the best move?",
+     "opts": [
+      "Skip the review for them today, and check in privately after class instead",
+      "Review it briefly anyway, but shift straight to what they can try differently next time",
+      "Ask another student to walk through their homework instead, so the moment passes quickly for everyone"
+     ],
+     "c": 1,
+     "fb": "Skipping the review lets ‘not submitting’ feel consequence-free. A brief, forward-focused look keeps the habit alive without dwelling on the miss."
+    },
+    {
+     "q": "It's M1L1 and you're running short on time, right before you're supposed to walk through “How to submit homework?”. What do you do?",
+     "opts": [
+      "Skip it this time — students can usually figure the platform out on their own",
+      "Trim time from another part of the lesson so this gets its normal, unhurried walkthrough",
+      "Do a faster, condensed version of it so it's still technically covered"
+     ],
+     "c": 1,
+     "fb": "This task is non-negotiable precisely because it sets the tone for every submission after it — it's worth protecting the time for, not condensing it."
+    },
+    {
+     "q": "A tutor reviews a student's homework by saying only “Yep, that's correct, nice.” What's missing from a proper review?",
+     "opts": [
+      "Nothing — confirming it's correct is the main point",
+      "A specific, out-loud look at what exactly they did right or wrong",
+      "The tutor should have given a numeric grade instead"
+     ],
+     "c": 1,
+     "fb": "Confirming correctness isn't the same as reviewing it — the specific “what and why” is what makes it land."
+    },
+    {
+     "q": "Which of these is NOT something My Achievements is meant to do?",
+     "opts": [
+      "Give students a visible reason to finish homework",
+      "Replace the need for a tutor to review homework at all",
+      "Show progress through coins and badges"
+     ],
+     "c": 1,
+     "fb": "My Achievements is a motivational bonus, not a substitute for the tutor actually reviewing the work."
+    },
+    {
+     "q": "A student says homework feels pointless. What's the most effective response in the moment?",
+     "opts": [
+      "Explain the grading consequences of not submitting, so they understand the stakes",
+      "Point them to My Achievements and show what they're one step from unlocking",
+      "Tell them it's required either way, since some tasks just aren't going to feel fun"
+     ],
+     "c": 1,
+     "fb": "A visible, fun reward reframes the task — consequences alone rarely change how homework *feels* to a student."
+    },
+    {
+     "q": "With only 3 minutes before class must start on time, do you skip the homework review to protect the warm-up, or skip part of the warm-up to protect the review?",
+     "opts": [
+      "Skip the review — warm-up sets the tone for everything after",
+      "Skip part of the warm-up — reviewing homework is the single strongest lever this training has shown",
+      "Skip neither — rush through both equally instead"
+     ],
+     "c": 1,
+     "fb": "When time is genuinely tight, the homework review is the higher-leverage stage to protect."
+    }
+   ],
+   "4": [
+    {
+     "q": "A student messages after class asking exactly how to submit, even though the tutor explained the steps out loud earlier and even pointed at the screen while talking. What does this most likely mean?",
+     "opts": [
+      "The student wasn't paying attention and needs to be more responsible next time",
+      "Hearing the steps described isn't the same as watching them actually happen — the click itself was never demonstrated live",
+      "The platform's submission flow is genuinely too complicated for this age group"
+     ],
+     "c": 1,
+     "fb": "Pointing at the screen while describing still isn't the same as clicking through it live — students need to see the actual click happen, not just hear it described."
+    },
+    {
+     "q": "A tutor has taught the same course five times and feels confident students already know how to submit from previous lessons. This time, they skip the live demo and just remind students verbally. Two students later message asking how to submit. What went wrong?",
+     "opts": [
+      "Nothing — those two students simply weren't paying attention",
+      "Assuming last time's memory carries over skips the exact moment that prevents confusion — a live demo protects against exactly this",
+      "The tutor should have sent a written guide instead of relying on memory"
+     ],
+     "c": 1,
+     "fb": "Confidence that students remember doesn't replace the demo itself — a live walkthrough is what actually prevents the confusion, every single time, regardless of how many times the course has run before."
+    },
+    {
+     "q": "A tutor says “Once you're done, just hit submit, okay?” while screen-sharing, but never actually clicks anything on screen during the explanation. A student nods along and says they understand. What's the risk here?",
+     "opts": [
+      "None — the student confirmed they understood, so the explanation was clearly enough",
+      "Nodding along doesn't confirm they know exactly where to click — the actual click was never shown, only narrated",
+      "The tutor should ask the student to repeat the deadline back to confirm"
+     ],
+     "c": 1,
+     "fb": "A student can nod and still not know exactly where the button is — verbal confirmation isn't the same as watching the actual click happen on screen."
+    },
+    {
+     "q": "Mid-demo, the screen share suddenly freezes and won't reconnect after one attempt. The tutor has a 60-second demo clip recorded from a previous class. What's the best next move?",
+     "opts": [
+      "Keep talking through the steps with no visual, hoping the share reconnects on its own mid-sentence",
+      "Stop, switch to the pre-recorded 60-second clip so students still see the steps happen visually",
+      "Skip the demo entirely and email written instructions to parents after class"
+     ],
+     "c": 1,
+     "fb": "Talking with no visual loses the exact words-and-pictures pairing a demo is built on — the pre-recorded clip preserves that pairing even when live sharing fails."
+    },
+    {
+     "q": "Screen share keeps glitching badly all class and won't stabilize no matter what's tried. Time is running out to cover the actual lesson content. Does the tutor spend the remaining minutes troubleshooting the connection, or describe the submission steps verbally just this once and demo it properly next class?",
+     "opts": [
+      "Keep troubleshooting — a working live demo is worth losing several minutes of lesson content for",
+      "Describe it verbally as a one-time fallback this class, and commit to a proper live demo at the very start of next class",
+      "Skip the submission walkthrough for this class entirely and let students figure the platform out on their own"
+     ],
+     "c": 1,
+     "fb": "A verbal fallback used once, paired with a committed proper demo next class, protects both the lesson content today and the demo habit going forward — losing the whole class to troubleshooting protects neither."
+    },
+    {
+     "q": "During a live demo, one student keeps unmuting to ask questions while three others stay completely silent the whole time. The tutor answers every question the vocal student asks in detail. What's missing from this demo?",
+     "opts": [
+      "Nothing — answering questions thoroughly is exactly what a good demo should do",
+      "Calling on the quiet students by name to check they're actually following, not just the one who's vocal",
+      "Asking the vocal student to slow down so they don't dominate the demo time"
+     ],
+     "c": 1,
+     "fb": "A demo that only serves the loudest voice in the room leaves the quiet majority exactly as confused as if there'd been no demo at all — calling on them by name is what keeps everyone actually watching."
+    }
+   ],
+   "5": [
+    {
+     "q": "A tutor spends the last two minutes of class saying “Great energy today, see you next week, don't forget your homework!” warmly and with a big smile. A student still doesn't submit anything before the next class. What most likely went wrong?",
+     "opts": [
+      "The student just wasn't motivated enough, no matter how the class ended",
+      "Warmth alone doesn't replace a concrete plan — no specific task, tab, or deadline was ever actually stated",
+      "The tutor should have offered a reward for submitting on time"
+     ],
+     "c": 1,
+     "fb": "A warm goodbye feels good in the moment, but without a specific what/where/when, nothing concrete actually walked out the door with the student."
+    },
+    {
+     "q": "Class is running long and the tutor is deciding what to cut: either the last two minutes reserved for the closing recap, or a few minutes from the middle of Theory & Practice. Which is the safer cut for this specific metric, and why?",
+     "opts": [
+      "Cut from Theory & Practice — the closing recap is only useful if there's extra time left over anyway",
+      "Protect the closing recap and trim from Theory & Practice instead — the recap is what turns intention into an actual submission",
+      "Cut both evenly so neither part feels shortchanged"
+     ],
+     "c": 1,
+     "fb": "The recap is the single strongest lever this specific metric responds to — losing content time hurts less than losing the moment that turns intention into action."
+    },
+    {
+     "q": "A tutor ends class with “Remember to finish the exercise and submit it soon, okay?” A student later says they weren't sure which assignment tab to use, so they just didn't submit at all. What part of the closing recap was actually missing?",
+     "opts": [
+      "Nothing was missing — the exercise itself was named clearly",
+      "Where and When — no specific tab was named, and “soon” isn't an actual deadline",
+      "The tutor should have repeated the instructions a second time"
+     ],
+     "c": 1,
+     "fb": "“Soon” isn't a deadline a student can act on, and no tab was ever named — two of the three parts of the formula were missing, which is exactly why the student stalled."
+    },
+    {
+     "q": "With the lesson wrapping up, a tutor spends the final two minutes walking back through the hardest concept from today's lesson one more time, planning to mention the homework quickly right as the call ends. What's the risk in this approach?",
+     "opts": [
+      "None — reinforcing the hardest concept is always the best use of final minutes",
+      "The homework recap gets rushed or cut entirely, and a rushed one-liner rarely gives students enough to act on later",
+      "Students will feel like the lesson ended abruptly if the concept review is skipped"
+     ],
+     "c": 1,
+     "fb": "Reinforcing content matters, but if it consistently squeezes out the recap, students are left without the concrete plan that's proven to drive submission — protect the recap deliberately instead of hoping there's time left over."
+    },
+    {
+     "q": "A tutor gives a full, specific recap — exact task, exact tab, exact deadline — but delivers it in a flat, rushed tone while already reaching to end the call. A student still forgets to submit. What does this suggest about the recap?",
+     "opts": [
+      "The recap format doesn't actually matter as long as all three parts were technically said",
+      "Content matters most, but pairing the recap with genuine, specific encouragement helps it actually stick with the student",
+      "The tutor should have written the recap down instead of saying it out loud"
+     ],
+     "c": 1,
+     "fb": "Getting the three parts right is necessary but not always sufficient — pairing the recap with real, specific motivation (not just correct information delivered flatly) is what helps it land and get remembered."
+    },
+    {
+     "q": "Two tutors both give a technically complete What/Where/When recap. One says it in the last 10 seconds while already saying goodbye; the other protects a full unhurried two minutes for it. Both recaps contain the same information. Why might their students still submit at different rates?",
+     "opts": [
+      "They won't differ — as long as the same words were said, the outcome should be identical",
+      "A rushed 10-second version is easy to half-hear and forget, while a protected, unhurried two minutes gives it room to actually register and be acted on",
+      "The second tutor probably also gave a better grade on the previous assignment"
+     ],
+     "c": 1,
+     "fb": "Saying the right words isn't the same as giving them room to land — a rushed recap competes with a student already mentally leaving the call, while a protected one gets real attention."
+    }
+   ],
+   "6": [
+    {
+     "q": "What's the best first move after a student stays silent all class?",
+     "opts": [
+      "Wait and see if they're more talkative next class before doing anything",
+      "Message them personally, same day",
+      "Mention it to the parent group generally, without naming the student"
+     ],
+     "c": 1,
+     "fb": "A same-day, personal check-in catches a quiet dip before it becomes a pattern."
+    },
+    {
+     "q": "Before proposing an extra class to help a student catch up:",
+     "opts": [
+      "Contact your TL first, then reply warmly that you're happy to help and you're checking on scheduling",
+      "Reply warmly right away that you'll set it up, and mention it to your TL after so there's a record",
+      "Contact your TL first, and hold off replying to the parent until you get approval, so you don't promise anything prematurely"
+     ],
+     "c": 0,
+     "fb": "TL first, then a warm holding reply — the parent hears back quickly without anything being promised too early."
+    },
+    {
+     "q": "A tutor logs a student as “missing” in the backoffice but sends no message to anyone. What's missing from closing the loop?",
+     "opts": [
+      "Nothing — logging the status is the main requirement",
+      "Actually flagging or messaging someone if the pattern continues",
+      "A grade needs to be entered too"
+     ],
+     "c": 1,
+     "fb": "Logging accurately matters, but closing the loop also means making sure someone acts on it."
+    },
+    {
+     "q": "Which of these is NOT a good reason to loop in parents early?",
+     "opts": [
+      "It avoids a harder surprise conversation later",
+      "It gives parents a chance to help from home before it's a bigger issue",
+      "It shifts responsibility for the student's homework onto the parent instead of the tutor"
+     ],
+     "c": 2,
+     "fb": "Looping in parents is about shared awareness, not shifting the tutor's own responsibility elsewhere."
+    },
+    {
+     "q": "A student missed 2 lessons in a row. Do you wait one more lesson to see if they return, or flag it to CS now?",
+     "opts": [
+      "Wait one more — flagging too early might feel like overreacting",
+      "Flag it now — waiting only delays the help that could actually reach the family",
+      "Message the student directly instead of flagging to CS at all"
+     ],
+     "c": 1,
+     "fb": "This is exactly the threshold for flagging — waiting longer only delays support that could help."
+    },
+    {
+     "q": "True or false: parents should only hear about missed homework at report time.",
+     "opts": [
+      "True — regular updates could feel like nagging",
+      "False — an early heads-up avoids a much harder surprise later",
+      "True — it's the student's responsibility to tell their parents"
+     ],
+     "c": 1,
+     "fb": "An early, small update avoids a much harder conversation down the line."
+    }
+   ]
+  },
+  "sortgame": {
+   "2": [
+    {
+     "txt": "Running 5 minutes behind, a tutor skips Wrap-Up entirely to end exactly on schedule.",
+     "cat": "trash",
+     "why": "Ending on time doesn’t help if the mirror’s closing half is missing — that’s where closure comes from."
+    },
+    {
+     "txt": "A tutor closes class with “Great work today, see you next week!” and moves on, without mentioning what’s due before the next lesson.",
+     "cat": "trash",
+     "why": "A warm goodbye isn’t Homework Assignment — that stage got skipped entirely, not just softened."
+    },
+    {
+     "txt": "A tutor checks yesterday’s homework at the start of class, then assigns new homework near the end.",
+     "cat": "treasure",
+     "why": "That’s the actual mirror pairing — Homework Check answers to Homework Assignment."
+    },
+    {
+     "txt": "A tutor treats Previous Lesson Revision and Homework Assignment as the matching mirror pair.",
+     "cat": "trash",
+     "why": "Wrong pairing — Homework Check mirrors Homework Assignment, not Previous Lesson Revision."
+    },
+    {
+     "txt": "During Homework Check, a tutor grades quietly in the background while the student waits without comment.",
+     "cat": "trash",
+     "why": "Silent grading is the opposite of the involvement this stage is built for."
+    },
+    {
+     "txt": "A tutor keeps using Open Questions and Screen Share through Theory & Practice, even though it pushes the lesson a few minutes long.",
+     "cat": "treasure",
+     "why": "Involvement is worth protecting — it’s one of the four techniques this module asks tutors to keep running, not trim first."
+    },
+    {
+     "txt": "A student nails a tricky answer, and the tutor says nothing, worried that praising every correct answer might come across as patronizing.",
+     "cat": "trash",
+     "why": "Specific praise tied to what they did lands better than silence — silence isn’t neutral here."
+    },
+    {
+     "txt": "With two minutes left, a tutor rushes through Lesson Summary in ten seconds just so Next Lesson Preview can still technically happen too.",
+     "cat": "trash",
+     "why": "A rushed ten-second version doesn’t do the stage’s job — better to protect one stage fully than run two badly."
+    },
+    {
+     "txt": "A tutor spends the whole class on new content, skipping the Beginning and End stages because the students seem engaged anyway.",
+     "cat": "trash",
+     "why": "Engagement in the moment doesn’t replace the stages that build submission habits before and after."
+    },
+    {
+     "txt": "A tutor gives specific praise — “great job explaining that step!” — right after a student answers correctly, then moves on.",
+     "cat": "treasure",
+     "why": "Specific, tied-to-action praise is exactly the response this module recommends."
+    },
+    {
+     "txt": "A tutor shares their screen and demos the submission flow live, even though the class has already seen it once before.",
+     "cat": "treasure",
+     "why": "Showing it beats describing it — that stays true even on a repeat."
+    },
+    {
+     "txt": "When a student looks stuck, the tutor asks an Open Question to guide them toward the answer instead of just giving it.",
+     "cat": "treasure",
+     "why": "That’s exactly what Open Questions is for — involvement over a quick handout answer."
+    },
+    {
+     "txt": "A tutor keeps Wrap-Up short but makes sure it still clearly happens, even when the lesson is running a couple minutes over.",
+     "cat": "treasure",
+     "why": "Short and present beats long and skipped — the mirror just needs both ends to actually exist."
+    }
+   ]
+  },
+  "ui": {
+   "deptName": "Tutor Development Department",
+   "heroEyebrow": "📊 Tutor Training Program",
+   "heroH1": "Boost Your Students'<br><span class=\"h-pill\">HW & Classwork Submission</span>",
+   "heroWelcome": "Welcome to this training! You're probably here for one of two reasons:",
+   "heroReason1": "You explain the homework clearly, and half the class still doesn't submit it — you want to understand why.",
+   "heroReason2": "Project grading piles up, students move on before you grade it, and it's dragging your HW/CW numbers down.",
+   "heroWork": "Complete all 6 modules and score at least 80% on each available quiz to unlock the essentials checklist.",
+   "startBtn": "🚀 Start Training",
+   "pathLabel": "Your learning path",
+   "navModules": "← Modules",
+   "navExitCheck": "← Exit Check",
+   "sortInstr": "Drag the card into the zone it belongs — or just tap a zone if that's easier.",
+   "trashLabel": "Trash",
+   "trashSub": "Hurts submissions",
+   "treasureLabel": "Treasure",
+   "treasureSub": "Helps submissions",
+   "chkCertified": "✅ Training completed",
+   "chkTitle": "Your HW/CW Essentials Checklist",
+   "chkSub": "Keep this nearby. These are the habits from the training that move the needle most — in the order they show up in a real class.",
+   "chkSelfH": "🪞 Self-Check: Ask Yourself",
+   "chkSelfSub": "Not graded — just a quick, honest check-in with yourself before or after class.",
+   "downloadPdf": "⬇️ Download as PDF",
+   "backDash": "← Back to Dashboard",
+   "badgeReading": "📖 Reading",
+   "noTestReq": "No test required",
+   "badgeCompleted": "✓ Completed",
+   "badgeLocked": "🔒 Locked",
+   "badgeStart": "Start",
+   "scoreLabel": "Score:",
+   "completeModulePrefix": "Complete Module ",
+   "hasCheck": "Has a check",
+   "allModulesDone": "🏆 All modules done!",
+   "completeSuffix": " complete",
+   "modulePrefix": "Module ",
+   "ofWord": " of ",
+   "objectiveLabel": "Objective:",
+   "finalStage": "Final Step",
+   "finalExam": "Complete the DST on the LMS",
+   "examDesc": "The self-study part ends here. Go back to the LMS training page and pass the DST to close the assignment.",
+   "openForm": "Read this",
+   "certifiedTick": "Certified ✓",
+   "opensExamForm": "What to do next",
+   "completeAllModules": "Complete all modules",
+   "bonus": "Bonus",
+   "hwcwChecklist": "HW/CW Checklist",
+   "bonusDesc": "Habits, bond-building, and self-check questions — plus a PDF download. Unlocked once you've completed all 6 modules.",
+   "unlocked": "✓ Unlocked",
+   "referenceCard": "Reference card",
+   "continueToModule": "✅ Continue to Module ",
+   "backToDashboardCheck": "✅ Back to Dashboard",
+   "retakeSorting": "🔄 Retake the Sorting Challenge",
+   "takeSorting": "🎮 Take the Sorting Challenge →",
+   "retakeCheck": "🔄 Retake the Check",
+   "takeCheck": "📝 Take the Knowledge Check →",
+   "methodologyTitle": "📐 From the Lesson Methodology",
+   "whatToNotice": "What to notice:",
+   "browserCantPlay": "Your browser can't play this video.",
+   "adjustAge": "🎂 Adjust for Age",
+   "youngerLabel": "Younger (6–11):",
+   "olderLabel": "Older (12–17):",
+   "realClassExample": "Real class example",
+   "questionOf": "Question ",
+   "cardOf": "Card ",
+   "correctBang": "✓ Correct! ",
+   "notQuite": "✗ Not quite — ",
+   "seeResults": "See Results",
+   "nextArrow": "Next →",
+   "viewCertificate": "🎓 View Certificate",
+   "retakeFinalExam": "Retake Final Exam",
+   "nextModule": "Next Module →",
+   "goToFinalExam": "🎉 See the Final Step",
+   "reviewModulePrefix": "📖 Review Module ",
+   "retakeChallenge": "Retake the Challenge",
+   "retakeCheck2": "Retake the Check",
+   "youPassed": "You Passed!",
+   "keepStudying": "Keep Studying",
+   "youVerbTpl": "You {VERB} {SCORE}/{TOTAL} correctly.",
+   "sortedVerb": "sorted",
+   "answeredVerb": "answered",
+   "trainingNowCert": "The training is now certified",
+   "nextModuleUnlocked": "The next module is unlocked",
+   "need80": "You need at least 80% to continue.",
+   "trainingCertified": "Training Certified!",
+   "certDescTpl": "You've completed all {TOTAL} modules and passed the final exam — congratulations! Your HW/CW Checklist is now unlocked.",
+   "certOfCompletion": "Certificate of Completion",
+   "certTitle2": "Boost Homework & Classwork Submission",
+   "certDeptLineTpl": "Kodland Tutor Development Department · All {TOTAL} modules · Final exam: {SCORE}%",
+   "viewYourChecklist": "✅ View Your Checklist →",
+   "lastModulePassed": "Your checklist is unlocked and one last step is waiting",
+   "compTitle": "Self-Study Training Complete!",
+   "compP1": "Congratulations! You've completed the self-study training to improve your HW/CW Submission metrics.",
+   "compP2": "You're almost done! Please return to the LMS training page where you opened this training — the DST is available directly below the training.",
+   "compP3": "You must complete and pass the DST for the training to be considered successfully completed. If the DST is not completed, the training will remain incomplete and may become overdue.",
+   "compP4": "Please make sure to complete the DST and achieve a passing score to successfully close the assignment.",
+   "compGood": "Good luck! 🍀"
+  }
+ },
+ "ru": {
+  "modules": [
+   {
+    "id": 1,
+    "emoji": "📊",
+    "title": "Как понимать метрику: сдача ДЗ и КР",
+    "desc": "Как измеряется сдача заданий, что означают КСДЗ и КСКР для тебя и почему это не просто формальность.",
+    "obj": "Понять, как измеряется сдача ДЗ и КР и почему она напрямую влияет на удержание учеников.",
+    "color": "#7C3AED",
+    "noQuiz": true,
+    "sections": [
+     {
+      "t": "📐 Как Измеряются эти Показатели?",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Каждое задание относится к одному из двух типов, и они ведут себя совершенно по-разному после того, как ученик нажимает кнопку «Отправить»."
+       },
+       {
+        "type": "table",
+        "h": "Типы заданий",
+        "head": [
+         "Тип",
+         "Как засчитывается"
+        ],
+        "rows": [
+         [
+          "📘 Теория",
+          "Автоматически отмечается как выполненное, как только ученик откроет его — не требуется никаких действий с твоей стороны"
+         ],
+         [
+          "⭐ Проект",
+          "Ждёт твоей оценки перед тем, как засчитаться — и перед тем, как ученик сможет двигаться дальше"
+         ]
+        ]
+       },
+       {
+        "type": "img",
+        "src": IMG['3d69510a'],
+        "caption": "Это легенда, которую ты видишь в окне «Проверка» — цвета соответствуют теории (автоматический зачёт) и проектной работе (платформа ожидает оценки от преподавателя)."
+       },
+       {
+        "type": "text",
+        "h": "С точки зрения наставника",
+        "b": "Два показателя отражают твою эффективность по этой метрике:<br><br><strong>КСДЗ (коэффициент сдачи домашних заданий):</strong> % выданных ДЗ, которые ученики фактически сдали.<br><strong>КСКР (коэффициент сдачи классных работ):</strong> % заданий, сданных во время занятия."
+       }
+      ]
+     },
+     {
+      "t": "🔍 Почему ученики не сдают задания",
+      "cards": [
+       {
+        "type": "twocol",
+        "left": {
+         "h": "🌦️ Внешние факторы (вне твоего контроля)",
+         "items": [
+          "У семьи не было времени на неделе",
+          "Технические проблемы дома",
+          "Ученик действительно забыл про дедлайн"
+         ]
+        },
+        "right": {
+         "h": "🎯 Внутренние факторы (ты можешь на них повлиять)",
+         "items": [
+          "Ученик не понял задания",
+          "Забыл, что именно делать",
+          "Ученику кажется, что задание не очень важное",
+          "Ученик сдал задание ранее, но его не проверили — так зачем пытаться снова?"
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "t": "⛓️ Эффект домино",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Пропуск домашнего задания редко остается разовым явлением",
+        "b": "Ученик не сдаёт домашние задания → не получает обратной связи → отстаёт от следующего занятия → чувствует себя отстающим от группы в целом → отстраняется → в конечном итоге вообще перестаёт посещать занятия."
+       },
+       {
+        "type": "text",
+        "b": "Именно поэтому сдача ДЗ и КР — не формальность: это один из самых ранних сигналов того, что ученик потихоньку собирается бросить курс. Хорошая новость заключается в том, что мы можем повлиять на внутренние причины игнорирования заданий. Именно этому будет посвящена оставшаяся часть тренинга!"
+       },
+       {
+        "type": "tip",
+        "txt": "Перед каждым занятием: открой вкладку с домашними заданиями и точно узнай, кто отстаёт — до того, как поздороваешься, а не после."
+       },
+       {
+        "type": "age",
+        "young": "«Выполняя домашку, вы быстрее станете мастерами программирования!»",
+        "older": "«Честно говоря, именно последовательное выполнение заданий — ключ к успеху в программировании.»"
+       },
+       {
+        "type": "method",
+        "b": "В каждой методичке Кодланда указан ответственный методист и открытый канал обратной связи, через который можно сообщить об ошибках или неясных инструкциях — тот же канал, который можно использовать, если что-то в материалах урока кажется неверным или непонятным."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "emoji": "🪞",
+    "title": "Структура стандартного урока",
+    "desc": "Кратко напомним полную структуру урока, а затем сразу перейдём к двум ключевым точкам, которые влияют на сдачу заданий.",
+    "obj": "Вспомним полную структуру урока и точно знать, где в ней находятся точки, связанные с ДЗ и КР.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🪞 Краткое повторение: структура урока",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Ты уже видел полную структуру урока — давай быстро повторим. Каждый урок устроен как зеркало: четыре этапа в начале, блок теории и практики в середине и те же четыре этапа в обратном порядке в конце. В итоге получается петля: урок заканчивается точно так же, как и начинается, давая учащимся ощущение завершенности и ритма."
+       },
+       {
+        "type": "twocol",
+        "left": {
+         "h": "▶️ Начало",
+         "items": [
+          "1. Разминка",
+          "2. Разбор предыдущего урока",
+          "3. Проверка домашнего задания",
+          "4. Постановка цели на урок"
+         ]
+        },
+        "right": {
+         "h": "⏹️ Конец (в зеркальном отражении)",
+         "items": [
+          "1. Разбор итогов урока",
+          "2. Разбор предстоящего Д/З",
+          "3. Анонс следующего урока",
+          "4. Подведение итогов"
+         ]
+        }
+       },
+       {
+        "type": "hi",
+        "h": "🧪 Середина: теория и практика",
+        "b": "Между началом и концом находится фактическое обучение — объяснение нового материала с последующей практикой. Всего в реальном уроке 9 этапов, а не 8: 4 этапа в начале + Теория и Практика + 4 этапа в конце."
+       },
+       {
+        "type": "method",
+        "b": "Настоящие методички Кодланда (например, M2L1) расписаны по этапам с указанием времени — летучка, теория, практика, рефлексия — каждый из которых имеет запланированную продолжительность и время начала. Эта зеркальная структура — не рекомендация; уроки пишутся с этой структурой в уме."
+       },
+       {
+        "type": "age",
+        "young": "«Я так рада, что вы здесь! Сегодня мы строим что-то потрясающее».",
+        "older": "«Привет, рад тебя видеть! Готов покопаться в сегодняшнем проекте?»"
+       },
+       {
+        "type": "tip",
+        "txt": "Полезная привычка: перед уроком запиши краткий список этапов с примерными таймингами. Держи этот список перед глазами — он поможет заметить пропущенный этап до того, как это случится."
+       }
+      ]
+     },
+     {
+      "t": "🎯 Где на самом деле находятся ДЗ и КР",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Из всех девяти этапов два — основные точки внимания в этом тренинге; всё остальное в этом модуле — контекст. Мы обсудим эти два этапа отдельно в последующих модулях"
+       }
+      ]
+     },
+     {
+      "t": "✏️ Точка взаимодействия 1: проверка домашнего задания.",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Цель: вслух разобрать домашнее задание с учениками, а не просто поставить галочку. Этому этапу полностью посвящён Модуль 3."
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1i8iimN6bLpZJmneMsg6pwEJkAS60ACzN/preview",
+        "label": "Проверка домашнего задания — пример",
+        "caption": "Посмотри, как тьютор открывает домашнее задание и разбирает его вместе с учеником, а не просто спрашивает: «Ты сделал?»"
+       }
+      ]
+     },
+     {
+      "t": "📜 Точка взаимодействия 2: домашнее задание",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Цель: дать четкое домашнее задание с инструкциями до окончания урока. Этот этап мы рассмотрим в Модуле 5."
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1AcsxezuF8aEm-VOCona6TxIRFRD1B-J3/preview",
+        "label": "Домашнее задание — пример",
+        "caption": "Посмотри, как тьютор чётко объясняет следующее домашнее задание — что это и почему важно — а не торопится сказать о нём в последние 10 секунд."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Каждый этап в действии",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Представляем твоему вниманию записи остальных семи этапов, на случай если тебе хочется освежить знания."
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1zUgpYgg-RNyIhW_UxTZSoPpttov2IStZ/preview",
+        "label": "1. Разминка"
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1GPsYwQlQm2dyQIdV31jmgy2E9NglWens/preview",
+        "label": "2. Разбор предыдущего урока"
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/17FF9_3JAy59x9juBkchimTd9eGDQSavW/preview",
+        "label": "4. Постановка цели на урок"
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1DuPPoqAxjQi_r6lbyIfqCjoKCE6xrnKJ/preview",
+        "label": "5. Разбор итогов урока"
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1KikQmQTWXBWvtE5RNXjEGlor-LFP05f6/preview",
+        "label": "8. Анонс следующего урока"
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1lAb-A2jloDQ6bCun5SybM6iXe4CHv8jd/preview",
+        "label": "9. Подведение итогов"
+       }
+      ]
+     },
+     {
+      "t": "🙋 Как вовлекать детей на каждом этапе",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Представляем твоему вниманию четыре метода, которые работают на любом из девяти вышеперечисленных этапов."
+       },
+       {
+        "type": "table",
+        "h": "Четыре метода, которые работают на любом этапе",
+        "head": [
+         "Метод",
+         "Как применять"
+        ],
+        "rows": [
+         [
+          "❓ Открытые вопросы",
+          "Спрашивай: «Как думаешь, что произойдёт, если…?» — избегай односложных вопросов, на которые можно ответить «да» или «нет», побуждай к настоящему размышлению"
+         ],
+         [
+          "🔗 Демонстрация экрана",
+          "Попроси ученика показать экран и пройдись по своей работе вместе — отлично работает во время Разминки и этапе Проверки ДЗ"
+         ],
+         [
+          "▶️ Чтение слайдов",
+          "Предложи ученикам прочитать текст на слайде вслух, а затем объяснить своими словами"
+         ],
+         [
+          "⭐ Похвала и поддержка",
+          "Конкретная похвала, например: «Отлично объяснил этот шаг!» — поощряй старания, а не только правильные ответы."
+         ]
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "emoji": "👋",
+    "title": "Сильный старт: разбираем домашнее задание вместе",
+    "desc": "Разбираем самую эффективную привычку для повышения сдаваемости, а также рассмотрим задание M1У1, которое нельзя пропускать.",
+    "obj": "Сделать проверку домашнего задания видимой и озвученной частью начала каждого урока.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 Единственное правило для этого этапа",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "На каждом уроке вместе вслух разбирай хотя бы одно домашнее задание.",
+        "b": "Это самая чёткая закономерность, которую мы видим на наших занятиях, — и она согласуется с десятилетиями исследований об обратной связи (Hattie & Timperley, 2007): конкретная, видимая обратная связь — один из самых сильных инструментов, влияющих на то, продолжаются ли обучение и сдача заданий."
+       },
+       {
+        "type": "text",
+        "b": "Механизм прост: ученик, который видит, что домашнее задание за прошлую неделю действительно проверено, верит, что и на этой неделе будет то же самое. Пропусти проверку, и сдача заданий со временем потеряет смысл."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ Что делать",
+         "items": [
+          "Разбери хотя бы одну часть задания вместе с учеником и предоставь фидбек вслух.",
+          "Спроси, а не только, удалось ли сделать ДЗ в целом",
+          "Предоставляй конкретику — подсвети конкретный успех, а не «хорошую работу» в целом."
+         ]
+        },
+        "right": {
+         "h": "❌ Чего следует избегать",
+         "items": [
+          "Отмечать задание как выполненное, даже не посмотрев его вместе",
+          "Предоставлять общую похвалу без конкретики",
+          "Исправлять ошибки самостоятельно, без обсуждения с учениками."
+         ]
+        }
+       },
+       {
+        "type": "method",
+        "b": "Наши методички предписывают преподавателям задавать вопросы наиболее неактивным ученикам, а также хвалить тех, кто активен в чате и отвечает правильно. Этап Проверки ДЗ предусмотрен специально для этого."
+       },
+       {
+        "type": "tip",
+        "txt": "Попробуй связать домашнее задание с тем, что нравится ученику. «Ты говорил, что любишь Minecraft — попробуешь сделать проект в стиле игры?» Так домашняя работа перестаёт быть скучной обязанностью."
+       }
+      ]
+     },
+     {
+      "t": "⚠️ Каждый M1У1: строго обязательно",
+      "cards": [
+       {
+        "type": "warnbox",
+        "h": "В каждом M1У1 есть задание «Как сдавать домашку?»",
+        "b": "Это теоретическое задание, которое обучает процессу сдачи. Проходи его вживую, на экране, каждый раз — это важно."
+       },
+       {
+        "type": "img",
+        "src": IMG['553f225d'],
+        "caption": "Вот что видят ученики: задание M1L1 «Как сдать домашнее задание?» — пройди по этому заданию вживую, на камеру."
+       },
+       {
+        "type": "img",
+        "src": IMG['27f5e1ce'],
+        "caption": "После выполнения в панели заданий появляется статус «Проверено» — это первый опыт сдачи заданий, который получает ученик."
+       }
+      ]
+     },
+     {
+      "t": "🌟 Дополнительная вовлечённость: Мои достижения",
+      "cards": [
+       {
+        "type": "text",
+        "b": "У учеников есть вкладка «Мои достижения». По мере выполнения домашних заданий ученики могут открывать дополнительные миссии, значки и монеты. К сожалению, большинство учеников никогда туда не заходят, если тьютор сам не покажет."
+       },
+       {
+        "type": "age",
+        "young": "«Мои достижения» отлично работают как есть — монеты и значки в этом возрасте действительно вызывают интерес.",
+        "older": "Подростки зачастую находят подобную геймификацию ребячеством. Попробуй преподать это как серию <strong>стриков</strong> (как в Duolingo, например), таблицу лидеров среди сверстников или просто дай ребятам знать, что они «в одном шаге от следующего испытания». Система не меняется, но подача другая."
+       },
+       {
+        "type": "img",
+        "src": IMG['3c6dd220'],
+        "caption": "В «Моих достижениях» открывается специальная миссия — ученики отслеживают прогресс, как в настоящей игре."
+       },
+       {
+        "type": "img",
+        "src": IMG['70844c19'],
+        "caption": "Монеты зарабатываются за выполнение заданий — хороший повод упомянуть их в начале урока."
+       }
+      ]
+     },
+     {
+      "t": "🎓 Бонус: последний урок любого модуля курса",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Это та же привычка, только в масштабе не одного урока, а целого модуля. Когда доходишь до последнего урока модуля — любого, не только в этом тренинге, — выдели часть урока на небольшое повторение."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "🔁",
+          "h": "Обзор",
+          "b": "Вслух пройдись по тому, что было пройдено за весь модуль, — не только по сегодняшнему уроку.",
+          "color": "blue"
+         },
+         {
+          "ic": "📂",
+          "h": "Проверка работ",
+          "b": "Просмотри ДЗ и КР, сданные в течение модуля. Отметь, с чем возникли трудности, и разбери эти моменты сейчас — пока проблемы не перетекли в следующий модуль.",
+          "color": "coral"
+         },
+         {
+          "ic": "🎯",
+          "h": "Постановка цели",
+          "b": "Договоритесь об одной конкретной цели для следующего модуля — не абстрактное «учиться усерднее», а конкретный результат, который можно будет подтвердить.",
+          "color": "green"
+         }
+        ]
+       },
+       {
+        "type": "tip",
+        "txt": "В Модуле 5 мы поговорим про метод «Что/Где/Когда». Вспомни про эту практику – здесь та же самая логика, просто применяется она на уровне модуля, а не на уровне одного урока."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Реальный пример",
+      "cards": [
+       {
+        "type": "yt",
+        "id": "wL4uFMsQTq4",
+        "start": 465,
+        "end": 566,
+        "caption": "Отличный пример повторения урока вместе с учеником — тьютор проверяет, что было усвоено в прошлый раз, прежде чем двигаться дальше, а не просто пересказывает это сам."
+       },
+       {
+        "type": "yt",
+        "id": "eZClmTdgCMA",
+        "start": 3465,
+        "end": 3519,
+        "caption": "Конструктивная обратная связь в действии: тьютор объясняет, *почему* работа хорошая, а не просто говорит «молодец» — именно на такую, конкретную похвалу стоит обратить внимание."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "emoji": "🎯",
+    "title": "Во время урока: демонстрируй процесс сдачи вживую",
+    "desc": "Демонстрируем сдачу домашних или классных заданий на экране, потому что словесных инструкций зачастую недостаточно",
+    "obj": "Заменить словесные инструкции демонстрацией процесса сдачи ДЗ/КР на экране",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 Важнейшее правило этого модуля",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Никогда не *объясняй*, куда нажать, — покажи экран и продемонстрируй это вживую.",
+        "b": "Исследования Ричарда Мейера в области мультимедийного обучения показывают: люди лучше усваивают информацию, когда видят и слышат одновременно, а не только слышат. Ученик, который не уверен, куда именно нажимать, обычно не спрашивает — он просто тихо сдаётся."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ Что делать",
+         "items": [
+          "Покажи экран и продемонстрируй реальный процесс сдачи",
+          "Наведи курсор мыши на кнопку, о которой говоришь",
+          "Запиши 60-секундную демонстрацию один раз и используй на каждом уроке (по желанию)"
+         ]
+        },
+        "right": {
+         "h": "❌ Чего следует избегать",
+         "items": [
+          "Устных объяснений, куда нажимать – без демонстрации",
+          "Объяснений платформы по памяти с выключенным экраном",
+          "Думать, что ученики помнят демонстрацию с прошлой недели"
+         ]
+        }
+       },
+       {
+        "type": "age",
+        "young": "«Смотрите внимательно — сейчас покажу кое-что крутое!»",
+        "older": "«Давай быстро пройдёмся по этому моменту вместе, чтобы потом не застрять.»"
+       },
+       {
+        "type": "method",
+        "b": "В методичках не просто сказано «объясни инструмент» — там даны пронумерованные шаги со скриншотами для живой демонстрации. Методисты знают, как важна наглядность, и нам тоже стоит это понимать."
+       },
+       {
+        "type": "tip",
+        "txt": "Дополнительный совет: во время демонстрации называй тихих учеников по имени — так следить будут все, а не только половина группы."
+       }
+      ]
+     },
+     {
+      "t": "📢 Простая формула демонстрации в 3 шага",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Превратить принцип «покажи, а не просто расскажи» в привычку будет проще, если мы будем использовать этот фиксированный алгоритм при каждой демонстрации."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "📣",
+          "h": "Объяви",
+          "b": "Скажи, что будешь показывать, до того как начнёшь: «Смотрите на мой экран — я сейчас покажу, как именно сдать это задание.»",
+          "color": "blue"
+         },
+         {
+          "ic": "🖥️",
+          "h": "Покажи и расскажи",
+          "b": "Пройди по шагам вживую, комментируя вслух: «Я нажимаю кнопку «Отправить» и здесь появится мой результат.»",
+          "color": "coral"
+         },
+         {
+          "ic": "✅",
+          "h": "Подтверждай",
+          "b": "Попроси одного ученика повторить шаги или попробовать сделать это самому под твоим присмотром.",
+          "color": "green"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "t": "👀 Как убедиться, чтобы все смотрят?",
+      "cards": [
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ Что делать",
+         "items": [
+          "Во время демонстрации называй тихих учеников по имени",
+          "Остановись посреди демонстрации и спроси: «Что нажимаем дальше?»",
+          "Заметь, кто из учеников не включал микрофон и не писал в чат, и свяжись с ним(и) после"
+         ]
+        },
+        "right": {
+         "h": "❌ Чего следует избегать",
+         "items": [
+          "Показывать экран и объяснять шаги только для самого сильного ученика",
+          "Считать, что тишина означает, что все понимают твои объяснения",
+          "Спешить с демонстрацией сдачи заданий, чтобы сэкономить время"
+         ]
+        }
+       },
+       {
+        "type": "table",
+        "h": "Быстрые решения частых технических проблем",
+        "head": [
+         "Проблема",
+         "Быстрое решение"
+        ],
+        "rows": [
+         [
+          "Зависла демонстрация экрана",
+          "Останови и перезапусти показ, попутно рассказывая, что ты бы показывал"
+         ],
+         [
+          "Ученик не видит кнопку",
+          "Увеличь масштаб или используй подсветку курсора / лазерную указку"
+         ],
+         [
+          "Тормозит платформа",
+          "Переключись на заранее записанный 60-секундный ролик"
+         ],
+         [
+          "Один-два ученика застряли с технической проблемой",
+          "Переведи его в отдельную комнату вместе с тимлидом и продолжай вести урок с остальными"
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "t": "🗂️ Знай типы заданий",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Не на всех курсах домашние задания сдаются одинаково. Прежде чем показывать вживую, проверь, какой тип используется на твоём курсе."
+       },
+       {
+        "type": "table",
+        "h": "Три типа заданий, которые ты встретишь",
+        "head": [
+         "Тип",
+         "Пример курса",
+         "Как студенты сдают"
+        ],
+        "rows": [
+         [
+          "💬 В чате",
+          "Роблокс, цифровое творчество",
+          "Отправляют ссылку и файл в чат"
+         ],
+         [
+          "💻 Встроенный редактор",
+          "Питон, Скретч",
+          "Пишут код прямо на платформе, затем нажимают «Отправить»"
+         ],
+         [
+          "✅ Теория + чек-лист",
+          "Большинство курсов",
+          "Читают материал, отмечают пункты и отправляют"
+         ]
+        ]
+       },
+       {
+        "type": "tip",
+        "txt": "Если твой курс не из перечисленных, выбери самый похожий тип из трёх – общая логика сдачи не изменится."
+       }
+      ]
+     },
+     {
+      "t": "🎮 Реальный пример: Роблокс",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Ученики работают над игрой в Roblox Studio, вне платформы Kodland. Поэтому они всегда сдают задания через чат, прикрепляя ссылку и файл игры."
+       },
+       {
+        "type": "img",
+        "src": IMG['e8e73f38'],
+        "caption": "Робот в чате напоминает ученикам прикрепить файл и перепроверить критерии. Прочитай это сообщение вслух во время демонстрации — ученики часто игнорируют эти подсказки."
+       }
+      ]
+     },
+     {
+      "t": "🐍 Реальный пример: Python",
+      "cards": [
+       {
+        "type": "img",
+        "src": IMG['c9ceb704'],
+        "caption": "Ученики пишут код прямо на платформе. Никаких файлов не требуется — ученик нажимает «Запустить», проверяет результат, а затем нажимает «Сдать»."
+       },
+       {
+        "type": "tip",
+        "txt": "Видишь кнопку «Сдать повторно» вместо «Сдать»? Это значит, что ученик уже сдал это задание, и оно ждёт твоей проверки."
+       }
+      ]
+     },
+     {
+      "t": "🎨 Реальный пример: Цифровое Творчество",
+      "cards": [
+       {
+        "type": "img",
+        "src": IMG['fd3f1f39'],
+        "caption": "Цифровое творчество первого уровня — самый простой тип заданий на сдачу: ученики просто листают слайды. Никакого кода, никаких файлов."
+       },
+       {
+        "type": "tip",
+        "txt": "Из-за такой простоты у учеников может сложиться мнение, что достаточно просто прочитать задание. Напомни им: чтение не равняется сдаче – нужно нажать кнопку «Сдать»."
+       }
+      ]
+     },
+     {
+      "t": "⚠️ Предупреждение «Задание не сдано»",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Если ученик нажимает «Далее», не отправив задание, появляется это окно."
+       },
+       {
+        "type": "img",
+        "src": IMG['2aaf1c75'],
+        "caption": "Это значит, что работа так и не дошла до тебя, даже если на экране ученика всё выглядит готовым."
+       },
+       {
+        "type": "img",
+        "src": IMG['c75b6cdc'],
+        "caption": "Вот что ты видишь со своей стороны. Красный/оранжевый = не сдано, зелёный = проверено, жёлтый = ждёт проверки."
+       },
+       {
+        "type": "warnbox",
+        "h": "Не делай поспешных выводов — сначала спроси",
+        "b": "Если ты видишь красный цвет в панели, это не всегда значит, что ученик пропустил задание. Возможно, он просто случайно нажал «Далее». Спроси, прежде чем делать выводы."
+       }
+      ]
+     },
+     {
+      "t": "⭐ Завершай цикл обратной связью от учеников",
+      "cards": [
+       {
+        "type": "img",
+        "src": IMG['d44b8c5b'],
+        "caption": "Каждый урок заканчивается оценкой в звёздах."
+       },
+       {
+        "type": "img",
+        "src": IMG['e6f1705d'],
+        "caption": "Ученик также может оценить отдельные задания через систему «палец вверх / вниз»."
+       },
+       {
+        "type": "text",
+        "b": "Это не просто формальность — авторы курсов действительно учитывают эти оценки. Время от времени напоминай ученикам ставить честные оценки. Это помогает всем, в том числе и тебе."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Реальный пример",
+      "cards": [
+       {
+        "type": "yt",
+        "id": "6Jccmc9oieY",
+        "start": 980,
+        "end": 1423,
+        "caption": "Это ключевой приём модуля — тьютор показывает задание вживую, прежде чем предложить ученикам попробовать самим, и ждёт, пока все подтвердят готовность."
+       },
+       {
+        "type": "yt",
+        "id": "KtXz1EXYsIU",
+        "start": 1675,
+        "end": 2075,
+        "caption": "Прямой пример трёхшаговой формулы демонстрации — инструкции разбиты на маленькие, понятные шаги, а не даны одним большим блоком."
+       },
+       {
+        "type": "yt",
+        "id": "6Jccmc9oieY",
+        "start": 1243,
+        "end": 1295,
+        "caption": "А вот как можно убедиться, что все следят за демонстрацией — тьютор активно вовлекает учащихся, а не просто говорит в молчащую аудиторию."
+       },
+       {
+        "type": "yt",
+        "id": "gamD-X9ZuCo",
+        "start": 1641,
+        "end": 1935,
+        "caption": "Бонусный совет: старайся находить гибкий подход к учащимся, но не в жертву главным задачам урока."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "emoji": "🏁",
+    "title": "Завершение урока: чёткое подведение итогов",
+    "desc": "Расплывчатый разбор урока забывается, а чёткий запоминается надолго.",
+    "obj": "Заканчивай каждый урок чётким, озвученным повторением того, что нужно сдать, куда и к какому сроку.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 Важнейшее правило этого модуля",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Потрать последние 2 минуты урока на объяснение, что именно мы сдаём, куда и к какому сроку. Здесь важна конкретика, так что используй демонстрацию экрана.",
+        "b": "Исследования по планированию намерений (Гольвицер) показывают: люди гораздо чаще доводят дела до конца, если у них есть понимание, что нужно делать и к какому сроку. Согласно нашим наблюдениям, предоставление этого понимания учащимся значительно увеличивает количество сданных заданий, особенно классных"
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ Что делать",
+         "items": [
+          "Завершай занятие чётким подведением итогов: что сдаём, куда, к какому сроку",
+          "Выделяй последние 2 минуты занятия для этой практики",
+          "Убедись, что ученик точно знает, куда отправлять задания"
+         ]
+        },
+        "right": {
+         "h": "❌ Чего следует избегать",
+         "items": [
+          "Сокращения подведения итогов, если не укладываешься по времени",
+          "Расплывчатых напоминаний: «не забудь домашку»",
+          "Окончания урока формальностью вместо чёткого следующего шага"
+         ]
+        }
+       },
+       {
+        "type": "age",
+        "young": "«Не забудь нарисовать своё зелье и прислать его мне до следующего урока!»",
+        "older": "«Для ясности — задание нужно сдать на вкладке «Домашние задания» до вечера среды.»"
+       },
+       {
+        "type": "method",
+        "b": "Этап «Рефлексия» в методичках гласит: похвали учеников за работу, спроси, что им понравилось на уроке, а затем объяви, что делать дальше, — именно подобное завершение по формуле Что/Где/Когда рекомендует этот модуль."
+       },
+       {
+        "type": "tip",
+        "txt": "Перед тем как дать домашнее задание, кратко объясни, зачем оно нужно: «Это задание поможет тебе потренировать навык, которому мы научились сегодня». Краткое объяснение работает лучше, чем просто «сделай»."
+       },
+       {
+        "type": "tip",
+        "txt": "Дополнительный совет: свяжи итоги урока с одной конкретной, личной похвалой — частное обращение мотивирует куда сильнее, чем общая похвала."
+       }
+      ]
+     },
+     {
+      "t": "🧩 Формула «Что / Где / Когда»",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Чёткое подведение итогов состоит из трёх частей — упусти любую, и всё перестанет работать."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "📝",
+          "h": "Что",
+          "b": "Назови конкретное задание: «Закончи упражнение по закраске с сегодняшнего урока».",
+          "color": "blue"
+         },
+         {
+          "ic": "📍",
+          "h": "Где",
+          "b": "Назови конкретную вкладку: «Сдать задание нужно на вкладке «Домашние задания», а не в «Проектах».",
+          "color": "coral"
+         },
+         {
+          "ic": "⏰",
+          "h": "Когда",
+          "b": "Назови точный дедлайн: «До полуночи среды».",
+          "color": "green"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "t": "🌟 Добавь настоящую мотивацию",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Четкое подведение итогов будет еще лучше в сочетании с подлинной, конкретной мотивацией, а не с общей похвалой."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ Что делать",
+         "items": [
+          "Перед прощанием похвали ученика за что-то конкретное",
+          "Предложи небольшой выбор в домашнем задании — чувство ответственности повышает мотивацию",
+          "Подавай домашнее задание как практику, а не как обязанность"
+         ]
+        },
+        "right": {
+         "h": "❌ Чего следует избегать",
+         "items": [
+          "Общей похвалы: «Все молодцы»",
+          "Окончания урока на формальности или в спешке",
+          "Создания ощущения, что домашнее задание — это наказание"
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "t": "🎬 Реальный пример",
+      "cards": [
+       {
+        "type": "yt",
+        "id": "6Jccmc9oieY",
+        "start": 3586,
+        "end": 3862,
+        "caption": "Это пример отлично иллюстрирует ключевую идею модуля — тьютор создаёт атмосферу предвкушения следующего урока и чётко объясняет домашнее задание."
+       },
+       {
+        "type": "yt",
+        "id": "XhgRysTDqXU",
+        "start": 5106,
+        "end": 5177,
+        "caption": "Хороший пример чёткого объяснения домашнего задания — отработка элемента «Что» в формуле «Что / Где / Когда»."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "emoji": "📩",
+    "title": "После занятий: раннее выявление и работа по регламенту",
+    "desc": "Именно в этот момент тихое отставание может перерасти в уход с курса.",
+    "obj": "Выяви молчаливого или не сдающего задания ученика на раннем этапе — и сразу проработай это согласно регламенту.",
+    "color": "#7C3AED",
+    "sections": [
+     {
+      "t": "🎯 Главное правило: молчание и несданные работы",
+      "cards": [
+       {
+        "type": "hi",
+        "h": "Если ученик молчал весь урок или не сдал задание — оставь оценку в бэк-офисе в тот же день.",
+        "b": "Оценка в бэк-офисе — основной рабочий инструмент: её видят тимлид и Поддержка Клиентов, и именно она запускает дальнейшие действия. Это напрямую связано с эффектом домино из Модуля 1: именно тихое, незамеченное отставание превращается в ученика, который в итоге перестаёт ходить на занятия."
+       },
+       {
+        "type": "doavoid",
+        "left": {
+         "h": "✅ Что делать",
+         "items": [
+          "Регулярно проверяй сдачу ДЗ и КР и сразу оценивай сданные работы, не откладывая: так ученик видит, что ты внимательно смотришь его проект и ценишь его работу",
+          "Оставь оценку ученика в бэк-офисе сразу после урока, если он весь урок молчал или не включался в работу",
+          "(По желанию) Напиши ученику короткое вежливое сообщение в тот же день, если у тебя есть доступ к переписке",
+          "Сообщи в Поддержку Клиентов через бэк-офис, если ученик пропускает 2 урока подряд и не выходит на связь"
+         ]
+        },
+        "right": {
+         "h": "❌ Чего следует избегать",
+         "items": [
+          "Ждать, пока накопится несколько несданных работ, прежде чем что-то предпринять",
+          "Считать, что молчаливый ученик всё понял, просто потому что он никому не мешает",
+          "Копить учебные проблемы до момента выдачи отчётов"
+         ]
+        }
+       },
+       {
+        "type": "age",
+        "young": "«Привет! Я заметил, что ты сегодня был немного тихим — всё хорошо? 😊»",
+        "older": "«Привет, заметил, что ты сегодня молчал на уроке — дай знать, если что-то было непонятно.»"
+       },
+       {
+        "type": "method",
+        "b": "В методических рекомендациях прямо сказано: оставь оценку ученика в бэк-офисе, если он не ответил ни на один вопрос за весь урок, и сообщи в Поддержку Клиентов, если он пропускает 2 урока подряд без обратной связи."
+       }
+      ]
+     },
+     {
+      "t": "🆘 Как организовать дополнительное занятие",
+      "cards": [
+       {
+        "type": "warnbox",
+        "h": "Не обещай дополнительное занятие ни ученику, ни родителям напрямую",
+        "b": "Если ты видишь, что ученик отстал и ему нужно дополнительное занятие, чтобы нагнать материал, решение принимаешь не ты. Твоя задача — передать ситуацию по регламенту, а дальше подключаются тимлид и Поддержка Клиентов."
+       },
+       {
+        "type": "flow",
+        "steps": [
+         {
+          "ic": "📝",
+          "color": "blue",
+          "h": "1. Оценка в бэк-офисе",
+          "b": "Опиши ситуацию: что именно не усвоено и почему ученику нужно дополнительное занятие."
+         },
+         {
+          "ic": "👤",
+          "color": "coral",
+          "h": "2. Решение тимлида",
+          "b": "Тимлид смотрит запрос и либо сам создаёт заявку на дополнительное занятие, либо передаёт вопрос в Поддержку Клиентов."
+         },
+         {
+          "ic": "📞",
+          "color": "green",
+          "h": "3. Связь с семьёй",
+          "b": "Поддержка Клиентов связывается с родителями, обсуждает и подтверждает дополнительное занятие."
+         }
+        ]
+       },
+       {
+        "type": "tip",
+        "txt": "Пока заявка не подтверждена, ученику и родителям ничего не обещаем — иначе семья ждёт занятие, которого может не быть."
+       }
+      ]
+     },
+     {
+      "t": "📋 Сводим концы: оценка ученика в бэк-офисе",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Свести концы — значит вести записи так, чтобы тимлид и Поддержка Клиентов могли вовремя вмешаться.<br><br><strong>Основной инструмент:</strong> функция «Оценка ученика» в бэк-офисе.<br><strong>Что фиксировать:</strong> молчание на уроке, несданные ДЗ и КР, технические проблемы, которые помешали ученику работать.<br><strong>Что это даёт:</strong> тимлид и Поддержка Клиентов сразу видят ситуацию и могут связаться с семьёй или скорректировать поддержку без задержек."
+       },
+       {
+        "type": "img",
+        "src": IMG['fb30310b'],
+        "caption": "Вот как свод концов выглядит из БО — чётко видна отчётность по каждому из уроков."
+       },
+       {
+        "type": "hi",
+        "h": "Ты – часть команды",
+        "b": "Если что-то непонятно или разговор с учеником или родителем кажется сложным, вовремя подключи своего тимлида или команду TD. Обратиться за помощью до того, как ситуация станет проблемой, — это признак ответственности, а не слабости. Так вся команда сможет правильно поддержать ученика."
+       }
+      ]
+     },
+     {
+      "t": "🎬 Реальный пример",
+      "cards": [
+       {
+        "type": "text",
+        "b": "Мы не ведём записей разговоров с родителями, поэтому вот максимально близкий пример: тьютор повторяет с учеником прошлый урок и мягко упоминает, что его не было в прошлый раз."
+       },
+       {
+        "type": "video",
+        "src": "https://drive.google.com/file/d/1GPsYwQlQm2dyQIdV31jmgy2E9NglWens/preview",
+        "label": "Упоминание пропуска на занятии с вернувшимся учеником",
+        "caption": "Посмотри, как тьютор упоминает пропущенный урок как обыденную часть повторения, а не делает из этого неловкое замечание."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "checklist": [
+   "Проводи все четыре начальных и все четыре завершающих этапа — от разминки до подведения итогов — на каждом уроке.",
+   "На каждом занятии разбирай хотя бы одно домашнее задание вслух вместе с учениками.",
+   "Никогда не пропускай задание из M1У1 «Как сдавать домашку?» — проводи его вместе с учениками, с включённым экраном.",
+   "Напоминай ученикам о разделе «Мои достижения»: монеты и значки — это реальная причина выполнять задания.",
+   "Показывай, а не просто рассказывай — демонстрируй каждый этап сдачи заданий через экран, с подробными объяснениями.",
+   "Завершай каждое занятие подведением итогов: что нужно сделать, где и когда.",
+   "Оставь оценку в бэк-офисе в тот же день, если ученик молчал на уроке или не сдал работу; личное сообщение — по возможности, дополнительно.",
+   "Фиксируй проблемы в бэк-офисе заранее, а не во время отчётного периода.",
+   "Если ученик пропускает 2 урока подряд, сообщи в Поддержку Клиентов — не жди третьего."
+  ],
+  "selfq": [
+   "Провёл ли я сегодня все начальные и завершающие этапы или пропустил какой-то из-за нехватки времени?",
+   "Разобрал ли я сегодня вслух хотя бы одно домашнее задание с учеником?",
+   "Есть ли ученик, чью работу я просто отметил как «выполнено», даже не взглянув на нее по-настоящему?",
+   "Показал ли я сегодня процесс сдачи заданий вживую или просто рассказал о нем?",
+   "Закончил ли я урок конкретным изложением того, что нужно сдать?",
+   "Был ли на уроке молчаливый ученик, по которому я ещё не оставил оценку в бэк-офисе?",
+   "Фиксировал ли я на этой неделе проблемы в бэк-офисе сразу, а не откладывая до отчётного периода?"
+  ],
+  "quiz": {
+   "2": [
+    {
+     "q": "У тьютора мало времени, и он хочет сократить подведение итогов, чтобы закончить урок точно по расписанию. В чем риск?",
+     "opts": [
+      "Закончить урок вовремя важно, так что сократить подведение итогов — разумный компромисс",
+      "Нарушается структура «зеркала», и ученики теряют ощущение завершенности, которое она создает",
+      "Все в порядке, если анонс следующего урока все равно происходит где-то в ходе занятия"
+     ],
+     "c": 1,
+     "fb": "«Зеркальная» структура работает, только если присутствуют обе её части: пропуск завершающего этапа нарушает ритм, на котором строится вся структура."
+    },
+    {
+     "q": "В самом конце урока тьютор говорит: «Отлично поработали сегодня, увидимся на следующей неделе!» Какой этап пропущен?",
+     "opts": [
+      "Подведение итогов — они попрощались недостаточно тепло",
+      "Задание домашней работы — не было упомянуто задание на дом",
+      "Подведение итогов урока — группа не повторила пройденный материал"
+     ],
+     "c": 1,
+     "fb": "Теплое прощание — это не то же самое, что выдача нового домашнего задания: этот этап был полностью пропущен."
+    },
+    {
+     "q": "Какая из этих “Зеркальных” пар верная?",
+     "opts": [
+      "Проверка домашнего задания соответствует Выдаче домашнего задания",
+      "Разминка соответствует Постановке цели урока",
+      "Повторение прошлого урока соответствует Выдаче домашнего задания"
+     ],
+     "c": 0,
+     "fb": "<strong>Проверка домашнего задания</strong> соответствует <strong>Выдаче домашнего задания</strong>. Старое домашнее задание проверяется в начале, а новое задаётся ближе к концу — налицо зеркальное отражение."
+    },
+    {
+     "q": "Где в структуре урока происходит непосредственное изучение нового материала?",
+     "opts": [
+      "В течение четырех начальных этапов",
+      "В блоке «Теория и практика», между начальными и завершающими этапами",
+      "Во время Подведения итогов, в самом конце"
+     ],
+     "c": 1,
+     "fb": "Теория и практика — средний блок. В начале урока проходят 4 начальных этапа, затем ведётся теория и практика, а под конец проводятся 4 завершающих этапа – отражения 4 этапов в начале."
+    },
+    {
+     "q": "Что из перечисленного НЕ является одним из четырех методов вовлечения детей, работающих на каждом этапе?",
+     "opts": [
+      "Открытые вопросы",
+      "Молчаливое выставление оценок без комментариев",
+      "Совместное использование экрана"
+     ],
+     "c": 1,
+     "fb": "Молчаливое выставление оценок — это противоположность вовлечению. Четыре универсальных метода: открытые вопросы, демонстрация экрана, чтение слайдов и похвала с поощрением."
+    },
+    {
+     "q": "Учащийся правильно отвечает на вопрос во время урока. Согласно этому модулю, какая похвала является наиболее эффективной?",
+     "opts": [
+      "Быстрое «Молодец!», чтобы не сбавлять темп",
+      "Конкретная похвала, например: «Отлично объяснил этот шаг!», привязанная к тому, что ученик на самом деле сделал",
+      "Ничего не говори и позволь правильному ответу говорить самому за себя, поскольку чрезмерная похвала может показаться фальшью"
+     ],
+     "c": 1,
+     "fb": "Конкретная похвала, связанная с действиями ученика, работает гораздо лучше, чем общие слова или отсутствие реакции."
+    }
+   ],
+   "3": [
+    {
+     "q": "Ученик явно не сделал домашнее задание и выглядит смущённым, когда ты спрашиваешь его об этом при всех. Как лучше поступить?",
+     "opts": [
+      "Пропусти проверку сегодня и вместо этого поговори с учеником лично после урока",
+      "Кратко разбери задание, но упомяни, что в следующий раз можно поступить иначе",
+      "Попроси другого ученика показать его домашнее задание, чтобы сгладить неловкость для всех"
+     ],
+     "c": 1,
+     "fb": "Пропуск проверки создает ощущение, что несдача работы не имеет последствий. Краткий, ориентированный на будущее разбор поддерживает привычку, не зацикливаясь на ошибке."
+    },
+    {
+     "q": "Сейчас M1У1, и у тебя мало времени на разбор задания «Как сдавать домашку?». Как поступить?",
+     "opts": [
+      "Пропусти это задание — ученики сами смогут разобраться с платформой",
+      "Сократи время на другом этапе урока, чтобы осталось достаточно времени на этот этап",
+      "Проведи ее быстрее и в сжатом виде, чтобы формально она была пройдена"
+     ],
+     "c": 1,
+     "fb": "Это задание является обязательным именно потому, что оно задает тон для всех последующих сдач. На него стоит выделить достаточно времени, а не сокращать его."
+    },
+    {
+     "q": "Тьютор проверяет домашнее задание ученика, говоря только: «Да, правильно, здорово». Чего не хватает в подобном разборе?",
+     "opts": [
+      "Ничего. Главное — подтвердить, что всё правильно.",
+      "Конкретного устного разбора того, что именно ученик сделал правильно или неправильно",
+      "Тьютор должен был вместо разбора поставить оценку по балльной системе."
+     ],
+     "c": 1,
+     "fb": "Просто подтвердить правильность задания — не то же самое, что разобрать работу. Именно конкретное «что и почему» дает ученику понимание."
+    },
+    {
+     "q": "Что из перечисленного НЕ является предназначением раздела «Мои достижения»?",
+     "opts": [
+      "Дать ученикам видимый стимул выполнять домашнее задание",
+      "Заменить необходимость проверки домашнего задания тьютором",
+      "Демонстрация прогресса с помощью монет и значков"
+     ],
+     "c": 1,
+     "fb": "«Мои достижения» — это мотивационный бонус, а не замена реальной проверки работы тьютором."
+    },
+    {
+     "q": "Ученик говорит, что домашнее задание кажется бессмысленным. Что эффективнее всего ответить в этой ситуации?",
+     "opts": [
+      "Объясни последствия несдачи работы для оценок, чтобы они поняли, что на кону",
+      "Напомни про раздел «Мои достижения» и покажи, что ученик в одном шаге от получения новой награды",
+      "Скажи ученику, что делать задания обязательно, даже если некоторые задачи просто не приносят удовольствия"
+     ],
+     "c": 1,
+     "fb": "Видимая и интересная награда меняет отношение к заданию. Последствия сами по себе редко меняют то, как учащийся относится к домашней работе."
+    },
+    {
+     "q": "До начала практической части урока осталось всего 3 минуты. Пропустишь ли ты проверку домашнего задания, чтобы провести разминку, или сократишь разминку, чтобы провести проверку?",
+     "opts": [
+      "Пропущу проверку: разминка задаёт тон всему уроку",
+      "Сокращу разминку: проверка домашнего задания — это самый сильный способ повлиять на сдачу в будущем",
+      "Не пропущу ничего, а быстро проведу и то и другое"
+     ],
+     "c": 1,
+     "fb": "Если время действительно ограничено, проверка домашнего задания — это этап, на котором стоит сделать приоритет."
+    }
+   ],
+   "4": [
+    {
+     "q": "После урока ученик пишет тебе сообщение с вопросом, как именно сдать работу, хотя ты отчётливо объяснил(а) все шаги вслух. Что это может значить?",
+     "opts": [
+      "Ученик был невнимательным, ему нужно быть более ответственным в следующий раз",
+      "Услышать описание шагов сдачи заданий — это не то же самое, что увидеть, как они выполняются. Сам процесс (куда нажимать) не был показан вживую",
+      "Процесс сдачи на платформе действительно слишком сложен для этой возрастной группы"
+     ],
+     "c": 1,
+     "fb": "Указывать пальцем на экран во время описания — это не то же самое, что щелкать по нему вживую: учащиеся должны видеть сам щелчок, а не просто слышать его описание."
+    },
+    {
+     "q": "Ты на пятом уроке курса и уверен, что ученики уже знают, как сдавать работы по прошлым урокам. В этот раз ты пропускаешь живую демонстрацию и просто устно напоминаешь ученикам. Позже два ученика пишут с вопросом, как сдать работу. Что пошло не так?",
+     "opts": [
+      "Ничего. Эти два ученика просто не слушали",
+      "Уверенность в том, что ученики помнят с прошлого раза, приводит к тому, что ты пропускаешь тот самый момент, который предотвращает путаницу. Живая демонстрация защищает как раз от подобного",
+      "Тебе стоило отправить письменную инструкцию, а не полагаться на память"
+     ],
+     "c": 1,
+     "fb": "Уверенность в том, что ученики помнят, не заменяет саму демонстрацию. Только живой разбор процесса гарантированно предотвращает путаницу"
+    },
+    {
+     "q": "Во время демонстрации экрана ты говоришь: «Как только закончите, просто нажмите „Сдать“, хорошо?», но во время объяснения так ничего и не нажимаешь.",
+     "opts": [
+      "Никаких рисков: ученик подтвердил, что понял, значит устного объяснения было достаточно",
+      "Кивок не означает, что они точно знают, куда нажимать. Сам клик ты так и не показал, только описал словами",
+      "Тебе стоило попросить ученика повторить дедлайн сдачи задания, чтобы убедиться в том, что он слушает"
+     ],
+     "c": 1,
+     "fb": "Ученик может кивать, но при этом не знать, где находится кнопка. Устное подтверждение — это не то же самое, что увидеть реальный клик на экране."
+    },
+    {
+     "q": "В середине демонстрации трансляция экрана внезапно зависает и после одной попытки не переподключается. У тебя есть 60-секундный ролик с демонстрацией, записанный с прошлого занятия. Как лучше поступить дальше?",
+     "opts": [
+      "Продолжи объяснять шаги без визуального ряда, надеясь, что трансляция восстановится в процессе",
+      "Остановись и переключись на заранее записанный 60-секундный ролик, чтобы ученики видели процесс визуально",
+      "Полностью пропусти демонстрацию и отправь письменные инструкции родителям после урока"
+     ],
+     "c": 1,
+     "fb": "При объяснении без визуала теряется важная связь слов и картинки, на которой и строится демонстрация. Заранее записанный ролик сохраняет эту связь, даже если живая трансляция не удалась."
+    },
+    {
+     "q": "Демонстрация экрана постоянно сильно сбоит на протяжении всего урока и не стабилизируется, что бы ты ни пытался сделать. Времени на изучение основного материала остаётся всё меньше. Стоит ли тебе потратить оставшиеся минуты на устранение неполадок или один раз описать шаги сдачи устно, а на следующем уроке провести полноценную демонстрацию?",
+     "opts": [
+      "Продолжай пытаться устранять неполадки: работающая живая демонстрация стоит нескольких минут потерянного учебного времени",
+      "В качестве разового исключения объясни шаги устно. На следующем занятии обязательно проведи полноценную демонстрацию",
+      "Полностью пропусти объяснение процесса сдачи заданий на этом уроке и позволь ученикам разобраться с платформой самостоятельно"
+     ],
+     "c": 1,
+     "fb": "Устный вариант, использованный один раз в сочетании с обязательной полноценной демонстрацией на следующем занятии, защищает как сегодняшний материал, так и привычку проводить демонстрации в будущем. Потеря всего урока на устранение неполадок не защищает ни то, ни другое."
+    },
+    {
+     "q": "Во время демонстрации экрана один ученик постоянно включает микрофон, чтобы задавать вопросы, в то время как трое других молчат. Ты подробно отвечаешь на каждый вопрос этого активного ученика. Чего не хватает в этой ситуации?",
+     "opts": [
+      "Ничего. Подробные ответы на вопросы — это именно то, как должна работать хорошая демонстрация.",
+      "Обращения к молчаливым ученикам по имени, чтобы убедиться, что они следят за ходом объяснения.",
+      "Просьбы к активному ученику говорить помедленнее, чтобы он не занимал всё время демонстрации."
+     ],
+     "c": 1,
+     "fb": "Демонстрация, которая работает только на самого активного ученика, оставляет молчаливое большинство в таком же замешательстве, как если бы демонстрации не было вовсе. Обращение к учащимся по имени — это то, что заставляет их следить за демонстрацией."
+    }
+   ],
+   "5": [
+    {
+     "q": "Ты тратишь последние две минуты урока на тёплые слова и улыбку: «Отличная энергия сегодня, увидимся на следующей неделе, не забудь про домашнее задание!». Ученик всё равно ничего не сдаёт до следующего занятия. Что, скорее всего, пошло не так?",
+     "opts": [
+      "Ученик просто был недостаточно мотивирован, независимо от того, как закончился урок",
+      "Теплота не заменяет конкретного плана: ты не сказал(а) чётко, что именно нужно сделать, в какой вкладке и к какому сроку",
+      "Тебе стоило предложить награду за своевременную сдачу задания"
+     ],
+     "c": 1,
+     "fb": "Тёплое прощание приятно в моменте, но без конкретного «что / где / когда» ученик не выносит с собой никакого чёткого плана действий."
+    },
+    {
+     "q": "Урок затягивается, и ты решаешь, что сократить: последние две минуты, отведённые на напоминание о ДЗ, или несколько минут из середины блока «Теория и практика». Что безопаснее сократить для улучшения этой конретной метрики (сдача ДЗ/КР) и почему?",
+     "opts": [
+      "Сократить стоит «Теорию и практику» — напоминание о ДЗ полезно только в том случае, если и так остаётся лишнее время.",
+      "Проведи напоминание о ДЗ полностью и сократи «Теорию и практику» — именно напоминание превращает намерение в реальную сдачу работы",
+      "Сократи оба блока поровну, чтобы ни одна часть не чувствовалась незавершённой"
+     ],
+     "c": 1,
+     "fb": "Напоминание о ДЗ — это самый сильный рычаг, влияющий на показатели сдачи заданий. Потеря времени на контент материал урока не так страшна, как потеря того момента, который превращает намерение в действие."
+    },
+    {
+     "q": "Ты завершаешь урок словами: «Не забудьте закончить задание и сдать его поскорее, хорошо?». Позже ученик говорит, что не был уверен, на какой вкладке находится задание, и поэтому просто ничего не сдал. Какой именно части подведения итогов не хватало?",
+     "opts": [
+      "Ничего не пропущено — само задание было названо чётко",
+      "«Где» и «Когда»: ты не назвал конкретную вкладку, а «поскорее» — не является реальным дедлайном",
+      "Тебе стоило повторить инструкцию второй раз"
+     ],
+     "c": 1,
+     "fb": "«Поскорее» — это не срок, на который ученик может ориентироваться, а вкладку ты так и не назвал(а). Две из трёх частей формулы «Что / Где / Когда» отсутствовали, и именно поэтому ученик растерялся."
+    },
+    {
+     "q": "Когда урок уже подходит к концу, ты тратишь последние две минуты на повторение самой сложной концепции из сегодняшнего занятия, планируя быстро упомянуть домашнее задание под самый конец. В чём риск этого подхода?",
+     "opts": [
+      "Никакого: закрепление самой сложной концепции — это всегда лучшее использование последних минут урока",
+      "Напоминание о ДЗ сделано в спешке или пропущено полностью; к сожалению, поспешная фраза редко даёт ученикам достаточно информации для действий",
+      "Учащиеся почувствуют, что урок закончился резко, если обзор материалов урока будет пропущен"
+     ],
+     "c": 1,
+     "fb": "Закрепление материала важно, но если оно постоянно вытесняет напоминание о ДЗ, то ученики остаются без конкретного плана, который, как доказано, стимулирует сдачу работ. Лучше сознательно отложить время для напоминания, чем надеяться, что время останется в конце занятия."
+    },
+    {
+     "q": "Ты даёшь полный и конкретный разбор ДЗ: точное задание, точную вкладку, точный дедлайн. Но произносишь это монотонным, поспешным тоном, уже потянувшись завершить звонок. Ученик всё равно забывает сдать работу. О чём это говорит?",
+     "opts": [
+      "Формат разбора ДЗ не имеет значения, если все три части были упомянуты.",
+      "Содержание разбора ДЗ важно, но этот этап куда лучше запомнится ученику, если мы дополним его искренной и конкретной мотивацией",
+      "Тебе стоило записать этап анонса ДЗ в письменной форме, а не произносить его вслух."
+     ],
+     "c": 1,
+     "fb": "Полная подача информации о ДЗ необходима, но не всегда достаточна. Сочетание подачи информации искренней, конкретной мотивацией (а не просто сухим изложением) помогает ученику запомнить цель и стремиться к ней."
+    },
+    {
+     "q": "Два тьютора полностью разбирают предстоящее ДЗ по схеме «Что/Где/Когда». Один произносит его в последние 10 секунд, уже прощаясь; другой выделяет на него целые две минуты. Фактически оба изложения содержат одинаковую информацию. Почему у их учеников всё равно может быть разная успеваемость по сдаче работ?",
+     "opts": [
+      "Разницы не будет: пока сказаны одни и те же слова, результат должен быть одинаковым.",
+      "Поспешный 10-секундный вариант легко прослушать и забыть, в то время как две минуты дают этапу анонса ДЗ пространство, чтобы запомниться и превратиться в действие.",
+      "Второй тьютор, вероятно, также поставил более высокую оценку за предыдущую работу"
+     ],
+     "c": 1,
+     "fb": "Сказать правильные слова — это не то же самое, что дать им время «осесть». Поспешный анонс ДЗ не работает на ученика, который уже мысленно покидает звонок, в то время как размеренный анонс получает настоящее внимание"
+    }
+   ],
+   "6": [
+    {
+     "q": "Что нужно сделать, чтобы организовать ученику дополнительное занятие для проработки материала урока?",
+     "opts": [
+      "Оставить в бэк-офисе оценку с описанием ситуации и того, почему этому ученику нужно дополнительное занятие, и дождаться ответа тимлида или клиентского менеджера",
+      "Сразу написать родителям о дополнительном занятии и только потом оставить оценку в бэк-офисе",
+      "Написать ученику в личные сообщения, что ты проведёшь для него дополнительное занятие"
+     ],
+     "c": 0,
+     "fb": "Сначала оценка в бэк-офисе: её смотрит тимлид и решает — создать заявку самому или передать вопрос в Поддержку Клиентов, чтобы они связались с семьёй. Обещать занятие родителям или ученику напрямую нельзя."
+    },
+    {
+     "q": "Что лучше всего сделать в первую очередь, если ученик промолчал весь урок?",
+     "opts": [
+      "Подождать и посмотреть, будет ли он активнее на следующем уроке",
+      "Сразу после урока оставить оценку в бэк-офисе — а если есть доступ к переписке, дополнительно написать ученику короткое сообщение",
+      "Упомянуть об этом в родительском чате, не называя имени ученика"
+     ],
+     "c": 1,
+     "fb": "Оценка в бэк-офисе — обязательная часть: именно она доходит до тимлида и Поддержки Клиентов. Личное сообщение — хорошее дополнение, если такая возможность у тебя есть."
+    },
+    {
+     "q": "Верно или неверно: родители должны узнавать о пропущенном домашнем задании только при получении официальных отчётов.",
+     "opts": [
+      "Верно: частые обновления могут показаться назойливыми",
+      "Неверно: проблему нужно фиксировать в бэк-офисе заранее, чтобы Поддержка Клиентов успела её решить",
+      "Верно: ученик сам должен сообщить о статусе ДЗ родителям"
+     ],
+     "c": 1,
+     "fb": "Ранняя отметка в бэк-офисе даёт Поддержке Клиентов время связаться с семьёй, пока ситуация ещё поправима. Отчётный период для этого слишком поздно."
+    },
+    {
+     "q": "Ученик пропустил 2 урока подряд, не предупредив заранее, и не сдал классную работу. Что делать?",
+     "opts": [
+      "Сразу исключить ученика из группы",
+      "Сообщить о двух пропусках подряд в Поддержку Клиентов через бэк-офис, чтобы они связались с семьёй",
+      "Отметить все будущие домашние задания этого ученика как «проверено», чтобы не портить показатели",
+      "Не обращать внимания, пока остальные ученики группы на месте"
+     ],
+     "c": 1,
+     "fb": "Два пропуска подряд — это порог, после которого подключается Поддержка Клиентов. Твоя роль здесь — вовремя передать информацию через бэк-офис, а не решать вопрос самому."
+    },
+    {
+     "q": "Почему важно аккуратно оставлять оценки и обновлять статусы в бэк-офисе, а не держать всё в голове?",
+     "opts": [
+      "Это формальность, которая подтверждает, что тьютор был в системе в рабочее время",
+      "Так появляется прозрачная запись: тимлид, Поддержка Клиентов и заменяющий тьютор не столкнутся с сюрпризом и смогут вовремя поддержать ученика",
+      "Система автоматически отправляет предупреждение на личную почту ученика",
+      "Это автоматически закрывает ученику доступ к следующему занятию"
+     ],
+     "c": 1,
+     "fb": "Записи в бэк-офисе — это общая память команды. Пока информация только у тебя в голове, помочь ученику не может никто, кроме тебя."
+    }
+   ]
+  },
+  "sortgame": {
+   "2": [
+    {
+     "txt": "Опоздав на 5 минут, тьютор полностью пропускает этап «Подведение итогов», чтобы закончить урок точно по расписанию.",
+     "cat": "trash",
+     "why": "Окончание вовремя не поможет, если у «зеркала» нет второй половины: именно она вносит чувство завершённости."
+    },
+    {
+     "txt": "Тьютор завершает урок словами «Отлично поработали сегодня, увидимся на следующей неделе!» и переходит к своим делам, не упоминая, что нужно сделать к следующему занятию.",
+     "cat": "trash",
+     "why": "Тёплое прощание — это не «Выдача ДЗ»; этот этап был полностью пропущен, а не просто сокращён."
+    },
+    {
+     "txt": "Тьютор проверяет вчерашнее ДЗ в начале урока, а ближе к концу даёт новое домашнее задание.",
+     "cat": "treasure",
+     "why": "Это и есть настоящая зеркальная пара: «Проверка ДЗ» отражает «Анонс предстоящего ДЗ»."
+    },
+    {
+     "txt": "Тьютор считает, что «Повтор прошлого урока» и «Анонс предстоящего ДЗ» — это зеркальная пара.",
+     "cat": "trash",
+     "why": "Неправильная пара: «Проверка ДЗ» отражает «Анонс предстоящего ДЗ», а не «Повтор прошлого урока»."
+    },
+    {
+     "txt": "Во время проверки ДЗ тьютор молча ставит оценки, пока ученик ждёт без каких-либо пояснений.",
+     "cat": "trash",
+     "why": "Безмолвное оценивание — полная противоположность вовлечённости, ради которой создан этот этап."
+    },
+    {
+     "txt": "Тьютор продолжает использовать «Открытые вопросы» и «Демонстрацию экрана» на этапах «Теория» и «Практика», даже если это удлиняет урок на пару минут.",
+     "cat": "treasure",
+     "why": "Вовлечённость стоит беречь: это один из четырёх приёмов, которые модуль просит тьюторов продолжать применять, а не урезать в первую очередь."
+    },
+    {
+     "txt": "Ученик даёт сложный правильный ответ, а тьютор ничего не говорит — боится, что похвала за каждый верный ответ может прозвучать фальшиво.",
+     "cat": "trash",
+     "why": "Конкретная похвала за действие звучит лучше, чем молчание — здесь молчание не нейтрально."
+    },
+    {
+     "txt": "Когда до конца урока остаётся две минуты, тьютор проводит Подведение итогов урока» за десять секунд, лишь бы «Анонс следующего урока» тоже фактически состоялся.",
+     "cat": "trash",
+     "why": "Десятисекундная версия не выполняет задачу этапа — лучше качественно провести один этап, чем плохо — два."
+    },
+    {
+     "txt": "Преподаватель тратит весь класс на изучение нового материала, пропуская этапы шаги в начале и конце, потому что ученики всё равно заняты.",
+     "cat": "trash",
+     "why": "Вовлечённость здесь и сейчас не заменяет этапы, которые формируют привычку сдавать задания до и после урока."
+    },
+    {
+     "txt": "Тьютор даёт конкретную похвалу: «Отлично объяснил этот шаг!» — сразу после правильного ответа ученика и движется дальше.",
+     "cat": "treasure",
+     "why": "Конкретная похвала, привязанная к действию, — это именно та реакция, которую рекомендует модуль."
+    },
+    {
+     "txt": "Тьютор показывает экран и в прямом эфире демонстрирует процесс сдачи работы, даже если класс уже видел это раньше.",
+     "cat": "treasure",
+     "why": "Показать это лучше, чем описать — это остается верным даже при повторении."
+    },
+    {
+     "txt": "Когда ученик выглядит растерянным, тьютор задаёт открытый вопрос, чтобы подвести его к ответу, а не просто дать готовый.",
+     "cat": "treasure",
+     "why": "Именно для этого нужны открытые вопросы — вовлечение вместо сухой подсказки."
+    },
+    {
+     "txt": "Тьютор сокращает «Подведение итогов», но следит, чтобы он всё же прошёл, даже если урок затягивается на пару минут.",
+     "cat": "treasure",
+     "why": "Короткий, но состоявшийся этап лучше пропущенного — зеркалу нужны оба конца, чтобы существовать."
+    }
+   ]
+  },
+  "ui": {
+   "deptName": "Отдел развития тьюторов",
+   "heroEyebrow": "📊 Программа обучения репетиторо",
+   "heroH1": "Повысь уровень сдачи ДЗ и КР у своих учеников",
+   "heroWelcome": "Добро пожаловать на обучение! Скорее всего, ты здесь по одной из двух причин:",
+   "heroReason1": "Ты доходчиво объясняешь ДЗ, а половина класса всё равно не сдаёт — и ты хочешь понять, почему.",
+   "heroReason2": "Проекты накапливаются, ученики уходят дальше до проверки, и это тянет твои показатели ДЗ/КР вниз.",
+   "heroWork": "Пройди все 6 модулей и набери не менее 80% в каждом доступном тесте, чтобы открыть полезный справочник!",
+   "startBtn": "🚀 Начать обучение",
+   "pathLabel": "Твой путь обучения",
+   "navModules": "← Модули",
+   "navExitCheck": "← Итоговая проверка",
+   "sortInstr": "Перетащи карточку в нужную зону или просто нажми на зону, если тебе так удобнее.",
+   "trashLabel": "Мусор",
+   "trashSub": "Снижает сдаваемость",
+   "treasureLabel": "Сокровище",
+   "treasureSub": "Повышает сдаваемость",
+   "chkCertified": "✅ Обучение пройдено",
+   "chkTitle": "Твой справочник по основам ДЗ/КР",
+   "chkSub": "Держи его под рукой. Это привычки из тренинга, которые дают наибольший эффект — в том порядке, в каком они появляются на реальном уроке.",
+   "chkSelfH": "🪞 Самопроверка: спроси себя",
+   "chkSelfSub": "Без оценки — просто быстрая и честная проверка себя до или после урока.",
+   "downloadPdf": "⬇️ Скачать в PDF",
+   "backDash": "← Назад на панель управления",
+   "badgeReading": "📖 Чтение",
+   "noTestReq": "Тест не требуется",
+   "badgeCompleted": "✓ Завершено",
+   "badgeLocked": "🔒 Заблокировано",
+   "badgeStart": "Начать",
+   "scoreLabel": "Счёт:",
+   "completeModulePrefix": "Завершить модуль ",
+   "hasCheck": "Есть проверка",
+   "allModulesDone": "🏆 Все модули пройдены!",
+   "completeSuffix": " завершён",
+   "modulePrefix": "Модуль ",
+   "ofWord": " из ",
+   "objectiveLabel": "Цель:",
+   "finalStage": "Последний шаг",
+   "finalExam": "Пройди DST в LMS",
+   "examDesc": "Самостоятельная часть на этом заканчивается. Вернись на страницу тренинга в LMS и сдай DST, чтобы закрыть задание.",
+   "openForm": "Прочитать",
+   "certifiedTick": "Сертифицирован ✓",
+   "opensExamForm": "Что делать дальше",
+   "completeAllModules": "Пройди все модули",
+   "bonus": "Бонус",
+   "hwcwChecklist": "Справочник по ДЗ/КР",
+   "bonusDesc": "Привычки, укрепление связи с учениками и вопросы для самопроверки — плюс PDF для скачивания. Открывается после прохождения всех 6 модулей.",
+   "unlocked": "✓ Разблокировано",
+   "referenceCard": "Памятка",
+   "continueToModule": "✅ Перейти к модулю ",
+   "backToDashboardCheck": "✅ На панель управления",
+   "retakeSorting": "🔄 Пройти задание на сортировку заново",
+   "takeSorting": "🎮 Пройти задание на сортировку →",
+   "retakeCheck": "🔄 Перепройти проверку",
+   "takeCheck": "📝 Пройти проверку знаний →",
+   "methodologyTitle": "📐 Касательно Методичек",
+   "whatToNotice": "На что обратить внимание:",
+   "browserCantPlay": "Твой браузер не может воспроизвести это видео.",
+   "adjustAge": "🎂 Адаптируйся к возрасту учащихся",
+   "youngerLabel": "Учащиеся поменьше (6–11):",
+   "olderLabel": "Учащиеся постарше (12–17):",
+   "realClassExample": "Пример из реального урока",
+   "questionOf": "Вопрос ",
+   "cardOf": "Карточка ",
+   "correctBang": "✓ Правильно! ",
+   "notQuite": "✗ Не совсем — ",
+   "seeResults": "Посмотреть результаты",
+   "nextArrow": "Далее →",
+   "viewCertificate": "🎓 Посмотреть сертификат",
+   "retakeFinalExam": "Пересдать итоговый экзамен",
+   "nextModule": "Следующий модуль →",
+   "goToFinalExam": "🎉 Посмотреть последний шаг",
+   "reviewModulePrefix": "📖 Повторить модуль ",
+   "retakeChallenge": "Пройти задание заново",
+   "retakeCheck2": "Перепройти проверку",
+   "youPassed": "Успех!",
+   "keepStudying": "Продолжай изучать",
+   "youVerbTpl": "Вы {VERB} {SCORE}/{TOTAL} правильно.",
+   "sortedVerb": "отсортированный",
+   "answeredVerb": "ответил",
+   "trainingNowCert": "Обучение сертифицировано",
+   "nextModuleUnlocked": "Следующий модуль разблокирован",
+   "need80": "Чтобы продолжить, нужно набрать не менее 80%",
+   "trainingCertified": "Обучение сертифицировано!",
+   "certDescTpl": "Ты прошёл(-ла) все ({TOTAL}) модулей и сдал(а) итоговый экзамен — поздравляем! Твой справочник по ДЗ/КР теперь открыт.",
+   "certOfCompletion": "Сертификат о завершении",
+   "certTitle2": "Повысь сдаваемость ДЗ и КР",
+   "certDeptLineTpl": "Отдел развития репетиторов Kodland · Все модули: {TOTAL} · Итоговый экзамен: {SCORE}%",
+   "viewYourChecklist": "✅ Открыть справочник →",
+   "lastModulePassed": "Справочник открыт, остался последний шаг",
+   "compTitle": "Самостоятельная часть пройдена!",
+   "compP1": "Поздравляем! Ты прошёл(-ла) самостоятельный тренинг по улучшению метрик сдачи ДЗ и КР.",
+   "compP2": "Остался последний шаг! Вернись на страницу тренинга в LMS, откуда ты его открыл(-а), — DST находится сразу под тренингом.",
+   "compP3": "Чтобы тренинг считался успешно завершённым, DST нужно пройти и сдать. Если DST не пройден, тренинг останется незавершённым и может стать просроченным.",
+   "compP4": "Обязательно пройди DST и набери проходной балл, чтобы задание закрылось корректно.",
+   "compGood": "Удачи! 🍀"
+  }
+ }
+};
+
+const PAGE_LANG='ru';
+let LANG='ru';
+let MODULES,CHECKLIST,SELF_QUESTIONS,QUIZ,SORT_GAME;
+let sortPractice=false;
+function loadLangData(code){
+  const d=I18N[code]; if(!d) return false;
+  // Gameplay keys are internal identifiers and must never be localized.
+  // Re-sync them from the English master so every region grades identically.
+  if(d.sortgame && I18N.en && I18N.en.sortgame){
+    Object.keys(d.sortgame).forEach(id=>{
+      d.sortgame[id].forEach((item,index)=>{
+        const master=I18N.en.sortgame[id] && I18N.en.sortgame[id][index];
+        if(master) item.cat=master.cat;
+      });
+    });
+  }
+  MODULES=d.modules; CHECKLIST=d.checklist; SELF_QUESTIONS=d.selfq; QUIZ=d.quiz; SORT_GAME=d.sortgame;
+  LANG=code;
+  return true;
+}
+function UI(key){
+  const EN=I18N.en||I18N[LANG];
+  const d=I18N[LANG] && I18N[LANG].ui[key]!==undefined ? I18N[LANG].ui[key] : EN.ui[key];
+  return d;
+}
+function applyStaticUI(){
+  const rtl = (LANG==='ar');
+  document.documentElement.setAttribute('dir', rtl?'rtl':'ltr');
+  document.documentElement.setAttribute('lang', LANG);
+  document.querySelectorAll('[data-ui]').forEach(el=>{
+    const k=el.getAttribute('data-ui');
+    const v=UI(k);
+    if(v!==undefined) el.innerHTML=v;
+  });
+  const btn=document.getElementById('langBtn');
+  if(btn) btn.innerHTML=`🌐 ${LANG.toUpperCase()} <span style="font-size:10px">▾</span>`;
+  document.querySelectorAll('.lang-item').forEach(it=>{
+    const code=it.getAttribute('data-lang');
+    it.classList.toggle('active', code===LANG);
+  });
+}
+function setLang(code){
+  if(!I18N[code]) return;
+  loadLangData(code);
+  try{localStorage.setItem('hwcwLang',code);}catch(e){}
+  applyStaticUI();
+  document.getElementById('langMenu').classList.remove('show');
+  goHome();
+}
+(function(){
+  loadLangData(PAGE_LANG);
+})();
+
+function loadProg(){ try{ return JSON.parse(localStorage.getItem(PROG_KEY))||{}; }catch(e){ return {}; } }
+function saveProg(p){ try{ localStorage.setItem(PROG_KEY, JSON.stringify(p)); }catch(e){} }
+function setResult(id, pct, passed){
+  const p=loadProg(); p[id]={pct:pct, passed:passed}; saveProg(p);
+}
+function getScore(id){
+  if(localStorage.getItem('kl-hwcw-devmode')==='1') return 100;
+  const p=loadProg(); return p[id]? p[id].pct : 0;
+}
+function isPassed(id){
+  if(localStorage.getItem('kl-hwcw-devmode')==='1') return true;
+  const p=loadProg(); return !!(p[id] && p[id].passed);
+}
+function rc(c){
+  if(c.type==='text')return`<div class="card">${c.h?`<h4>${c.h}</h4>`:''}<p>${c.b}</p></div>`;
+  if(c.type==='hi')return`<div class="card hi"><h4>${c.h}</h4><p>${c.b}</p></div>`;
+  if(c.type==='warnbox')return`<div class="card warnbox"><h4>${c.h}</h4><p>${c.b}</p></div>`;
+  if(c.type==='tip')return`<div class="card tipbox"><p>💡 ${c.txt}</p></div>`;
+  if(c.type==='method')return`<div class="card method"><h4>${UI('methodologyTitle')}</h4><p>${c.b}</p></div>`;
+  if(c.type==='table'){
+    let h=`<div class="card"><h4>${c.h}</h4><table><thead><tr>${c.head.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>`;
+    c.rows.forEach(r=>{h+=`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`;});
+    return h+'</tbody></table></div>';
+  }
+  if(c.type==='twocol')return`<div class="twocol"><div class="card"><h4>${c.left.h}</h4><ul>${c.left.items.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="card"><h4>${c.right.h}</h4><ul>${c.right.items.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
+  if(c.type==='doavoid')return`<div class="twocol"><div class="card do"><h4>${c.left.h}</h4><ul>${c.left.items.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="card avoid"><h4>${c.right.h}</h4><ul>${c.right.items.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
+  if(c.type==='flow')return`<div class="flow">${c.steps.map(s=>`<div class="flow-step f-${s.color}"><div class="fs-ic">${s.ic}</div><h4>${s.h}</h4><p>${s.b}</p></div>`).join('')}</div>`;
+  if(c.type==='img')return`<div class="card imgcard"><img src="${c.src}" alt="" loading="lazy">${c.caption?`<div class="cap"><strong>${UI('whatToNotice')}</strong> ${c.caption}</div>`:''}</div>`;
+  if(c.type==='video'){
+    const drive=/^https:\/\/drive\.google\.com\/file\/d\/.+\/preview/.test(c.src);
+    const media=drive?`<div class="media-frame"><iframe src="${c.src}" allow="autoplay; fullscreen" allowfullscreen loading="lazy" title="${c.label||UI('realClassExample')}"></iframe></div>`:`<video controls preload="metadata" style="width:100%;border-radius:10px"><source src="${c.src}" type="video/mp4">${UI('browserCantPlay')}</video>`;
+    return`<div class="card imgcard">${c.label?`<div class="vlabel">${c.label}</div>`:''}${media}${c.caption?`<div class="cap"><strong>${UI('whatToNotice')}</strong> ${c.caption}</div>`:''}</div>`;
+  }
+  if(c.type==='age')return`<div class="card" style="background:#FCEBC7;border-color:#F2A623;border-style:dashed"><h4 style="color:#8a5c0c">${UI('adjustAge')}</h4><div style="font-size:13px;line-height:1.7;color:#8a5c0c"><strong>${UI('youngerLabel')}</strong> ${c.young}<br><strong>${UI('olderLabel')}</strong> ${c.older}</div></div>`;
+  if(c.type==='yt'){
+    const src=`https://www.youtube.com/embed/${c.id}?start=${c.start}&end=${c.end}&rel=0`;
+    const vtt=`./subtitles/${LANG}/${c.id}-${c.start}-${c.end}.vtt`;
+    const note=c.caption?(LANG==='en'?`<div class="cap"><strong>${UI('whatToNotice')}</strong> ${c.caption}</div>`:`<div class="localized-subtitle" data-vtt="${vtt}"><strong>CC · ${LANG.toUpperCase()}</strong> ${c.caption}</div>`):'';
+    return`<div class="card imgcard"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" src="${src}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="${UI('realClassExample')}"></iframe></div>${note}</div>`;
+  }
+  return '';
+}
+
+function renderHome(){
+  const done = MODULES.filter(m=>isPassed(m.id)).length;
+  const tag=document.getElementById('ntag');
+  if(done>0){tag.style.display='inline';tag.textContent=done===TOTAL?UI('allModulesDone'):done+'/'+TOTAL+UI('completeSuffix');}else tag.style.display='none';
+  const g=document.getElementById('mgrid'); g.innerHTML='';
+
+  MODULES.forEach((m,i)=>{
+    const prevNoQuiz = i>0 && MODULES[i-1].noQuiz;
+    const prev = i===0 || prevNoQuiz ? true : isPassed(MODULES[i-1].id);
+    const isDone = isPassed(m.id);
+    const locked = !prev;
+    const el=document.createElement('div');
+    el.className='mc rcard'+(locked?' locked':'')+(isDone?' done':'');
+    let badge, stag;
+    if(m.noQuiz){
+      badge=`<span class="badge br">${UI('badgeReading')}</span>`;
+      stag=`<span class="stag">${UI('noTestReq')}</span>`;
+    }else{
+      const pct=getScore(m.id);
+      badge=isDone?`<span class="badge bd">${UI('badgeCompleted')}</span>`:locked?`<span class="badge bl">${UI('badgeLocked')}</span>`:`<span class="badge bs">${UI('badgeStart')}</span>`;
+      stag=isDone?`<span class="stag">${UI('scoreLabel')} <b>${pct}%</b></span>`:locked?`<span class="stag">${UI('completeModulePrefix')}${m.id-1}</span>`:`<span class="stag">${UI('hasCheck')}</span>`;
+    }
+    el.innerHTML=`<div class="mc-stripe" style="background:${m.color}"></div>
+    <div class="mc-body">
+      <div class="mc-top"><div class="mc-num">${UI('modulePrefix')}${m.id}</div><div class="mc-em">${m.emoji}</div></div>
+      <div class="mc-title">${m.title}</div>
+      <div class="mc-desc">${m.desc}</div>
+      <div class="mc-foot">${badge}${stag}</div>
+    </div>`;
+    if(!locked) el.onclick=()=>openModule(m);
+    g.appendChild(el);
+  });
+
+  const allDone=MODULES.every(m=>isPassed(m.id));
+
+  // BONUS — checklist (comes before the DST step)
+  const chkEl=document.createElement('div');
+  chkEl.className='mc rcard'+(allDone?' done':' locked');
+  chkEl.innerHTML=`<div class="mc-stripe" style="background:var(--coral)"></div>
+  <div class="mc-body">
+    <div class="mc-top"><div class="mc-num">${UI('bonus')}</div><div class="mc-em">✅</div></div>
+    <div class="mc-title">${UI('hwcwChecklist')}</div>
+    <div class="mc-desc">${UI('bonusDesc')}</div>
+    <div class="mc-foot">${allDone?`<span class="badge bd">${UI('unlocked')}</span>`:`<span class="badge bl">${UI('badgeLocked')}</span>`}<span class="stag">${UI('referenceCard')}</span></div>
+  </div>`;
+  if(allDone) chkEl.onclick=()=>showChecklist();
+  g.appendChild(chkEl);
+
+  // FINAL STEP — the DST lives on the LMS, this card only explains what to do next
+  const examEl=document.createElement('div');
+  examEl.className='mc rcard'+(allDone?'':' locked');
+  const examBadge=allDone?`<span class="badge bs">${UI('openForm')}</span>`:`<span class="badge bl">${UI('badgeLocked')}</span>`;
+  const examStag=allDone?`<span class="stag">${UI('opensExamForm')}</span>`:`<span class="stag">${UI('completeAllModules')}</span>`;
+  examEl.innerHTML=`<div class="mc-stripe" style="background:linear-gradient(90deg,var(--blue),var(--coral))"></div>
+  <div class="mc-body">
+    <div class="mc-top"><div class="mc-num">${UI('finalStage')}</div><div class="mc-em">🎓</div></div>
+    <div class="mc-title">${UI('finalExam')}</div>
+    <div class="mc-desc">${UI('examDesc')}</div>
+    <div class="mc-foot">${examBadge}${examStag}</div>
+  </div>`;
+  if(allDone) examEl.onclick=()=>showComplete();
+  g.appendChild(examEl);
+}
+
+function openModule(m){
+  currentModule=m.id;
+  let html=`<div class="meyebrow">${UI('modulePrefix')}${m.id}${UI('ofWord')}${TOTAL}</div><div class="mh1">${m.emoji} ${m.title}</div><div class="mobj"><strong>${UI('objectiveLabel')}</strong> ${m.obj}</div>`;
+  m.sections.forEach(s=>{html+=`<div class="sch">${s.t}</div>`;s.cards.forEach(c=>{html+=rc(c);});});
+  html+='<hr class="divider">';
+  if(m.noQuiz){
+    const next=MODULES.find(x=>x.id===m.id+1);
+    html+=next?`<button class="ctabtn" onclick="completeReading(${m.id})">${UI('continueToModule')}${next.id} →</button>`:`<button class="ctabtn" onclick="goDashboard()">${UI('backToDashboardCheck')}</button>`;
+  }else if(QUIZ[m.id]){
+    const lbl=isPassed(m.id)?UI('retakeCheck'):UI('takeCheck');
+    html+=`<button class="ctabtn" onclick="startQuiz(${m.id})">${lbl}</button>`;
+    // the sorting challenge stays available, but only as ungraded practice
+    if(SORT_GAME[m.id]) html+=`<button class="bline" onclick="startSort(${m.id},true)">${UI('takeSorting')}</button>`;
+  }else if(SORT_GAME[m.id]){
+    const lbl=isPassed(m.id)?UI('retakeSorting'):UI('takeSorting');
+    html+=`<button class="ctabtn" onclick="startSort(${m.id})">${lbl}</button>`;
+  }else{
+    const lbl=isPassed(m.id)?UI('retakeCheck'):UI('takeCheck');
+    html+=`<button class="ctabtn" onclick="startQuiz(${m.id})">${lbl}</button>`;
+  }
+  document.getElementById('cbody').innerHTML=html;
+  showScreen('screen-content');
+  window.scrollTo(0,0);
+}
+function completeReading(id){
+  setResult(id,100,true);
+  const next=MODULES.find(x=>x.id===id+1);
+  if(next) openModule(next); else goDashboard();
+}
+
+const QUIZ_SHOW_COUNT=5;
+const SORT_SHOW_COUNT=6;
+function shuf(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function startQuiz(id){
+  sortPractice=false;
+  currentModule=id;
+  quizData=shuf([...QUIZ[id]]).slice(0,QUIZ_SHOW_COUNT).map(q=>{
+    const pairs=q.opts.map((o,i)=>({o,correct:i===q.c}));
+    shuf(pairs);
+    return {q:q.q,opts:pairs.map(p=>p.o),c:pairs.findIndex(p=>p.correct),fb:q.fb};
+  });
+  qi=0; score=0;
+  renderQ(); showScreen('screen-quiz');
+  window.scrollTo(0,0);
+}
+function startSort(id,practice){
+  sortPractice=!!practice;
+  currentModule=id;
+  quizData=shuf([...SORT_GAME[id]]).slice(0,SORT_SHOW_COUNT);
+  qi=0; score=0;
+  renderCard(); showScreen('screen-sort');
+  window.scrollTo(0,0);
+}
+function renderCard(){
+  const c=quizData[qi];
+  document.getElementById('sfill').style.width=(qi/quizData.length*100)+'%';
+  document.getElementById('scount').textContent=`${UI('cardOf')}${qi+1}${UI('ofWord')}${quizData.length}`;
+  const card=document.getElementById('scard');
+  card.textContent=c.txt;
+  card.className='sort-card';
+  card.style.transform='';
+  document.getElementById('sfb').className='qfb';
+  document.getElementById('snxt').className='qnxt';
+  document.getElementById('zone-trash').classList.remove('hover');
+  document.getElementById('zone-treasure').classList.remove('hover');
+  attachDrag(card);
+}
+function attachDrag(card){
+  let dragging=false, sx=0, sy=0;
+  card.onpointerdown=(e)=>{
+    dragging=true; sx=e.clientX; sy=e.clientY;
+    card.setPointerCapture(e.pointerId);
+    card.style.transition='none';
+  };
+  card.onpointermove=(e)=>{
+    if(!dragging)return;
+    const dx=e.clientX-sx, dy=e.clientY-sy;
+    card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/20}deg)`;
+    const tR=document.getElementById('zone-trash').getBoundingClientRect();
+    const rR=document.getElementById('zone-treasure').getBoundingClientRect();
+    document.getElementById('zone-trash').classList.toggle('hover', e.clientX>=tR.left&&e.clientX<=tR.right&&e.clientY>=tR.top&&e.clientY<=tR.bottom);
+    document.getElementById('zone-treasure').classList.toggle('hover', e.clientX>=rR.left&&e.clientX<=rR.right&&e.clientY>=rR.top&&e.clientY<=rR.bottom);
+  };
+  card.onpointerup=(e)=>{
+    if(!dragging)return;
+    dragging=false;
+    card.style.transition='transform .25s ease';
+    const tR=document.getElementById('zone-trash').getBoundingClientRect();
+    const rR=document.getElementById('zone-treasure').getBoundingClientRect();
+    document.getElementById('zone-trash').classList.remove('hover');
+    document.getElementById('zone-treasure').classList.remove('hover');
+    if(e.clientX>=tR.left&&e.clientX<=tR.right&&e.clientY>=tR.top&&e.clientY<=tR.bottom){dropCard('trash');}
+    else if(e.clientX>=rR.left&&e.clientX<=rR.right&&e.clientY>=rR.top&&e.clientY<=rR.bottom){dropCard('treasure');}
+    else{card.style.transform='';}
+  };
+}
+function dropCard(zone){
+  const card=document.getElementById('scard');
+  if(card.classList.contains('correct')||card.classList.contains('wrong'))return;
+  const c=quizData[qi]; const ok=zone===c.cat;
+  if(ok)score++;
+  card.classList.add(ok?'correct':'wrong');
+  card.style.transform='';
+  card.onpointerdown=null;card.onpointermove=null;card.onpointerup=null;
+  const fb=document.getElementById('sfb');
+  fb.className='qfb show '+(ok?'ok':'bad');
+  fb.innerHTML=(ok?UI('correctBang'):UI('notQuite'))+c.why;
+  const nx=document.getElementById('snxt');
+  nx.className='qnxt show';
+  nx.textContent=qi===quizData.length-1?UI('seeResults'):UI('nextArrow');
+}
+function nextCard(){
+  qi++;
+  if(qi<quizData.length){renderCard();window.scrollTo(0,0);return;}
+  const pct=Math.round(score/quizData.length*100);
+  const passed=pct>=80;
+  // practice runs never write a result, so they cannot unlock the next module
+  if(!sortPractice) setResult(currentModule, pct, passed);
+  showResults(pct, passed);
+}
+
+function renderQ(){
+  const q=quizData[qi];
+  document.getElementById('qfill').style.width=(qi/quizData.length*100)+'%';
+  document.getElementById('qcount').textContent=`${UI('questionOf')}${qi+1}${UI('ofWord')}${quizData.length}`;
+  document.getElementById('qtext').textContent=q.q;
+  const el=document.getElementById('qopts'); el.innerHTML='';
+  q.opts.forEach((o,idx)=>{const b=document.createElement('button');b.className='qopt';b.textContent=o;b.onclick=()=>answerQ(idx);el.appendChild(b);});
+  document.getElementById('qfb').className='qfb';
+  document.getElementById('qnxt').className='qnxt';
+}
+function answerQ(idx){
+  if(document.querySelector('.qopt.answered')) return;
+  const q=quizData[qi]; const ok=idx===q.c;
+  if(ok)score++;
+  document.querySelectorAll('.qopt').forEach((b,i)=>{b.classList.add('answered');if(i===q.c)b.classList.add('correct');else if(i===idx&&!ok)b.classList.add('wrong');});
+  const fb=document.getElementById('qfb');
+  fb.className='qfb show '+(ok?'ok':'bad');
+  fb.innerHTML=(ok?UI('correctBang'):UI('notQuite'))+q.fb;
+  const nx=document.getElementById('qnxt');
+  nx.className='qnxt show';
+  nx.textContent=qi===quizData.length-1?UI('seeResults'):UI('nextArrow');
+}
+function nextQ(){
+  qi++;
+  if(qi<quizData.length){renderQ();window.scrollTo(0,0);return;}
+  const pct=Math.round(score/quizData.length*100);
+  const passed=pct>=80;
+  setResult(currentModule, pct, passed);
+  showResults(pct, passed);
+}
+
+// ─── RESULTS ──────────────────────────────────────────────────────────────
+function showResults(pct, passed){
+  let acts='';
+  {
+    const m=MODULES.find(x=>x.id===currentModule);
+    if(passed&&m.id<TOTAL) acts+=`<button class="bdark" onclick="openModule(MODULES.find(x=>x.id==${m.id+1}))">${UI('nextModule')}</button>`;
+    if(passed&&m.id===TOTAL) acts+=`<button class="bdark" onclick="showComplete()">${UI('goToFinalExam')}</button>`;
+    acts+=`<button class="bline" onclick="openModule(MODULES.find(x=>x.id==${m.id}))">${UI('reviewModulePrefix')}${m.id}</button>`;
+    const retakeFn=SORT_GAME[m.id]?`startSort(${m.id})`:`startQuiz(${m.id})`;
+    const retakeLbl=SORT_GAME[m.id]?UI('retakeChallenge'):UI('retakeCheck2');
+    acts+=`<button class="bline" onclick="${retakeFn}">${retakeLbl}</button>`;
+  }
+  const label=SORT_GAME[currentModule]?'challenge':'check';
+  const verb=label==='challenge'?UI('sortedVerb'):UI('answeredVerb');
+  const lastOne=currentModule===TOTAL;
+  const sub=UI('youVerbTpl').replace('{VERB}',verb).replace('{SCORE}',score).replace('{TOTAL}',quizData.length)+(passed?' '+(lastOne?UI('lastModulePassed'):UI('nextModuleUnlocked'))+'.':' '+UI('need80'));
+  document.getElementById('rbody').innerHTML=`<div class="remi">${passed?'🎉':'😅'}</div><div class="rtitle">${passed?UI('youPassed'):UI('keepStudying')}</div><div class="rpct ${passed?'pass':'fail'}">${pct}%</div><div class="rsub">${sub}</div>${acts}`;
+  showScreen('screen-results');
+  window.scrollTo(0,0);
+  renderHome();
+}
+
+// ─── COMPLETION / NEXT STEP ON THE LMS ────────────────────────────────────
+function showComplete(){
+  document.getElementById('compbody').innerHTML=`<div style="font-size:72px">🎉</div>
+  <h1 style="font-family:'Baloo 2',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.5px;margin-top:15px;color:var(--text)">${UI('compTitle')}</h1>
+  <p class="comp-p">${UI('compP1')}</p>
+  <p class="comp-p">${UI('compP2')}</p>
+  <div class="comp-note"><div class="comp-note-ic">⚠️</div><div>${UI('compP3')}</div></div>
+  <p class="comp-p">${UI('compP4')}</p>
+  <p class="comp-good">${UI('compGood')}</p>
+  <button class="bdark" style="margin-bottom:10px" onclick="showChecklist()">${UI('viewYourChecklist')}</button>
+  <button class="bline" onclick="goDashboard()">${UI('backDash')}</button>`;
+  showScreen('screen-complete');
+  window.scrollTo(0,0);
+}
+
+// ─── CHECKLIST ─────────────────────────────────────────────────────────────
+function showChecklist(){
+  const el=document.getElementById('chkList'); el.innerHTML='';
+  CHECKLIST.forEach((txt,i)=>{
+    const d=document.createElement('div'); d.className='chk-item';
+    d.innerHTML=`<div class="chk-ic">${i+1}</div><div class="chk-txt">${txt}</div>`;
+    el.appendChild(d);
+  });
+  const selfEl=document.getElementById('chkSelf'); selfEl.innerHTML='';
+  SELF_QUESTIONS.forEach(q=>{
+    const d=document.createElement('div'); d.className='chk-self-item';
+    d.innerHTML=`<span class="chk-self-ic">☐</span><span>${q}</span>`;
+    selfEl.appendChild(d);
+  });
+  showScreen('screen-checklist');
+  window.scrollTo(0,0);
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────
+function exitQuiz(){
+  if(currentModule==='final'){ goDashboard(); return; }
+  const m=MODULES.find(x=>x.id===currentModule); if(m) openModule(m); else goDashboard();
+}
+function goHome(){ showScreen('screen-home'); window.scrollTo(0,0); }
+function goDashboard(){ renderHome(); showScreen('screen-path'); window.scrollTo(0,0); }
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ─── LANGUAGE DROPDOWN ─────────────────────────────────────────────────────
+function toggleLang(e){
+  e.stopPropagation();
+  document.getElementById('langMenu').classList.toggle('show');
+}
+document.addEventListener('click', function(){
+  document.getElementById('langMenu').classList.remove('show');
+});
+
+// ─── DEV MODE (Shift+D ×4, within 4s) ──────────────────────────────────────
+let devKeyBuffer=[];
+document.addEventListener('keydown', function(e){
+  if(e.shiftKey && e.key.toLowerCase()==='d'){
+    const now=Date.now();
+    devKeyBuffer.push(now);
+    devKeyBuffer=devKeyBuffer.filter(t=>now-t<4000);
+    if(devKeyBuffer.length>=4){ toggleDevMode(); devKeyBuffer=[]; }
+  }
+});
+function toggleDevMode(){
+  const isDev=localStorage.getItem('kl-hwcw-devmode')==='1';
+  if(!isDev){
+    localStorage.setItem('kl-hwcw-devmode-backup', localStorage.getItem(PROG_KEY)||'{}');
+    const p={}; MODULES.forEach(m=>{p[m.id]={passed:true,pct:100};}); p['final']={passed:true,pct:100};
+    saveProg(p);
+    localStorage.setItem('kl-hwcw-devmode','1');
+    showDevBadge(true);
+  }else{
+    const backup=localStorage.getItem('kl-hwcw-devmode-backup');
+    if(backup) localStorage.setItem(PROG_KEY, backup);
+    localStorage.removeItem('kl-hwcw-devmode');
+    showDevBadge(false);
+  }
+  renderHome();
+}
+function showDevBadge(on){
+  let b=document.getElementById('devBadge');
+  if(on){
+    if(!b){
+      b=document.createElement('div'); b.id='devBadge';
+      b.style.cssText='position:fixed;bottom:16px;right:16px;background:#0B1F45;color:#7BC142;font-family:monospace;font-size:12px;font-weight:700;padding:9px 16px;border-radius:10px;z-index:999;box-shadow:0 6px 20px rgba(0,0,0,.3);letter-spacing:.3px';
+      b.textContent='🛠 DEV MODE — everything unlocked (Shift+D×4 to exit)';
+      document.body.appendChild(b);
+    }
+  }else if(b){ b.remove(); }
+}
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+if(localStorage.getItem('kl-hwcw-devmode')==='1') showDevBadge(true);
+applyStaticUI();
+renderHome();
+</script>
+</body>
+</html>
