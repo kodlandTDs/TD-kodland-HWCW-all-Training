@@ -18,32 +18,41 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column}
-.nav{display:flex;align-items:center;padding:0 28px;height:66px;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:2px solid var(--nav-b)}
+.nav{display:flex;align-items:center;padding:0 28px;height:66px;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:2px solid var(--nav-b);position:sticky;top:0;z-index:10}
 .logo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .logo-mark{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.5px;color:var(--blue);line-height:1}
 .logo-div{width:1px;height:26px;background:var(--border);margin:0 5px}
 .logo-sub{font-weight:700;font-size:12.5px;color:var(--coral);line-height:1.3}
-.wrap{flex:1;max-width:940px;margin:0 auto;padding:56px 24px 72px;width:100%}
-.eyebrow{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--coral);margin-bottom:14px}
-h1{font-family:'Baloo 2',sans-serif;font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.8px;line-height:1.12;margin-bottom:14px}
-.h-pill{background:var(--blue);color:#fff;padding:2px 14px;border-radius:var(--rpill);display:inline-block}
-.lede{font-size:16.5px;color:var(--text2);line-height:1.7;max-width:620px;margin-bottom:8px}
-.pick{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;margin:38px 0 4px}
-.pick-sub{font-size:14.5px;color:var(--text-muted);margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px}
-.lc{display:flex;align-items:center;gap:14px;background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:17px 19px;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s,border-color .15s}
+
+.hero{text-align:center;padding:60px 24px 8px;max-width:820px;margin:0 auto}
+.eyebrow{display:inline-block;background:var(--surface);border:2px solid var(--border);border-radius:var(--rpill);padding:7px 18px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;color:var(--coral);margin-bottom:22px}
+h1{font-family:'Baloo 2',sans-serif;font-size:clamp(30px,5.2vw,46px);font-weight:800;letter-spacing:-.8px;line-height:1.16;margin-bottom:8px}
+.h-pill{display:inline-block;background:var(--coral);color:#fff;padding:4px 22px;border-radius:var(--rpill);margin-top:8px}
+.welcome{font-size:16.5px;color:var(--text2);line-height:1.7;margin:22px auto 16px;max-width:620px}
+.reasons{display:flex;flex-direction:column;gap:11px;max-width:620px;margin:0 auto}
+.reason{display:flex;gap:13px;align-items:flex-start;text-align:left;background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:15px 18px;box-shadow:var(--shadow);font-size:14.5px;color:var(--text2);line-height:1.6}
+.reason .em{font-size:20px;line-height:1.3;flex-shrink:0}
+.work{font-size:15px;color:var(--text2);line-height:1.7;margin:20px auto 0;max-width:620px}
+.cta-dead{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:15px 34px;border-radius:var(--rpill);background:var(--surface2);border:2px solid var(--border);color:var(--text-muted);font-family:'Inter',sans-serif;font-size:15px;font-weight:800;cursor:not-allowed;user-select:none}
+
+.picker{max-width:960px;margin:0 auto;padding:44px 24px 72px;width:100%;flex:1}
+.pick-h{font-family:'Baloo 2',sans-serif;font-size:23px;font-weight:800;text-align:center;margin-bottom:10px}
+.pick-note{display:flex;gap:11px;align-items:flex-start;background:#FFF4E8;border:2px solid #F5C08A;border-radius:var(--r);padding:15px 19px;font-size:14px;line-height:1.65;color:var(--text2);max-width:720px;margin:0 auto 30px}
+.pick-note .em{flex-shrink:0;font-size:17px;line-height:1.4}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:17px}
+.lc{display:flex;flex-direction:column;background:var(--surface);border:2px solid var(--border);border-radius:var(--r);padding:22px 23px;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s,border-color .15s}
 .lc:hover{transform:translateY(-3px);box-shadow:var(--shadow-h);border-color:var(--blue-l)}
-.lc .flag{font-size:30px;line-height:1;flex-shrink:0}
-.lc .txt{display:flex;flex-direction:column;min-width:0}
-.lc .name{display:block;font-family:'Baloo 2',sans-serif;font-size:17.5px;font-weight:800;letter-spacing:-.2px;line-height:1.2}
-.lc .native{display:block;font-size:12.5px;color:var(--text-muted);margin-top:3px;line-height:1.3}
-.lc .go{margin-left:auto;color:var(--blue);font-weight:800;font-size:18px}
-.lc.soon{opacity:.55;pointer-events:none;background:var(--surface2)}
-.lc.soon .go{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);border:2px solid var(--border);border-radius:var(--rpill);padding:3px 9px}
-.note{margin-top:34px;background:var(--surface2);border:2px dashed var(--blue-l);border-radius:var(--r);padding:18px 22px;font-size:14.5px;color:var(--text2);line-height:1.65}
-.note b{color:var(--text)}
+.lc .flag{font-size:30px;line-height:1;margin-bottom:11px}
+.lc .name{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.2px;margin-bottom:7px}
+.lc .desc{font-size:13.5px;color:var(--text2);line-height:1.6;flex:1}
+.lc .desc b{color:var(--text)}
+.lc .go{margin-top:15px;font-size:13.5px;font-weight:800;color:var(--blue)}
+.lc.soon{opacity:.6;pointer-events:none;background:var(--surface2)}
+.lc.soon .go{color:var(--text-muted)}
+.lc.soon .go::after{content:'';display:inline-block}
+
 footer{padding:22px 28px;border-top:2px solid var(--nav-b);font-size:12.5px;color:var(--text-muted);text-align:center}
-@media(max-width:640px){.wrap{padding:38px 18px 56px}.nav{padding:0 18px}}
+@media(max-width:640px){.hero{padding:40px 18px 4px}.nav{padding:0 18px}.picker{padding:34px 18px 56px}}
 </style>
 </head>
 <body>
@@ -55,66 +64,92 @@ footer{padding:22px 28px;border-top:2px solid var(--nav-b);font-size:12.5px;colo
   </a>
 </nav>
 
-<div class="wrap">
+<div class="hero">
   <div class="eyebrow">📊 Tutor Training Program</div>
   <h1>Boost Your Students'<br><span class="h-pill">HW &amp; Classwork Submission</span></h1>
-  <p class="lede">Six modules on how homework and classwork submission is measured, why it drives student retention, and exactly what to do in class to lift it.</p>
 
-  <div class="pick">Choose your language</div>
-  <div class="pick-sub">Pilih bahasa · Выбери язык · Escolha seu idioma</div>
+  <p class="welcome">Welcome to this training! You're probably here for one of two reasons:</p>
+
+  <div class="reasons">
+    <div class="reason"><span class="em">😩</span><span>You explain the homework clearly, and half the class still doesn't submit it — you want to understand why.</span></div>
+    <div class="reason"><span class="em">🐌</span><span>Project grading piles up, students move on before you grade it, and it's dragging your HW/CW numbers down.</span></div>
+  </div>
+
+  <p class="work">Complete all 6 modules and score at least 80% on each available quiz to unlock the essentials checklist.</p>
+
+  <span class="cta-dead" aria-disabled="true">👇 Choose your language below</span>
+</div>
+
+<div class="picker">
+  <div class="pick-h">Choose your language</div>
+  <div class="pick-note">
+    <span class="em">⚠️</span>
+    <span>Each language has its own training track. Pick the one you teach in — your progress is saved separately for each language, in the browser you use.</span>
+  </div>
 
   <div class="grid">
     <a class="lc" href="en.html">
-      <span class="flag">🇬🇧</span>
-      <span class="txt"><span class="name">English</span><span class="native">English</span></span>
-      <span class="go">→</span>
+      <div class="flag">🇬🇧</div>
+      <div class="name">English</div>
+      <div class="desc">For tutors teaching in <b>English</b> — includes the English training track and the video examples in English.</div>
+      <div class="go">Open English training →</div>
     </a>
-    <a class="lc" href="id.html">
-      <span class="flag">🇮🇩</span>
-      <span class="txt"><span class="name">Indonesian</span><span class="native">Bahasa Indonesia</span></span>
-      <span class="go">→</span>
-    </a>
-    <a class="lc" href="ru.html">
-      <span class="flag">🇷🇺</span>
-      <span class="txt"><span class="name">Russian</span><span class="native">Русский</span></span>
-      <span class="go">→</span>
-    </a>
-    <a class="lc" href="br.html">
-      <span class="flag">🇧🇷</span>
-      <span class="txt"><span class="name">Portuguese</span><span class="native">Português (Brasil)</span></span>
-      <span class="go">→</span>
-    </a>
-    <span class="lc soon">
-      <span class="flag">🇹🇷</span>
-      <span class="txt"><span class="name">Turkish</span><span class="native">Türkçe</span></span>
-      <span class="go">soon</span>
-    </span>
-    <span class="lc soon">
-      <span class="flag">🇮🇹</span>
-      <span class="txt"><span class="name">Italian</span><span class="native">Italiano</span></span>
-      <span class="go">soon</span>
-    </span>
-    <span class="lc soon">
-      <span class="flag">🇵🇱</span>
-      <span class="txt"><span class="name">Polish</span><span class="native">Polski</span></span>
-      <span class="go">soon</span>
-    </span>
-    <span class="lc soon">
-      <span class="flag">🇪🇸</span>
-      <span class="txt"><span class="name">Spanish</span><span class="native">Español</span></span>
-      <span class="go">soon</span>
-    </span>
-    <span class="lc soon">
-      <span class="flag">🇸🇦</span>
-      <span class="txt"><span class="name">Arabic</span><span class="native">العربية</span></span>
-      <span class="go">soon</span>
-    </span>
-  </div>
 
-  <div class="note">
-    <b>Note for tutors:</b> your progress is saved separately for each language, in the browser you use.
-    Finish all six modules, then return to the LMS training page to take the DST — the training only
-    counts as complete once the DST is passed.
+    <a class="lc" href="id.html">
+      <div class="flag">🇮🇩</div>
+      <div class="name">Bahasa Indonesia</div>
+      <div class="desc">Untuk tutor yang mengajar dalam <b>Bahasa Indonesia</b> — mencakup materi pelatihan dan contoh video berbahasa Indonesia.</div>
+      <div class="go">Buka pelatihan Bahasa Indonesia →</div>
+    </a>
+
+    <a class="lc" href="ru.html">
+      <div class="flag">🇷🇺</div>
+      <div class="name">Русский</div>
+      <div class="desc">Для тьюторов, преподающих на <b>русском языке</b> — включает программу обучения и видеопримеры на русском.</div>
+      <div class="go">Открыть обучение на русском →</div>
+    </a>
+
+    <a class="lc" href="br.html">
+      <div class="flag">🇧🇷</div>
+      <div class="name">Português (Brasil)</div>
+      <div class="desc">Para tutores que ensinam em <b>português</b> — inclui o programa de formação e os exemplos em vídeo em português.</div>
+      <div class="go">Abrir formação em português →</div>
+    </a>
+
+    <a class="lc" href="tr.html">
+      <div class="flag">🇹🇷</div>
+      <div class="name">Türkçe</div>
+      <div class="desc"><b>Türkçe</b> ders veren eğitmenler için — eğitim programını ve Türkçe video örneklerini içerir.</div>
+      <div class="go">Türkçe eğitimi aç →</div>
+    </a>
+
+    <a class="lc" href="it.html">
+      <div class="flag">🇮🇹</div>
+      <div class="name">Italiano</div>
+      <div class="desc">Per i tutor che insegnano in <b>italiano</b> — include il percorso di formazione e gli esempi video in italiano.</div>
+      <div class="go">Apri la formazione in italiano →</div>
+    </a>
+
+    <a class="lc" href="pl.html">
+      <div class="flag">🇵🇱</div>
+      <div class="name">Polski</div>
+      <div class="desc">Dla korepetytorów uczących <b>po polsku</b> — zawiera ścieżkę szkoleniową i przykłady wideo po polsku.</div>
+      <div class="go">Otwórz szkolenie po polsku →</div>
+    </a>
+
+    <a class="lc" href="es.html">
+      <div class="flag">🇪🇸</div>
+      <div class="name">Español</div>
+      <div class="desc">Para tutores que enseñan en <b>español</b> — incluye el programa de formación y los ejemplos en video en español.</div>
+      <div class="go">Abrir la formación en español →</div>
+    </a>
+
+    <a class="lc" href="ar.html">
+      <div class="flag">🇸🇦</div>
+      <div class="name">العربية</div>
+      <div class="desc">للمعلمين الذين يدرّسون <b>بالعربية</b> — يشمل برنامج التدريب وأمثلة الفيديو بالإنجليزية مع ترجمة عربية.</div>
+      <div class="go">افتح التدريب بالعربية ←</div>
+    </a>
   </div>
 </div>
 
