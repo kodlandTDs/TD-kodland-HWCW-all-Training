@@ -388,6 +388,9 @@ html[dir="rtl"] .sort-zones{flex-direction:row-reverse}
 const TOTAL=6;
 let currentModule=null, quizData=[], qi=0, score=0;
 const PROG_KEY='kl-hwcw-progress';
+// --- LMS GATE: notifies the LMS (parent frame) that the material is complete ---
+function notifyMaterialCompleted(){ try{ if(window.parent===window) return; if(localStorage.getItem('kl-hwcw-devmode')==='1') return; const avg=Math.round(MODULES.map(m=>getScore(m.id)).reduce((a,b)=>a+b,0)/TOTAL); window.parent.postMessage({source:'kodland-training',event:'completed',score:avg},'*'); }catch(e){} }
+if(localStorage.getItem('kl-hwcw-devmode')==='1' && location.search.indexOf('dev=1')===-1){ const b=localStorage.getItem('kl-hwcw-devmode-backup'); if(b) localStorage.setItem(PROG_KEY,b); localStorage.removeItem('kl-hwcw-devmode'); }
 
 const IMG={'3d69510a':'assets/img/3d69510a.png','553f225d':'assets/img/553f225d.png','27f5e1ce':'assets/img/27f5e1ce.png','3c6dd220':'assets/img/3c6dd220.png','70844c19':'assets/img/70844c19.png','e8e73f38':'assets/img/e8e73f38.png','c9ceb704':'assets/img/c9ceb704.png','fd3f1f39':'assets/img/fd3f1f39.png','2aaf1c75':'assets/img/2aaf1c75.png','c75b6cdc':'assets/img/c75b6cdc.png','d44b8c5b':'assets/img/d44b8c5b.png','e6f1705d':'assets/img/e6f1705d.png','285fac3e':'assets/img/285fac3e.png','fb30310b':'assets/img/fb30310b.png','7b35da18':'assets/img/7b35da18.png'};
 
@@ -523,6 +526,7 @@ function renderHome(){
   });
 
   const allDone=MODULES.every(m=>isPassed(m.id));
+  if(allDone) notifyMaterialCompleted();
 
   // BONUS — checklist (comes before the DST step)
   const chkEl=document.createElement('div');
@@ -791,6 +795,7 @@ document.addEventListener('click', function(){
 let devKeyBuffer=[];
 document.addEventListener('keydown', function(e){
   if(e.shiftKey && e.key.toLowerCase()==='d'){
+    if(location.search.indexOf('dev=1')===-1) return;
     const now=Date.now();
     devKeyBuffer.push(now);
     devKeyBuffer=devKeyBuffer.filter(t=>now-t<4000);
