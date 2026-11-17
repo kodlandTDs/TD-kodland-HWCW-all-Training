@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -250,6 +250,7 @@ html[dir="rtl"] .hr-item{flex-direction:row-reverse;text-align:right}
 html[dir="rtl"] table th,html[dir="rtl"] table td{text-align:right}
 html[dir="rtl"] .sort-zones{flex-direction:row-reverse}
 </style>
+<script src="shared/td-gate.js" defer></script>
 </head>
 <body>
 
@@ -383,14 +384,14 @@ html[dir="rtl"] .sort-zones{flex-direction:row-reverse}
   </div>
 </div>
 
+<script src="shared/hwcw-core.js"></script>
 <script>
 // ─── DATA ──────────────────────────────────────────────────────────────────
 const TOTAL=6;
 let currentModule=null, quizData=[], qi=0, score=0;
 const PROG_KEY='kl-hwcw-progress';
-// --- LMS GATE: notifies the LMS (parent frame) that the material is complete ---
-function notifyMaterialCompleted(){ try{ if(window.parent===window) return; if(localStorage.getItem('kl-hwcw-devmode')==='1') return; const avg=Math.round(MODULES.map(m=>getScore(m.id)).reduce((a,b)=>a+b,0)/TOTAL); window.parent.postMessage({source:'kodland-training',event:'completed',score:avg},'*'); }catch(e){} }
-if(localStorage.getItem('kl-hwcw-devmode')==='1' && location.search.indexOf('dev=1')===-1){ const b=localStorage.getItem('kl-hwcw-devmode-backup'); if(b) localStorage.setItem(PROG_KEY,b); localStorage.removeItem('kl-hwcw-devmode'); }
+  // LMS bridge lives in shared/hwcw-core.js (lmsSend / lmsReport)
+if(STORE.get('kl-hwcw-devmode')==='1' && location.search.indexOf('dev=1')===-1){ const b=STORE.get('kl-hwcw-devmode-backup'); if(b) STORE.set(PROG_KEY,b); STORE.del('kl-hwcw-devmode'); }
 
 const IMG={'3d69510a':'assets/img/3d69510a.png','553f225d':'assets/img/553f225d.png','27f5e1ce':'assets/img/27f5e1ce.png','3c6dd220':'assets/img/3c6dd220.png','70844c19':'assets/img/70844c19.png','e8e73f38':'assets/img/e8e73f38.png','c9ceb704':'assets/img/c9ceb704.png','fd3f1f39':'assets/img/fd3f1f39.png','2aaf1c75':'assets/img/2aaf1c75.png','c75b6cdc':'assets/img/c75b6cdc.png','d44b8c5b':'assets/img/d44b8c5b.png','e6f1705d':'assets/img/e6f1705d.png','285fac3e':'assets/img/285fac3e.png','fb30310b':'assets/img/fb30310b.png','7b35da18':'assets/img/7b35da18.png'};
 
@@ -440,7 +441,7 @@ function applyStaticUI(){
 function setLang(code){
   if(!I18N[code]) return;
   loadLangData(code);
-  try{localStorage.setItem('hwcwLang',code);}catch(e){}
+  try{STORE.set('hwcwLang',code);}catch(e){}
   applyStaticUI();
   document.getElementById('langMenu').classList.remove('show');
   goHome();
@@ -449,17 +450,18 @@ function setLang(code){
   loadLangData(PAGE_LANG);
 })();
 
-function loadProg(){ try{ return JSON.parse(localStorage.getItem(PROG_KEY))||{}; }catch(e){ return {}; } }
-function saveProg(p){ try{ localStorage.setItem(PROG_KEY, JSON.stringify(p)); }catch(e){} }
+function loadProg(){ try{ return JSON.parse(STORE.get(PROG_KEY))||{}; }catch(e){ return {}; } }
+function saveProg(p){ try{ STORE.set(PROG_KEY, JSON.stringify(p)); }catch(e){} }
 function setResult(id, pct, passed){
   const p=loadProg(); p[id]={pct:pct, passed:passed}; saveProg(p);
+  try{ if(window.lmsReport) window.lmsReport(); }catch(e){}
 }
 function getScore(id){
-  if(localStorage.getItem('kl-hwcw-devmode')==='1') return 100;
+  if(STORE.get('kl-hwcw-devmode')==='1') return 100;
   const p=loadProg(); return p[id]? p[id].pct : 0;
 }
 function isPassed(id){
-  if(localStorage.getItem('kl-hwcw-devmode')==='1') return true;
+  if(STORE.get('kl-hwcw-devmode')==='1') return true;
   const p=loadProg(); return !!(p[id] && p[id].passed);
 }
 function rc(c){
@@ -526,7 +528,7 @@ function renderHome(){
   });
 
   const allDone=MODULES.every(m=>isPassed(m.id));
-  if(allDone) notifyMaterialCompleted();
+  if(allDone && window.lmsSend) window.lmsSend("completed");
 
   // BONUS — checklist (comes before the DST step)
   const chkEl=document.createElement('div');
@@ -803,17 +805,17 @@ document.addEventListener('keydown', function(e){
   }
 });
 function toggleDevMode(){
-  const isDev=localStorage.getItem('kl-hwcw-devmode')==='1';
+  const isDev=STORE.get('kl-hwcw-devmode')==='1';
   if(!isDev){
-    localStorage.setItem('kl-hwcw-devmode-backup', localStorage.getItem(PROG_KEY)||'{}');
+    STORE.set('kl-hwcw-devmode-backup', STORE.get(PROG_KEY)||'{}');
     const p={}; MODULES.forEach(m=>{p[m.id]={passed:true,pct:100};}); p['final']={passed:true,pct:100};
     saveProg(p);
-    localStorage.setItem('kl-hwcw-devmode','1');
+    STORE.set('kl-hwcw-devmode','1');
     showDevBadge(true);
   }else{
-    const backup=localStorage.getItem('kl-hwcw-devmode-backup');
-    if(backup) localStorage.setItem(PROG_KEY, backup);
-    localStorage.removeItem('kl-hwcw-devmode');
+    const backup=STORE.get('kl-hwcw-devmode-backup');
+    if(backup) STORE.set(PROG_KEY, backup);
+    STORE.del('kl-hwcw-devmode');
     showDevBadge(false);
   }
   renderHome();
@@ -831,9 +833,14 @@ function showDevBadge(on){
 }
 
 // ─── INIT ──────────────────────────────────────────────────────────────────
-if(localStorage.getItem('kl-hwcw-devmode')==='1') showDevBadge(true);
+if(STORE.get('kl-hwcw-devmode')==='1') showDevBadge(true);
 applyStaticUI();
 goDashboard();
+
+/* bridge for shared/*.js: MODULES, LANG, currentModule are block-scoped */
+window.__HWCW={mods:function(){try{return MODULES||[]}catch(e){return[]}},total:function(){try{return TOTAL}catch(e){return 0}},cur:function(){try{return currentModule}catch(e){return null}},lang:function(){try{return LANG}catch(e){return 'en'}}};
 </script>
+<script src="shared/td-time.js"></script>
+<script src="shared/hwcw-survey.js"></script>
 </body>
 </html>
