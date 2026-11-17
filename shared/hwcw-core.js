@@ -137,6 +137,8 @@
     try {
       if (!inIframe() || devOn()) return;
       if (event === 'completed') {
+        // the final survey must be sent first (shared/hwcw-surveys.js defines this)
+        try { if (typeof w.TD_CAN_COMPLETE === 'function' && !w.TD_CAN_COMPLETE()) return; } catch (e) {}
         if (sentCompleted) return;       // once per page load
         sentCompleted = true;
       }
